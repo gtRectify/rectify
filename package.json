@@ -1,0 +1,11 @@
+{
+  "name": "rectify-live-reload",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.27.14"
+  },
+  "scripts": {
+    "dev": "browser-sync start --config bs-config.js"
+  }
+}
