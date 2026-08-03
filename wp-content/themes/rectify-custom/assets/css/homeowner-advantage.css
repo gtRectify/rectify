@@ -1,0 +1,156 @@
+/**
+ * Canonical "Why Homeowners Choose Rectify" section.
+ *
+ * This component mirrors the published leaning-pillars/chimneys reference and
+ * is shared by the homepage, residential, About Rectify, and Industries page
+ * builder renderers.
+ */
+.rx-homeowner-advantage,
+.rx-homeowner-advantage *,
+.rx-homeowner-advantage *::before,
+.rx-homeowner-advantage *::after {
+    box-sizing: border-box;
+}
+
+.rx-homeowner-advantage {
+    position: relative;
+    overflow: hidden;
+    padding: 68px 0 96px;
+    color: #fff;
+    background-color: #222840;
+    background-image: var(--rx-homeowner-advantage-contours);
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: 1160px auto;
+}
+
+.rx-homeowner-advantage-wrap {
+    width: min(1200px, calc(100% - 64px));
+    margin-inline: auto;
+}
+
+.rx-homeowner-advantage-head {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(32px, 6vw, 64px);
+    margin-bottom: 48px;
+}
+
+.rx-homeowner-advantage .rx-kicker {
+    display: block;
+    margin: 0 0 16px;
+    color: #bd1726;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    line-height: 1;
+}
+
+.rx-homeowner-advantage-head h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 48px !important;
+    font-weight: 700;
+    line-height: 1.12;
+}
+
+.rx-homeowner-advantage-head > p {
+    margin: 0;
+    color: rgba(255, 255, 255, .78);
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.rx-homeowner-advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.rx-homeowner-advantage-card {
+    margin: 0;
+    padding: 32px;
+    border: 1px solid #fff;
+    border-radius: 18px;
+    background: #222840;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, .18);
+}
+
+.rx-homeowner-advantage-card-head {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.rx-homeowner-advantage-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+}
+
+.rx-homeowner-advantage-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.rx-homeowner-advantage-card-head h3,
+.rx-homeowner-advantage-card h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.rx-homeowner-advantage-card-head h3 {
+    flex: 1;
+    max-width: 244px;
+}
+
+.rx-homeowner-advantage-card h3 {
+    margin-bottom: 10px;
+    max-width: 231px;
+}
+
+.rx-homeowner-advantage-card > p {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+    .rx-homeowner-advantage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    .rx-homeowner-advantage {
+        padding: 44px 0;
+    }
+
+    .rx-homeowner-advantage-wrap {
+        width: min(100% - 40px, 760px);
+    }
+
+    .rx-homeowner-advantage-head {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 620px) {
+    .rx-homeowner-advantage-grid {
+        grid-template-columns: 1fr;
+    }
+}

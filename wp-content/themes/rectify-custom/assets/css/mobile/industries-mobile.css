@@ -1,0 +1,1015 @@
+/*
+ * Industries Inner Pages — Mobile / Tablet Overrides
+ * ---------------------------------------------------------------------
+ * Loads immediately after assets/css/industries-inner-pages.css on all
+ * 8 Industries child pages (transport-assets, commercial-buildings,
+ * utilities-energy, marine-coastal, industrial-facilities,
+ * civil-infrastructure, mining-resources, residential-strata).
+ *
+ * All 8 templates render through the same Rectify Page Builder ii-*
+ * section renderers (class-renderer.php), so they share one set of
+ * `.rx-ii-*` structural classes under a `.rx-ii-page` wrapper. 7 of the
+ * 8 pages additionally carry `.rx-ii-commercial-buildings` (the shared
+ * "detailed industry" shell); only Transport Assets stands alone with
+ * its own `.rx-ii-transport-assets` block. The desktop stylesheet gives
+ * every page its own pixel-accurate Figma measurements via 2-class
+ * selectors such as `.rx-ii-commercial-buildings .rx-ii-intro` or
+ * `.rx-ii-transport-assets .rx-ii-banner`.
+ *
+ * Every selector below is written against `.rx-ii-page` (also present
+ * on all 8 articles) so it carries the same specificity as those
+ * per-page desktop selectors. Because this stylesheet is enqueued
+ * after industries-inner-pages.css, equal-specificity ties resolve in
+ * our favour regardless of where a given page's block happens to sit
+ * in the desktop file. `!important` is added only on the handful of
+ * properties the desktop file itself guards with `!important`
+ * (homeowner-advantage heading sizes, a couple of `.rx-ii-wrap` width
+ * clamps) or where a fixed pixel grid/width could otherwise force
+ * horizontal overflow on a narrow viewport.
+ *
+ * Breakpoints reuse the values already established in the desktop file
+ * (1180/1199/1280 "tighten", 900 "stack", 680/860/520 "compact") for the
+ * shared collapse logic, plus two additional tiers requested for this
+ * pass: a conventional tablet tier and small/extra-small phone tiers
+ * for the fine polish the desktop file doesn't attempt below ~520px.
+ *
+ *   Tablet ............ max-width: 1024px
+ *   Mobile ............ max-width: 767px
+ *   Small phone ....... max-width: 480px
+ *   Extra-small phone . max-width: 375px
+ */
+
+/* ==========================================================================
+   0. Foundation — safe on every Industries page, every breakpoint below
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page {
+        overflow-x: hidden;
+    }
+
+    .rx-ii-page,
+    .rx-ii-page * {
+        max-width: 100%;
+    }
+
+    .rx-ii-page img,
+    .rx-ii-page svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .rx-ii-page .rx-ii-media img,
+    .rx-ii-page .rx-ii-photo-banner img,
+    .rx-ii-page .rx-ii-process-media img,
+    .rx-ii-page .rx-ii-solution-icon,
+    .rx-ii-page .rx-ii-challenge-icon,
+    .rx-ii-page .rx-homeowner-advantage-icon img {
+        height: 100%;
+    }
+
+    .rx-ii-page .rx-ii-wrap {
+        box-sizing: border-box;
+    }
+}
+
+/* ==========================================================================
+   1. Containers — .rx-ii-wrap / .rx-homeowner-advantage-wrap
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-wrap,
+    .rx-ii-page .rx-ii-banner .rx-ii-wrap,
+    .rx-ii-page .rx-ii-cta > .rx-ii-wrap,
+    .rx-ii-page .rx-ii-solutions > .rx-ii-wrap,
+    .rx-ii-page .rx-homeowner-advantage-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-right: 32px;
+        padding-left: 32px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-wrap,
+    .rx-ii-page .rx-ii-banner .rx-ii-wrap,
+    .rx-ii-page .rx-ii-cta > .rx-ii-wrap,
+    .rx-ii-page .rx-ii-solutions > .rx-ii-wrap,
+    .rx-ii-page .rx-homeowner-advantage-wrap {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+
+    .rx-ii-page .rx-ii-band {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-wrap,
+    .rx-ii-page .rx-ii-banner .rx-ii-wrap,
+    .rx-ii-page .rx-ii-cta > .rx-ii-wrap,
+    .rx-ii-page .rx-ii-solutions > .rx-ii-wrap,
+    .rx-ii-page .rx-homeowner-advantage-wrap {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+}
+
+/* ==========================================================================
+   2. Title banner + breadcrumb
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-banner {
+        min-height: 0 !important;
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-kicker {
+        font-size: 18px !important;
+        line-height: 24px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-banner h1 {
+        max-width: 100% !important;
+        font-size: 32px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-breadcrumb {
+        flex-wrap: wrap;
+        row-gap: 6px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-banner {
+        padding: 36px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-banner h1 {
+        font-size: 26px !important;
+        line-height: 1.25 !important;
+    }
+
+    .rx-ii-page .rx-ii-kicker {
+        font-size: 16px !important;
+        line-height: 22px !important;
+    }
+
+    .rx-ii-page .rx-ii-breadcrumb {
+        gap: 8px;
+        font-size: 11px;
+    }
+
+    .rx-ii-page .rx-ii-breadcrumb-sep {
+        width: 5px;
+        height: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-banner h1 {
+        font-size: 22px !important;
+    }
+
+    .rx-ii-page .rx-ii-kicker {
+        font-size: 14px !important;
+        margin-bottom: 12px !important;
+    }
+}
+
+/* ==========================================================================
+   3. Intro — "Protecting Critical ... Infrastructure" (image + copy)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-intro {
+        min-height: 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-two-col {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-media,
+    .rx-ii-page .rx-ii-intro .rx-ii-media img {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: 16 / 10;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-copy h2 {
+        font-size: 24px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-copy p {
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-intro {
+        padding: 40px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-media,
+    .rx-ii-page .rx-ii-intro .rx-ii-media img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-copy h2 {
+        font-size: 22px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-intro .rx-ii-copy h2 {
+        font-size: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-intro .rx-ii-copy p {
+        font-size: 14px !important;
+    }
+}
+
+/* ==========================================================================
+   4. Challenges We Help Resolve
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-challenges {
+        min-height: 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges h2 {
+        max-width: 100% !important;
+        font-size: 30px !important;
+        line-height: 1.25 !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges .rx-ii-lead {
+        max-width: 100% !important;
+        font-size: 17px !important;
+        line-height: 1.5 !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        row-gap: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card {
+        min-height: 0 !important;
+        padding: 28px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-challenges {
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges h2 {
+        font-size: 26px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges .rx-ii-lead {
+        font-size: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges-grid {
+        grid-template-columns: 1fr !important;
+        margin-top: 28px !important;
+        gap: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card {
+        padding: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-icon-wrap {
+        width: 52px !important;
+        height: 52px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card h3 {
+        font-size: 18px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-challenges h2 {
+        font-size: 22px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges .rx-ii-lead {
+        font-size: 15px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card {
+        padding: 22px 20px !important;
+    }
+}
+
+/* ==========================================================================
+   5. Full-width photo banner
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-photo-banner,
+    .rx-ii-page .rx-ii-photo-banner img {
+        height: clamp(160px, 32vw, 260px) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-photo-banner,
+    .rx-ii-page .rx-ii-photo-banner img {
+        height: 200px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-photo-banner,
+    .rx-ii-page .rx-ii-photo-banner img {
+        height: 160px !important;
+    }
+}
+
+/* ==========================================================================
+   6. Engineered Solutions carousel
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-solutions {
+        min-height: 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions .rx-ii-two-col,
+    .rx-ii-page .rx-ii-solutions > .rx-ii-wrap:first-child {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions-copy h2 {
+        font-size: 28px !important;
+        line-height: 1.25 !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions .rx-ii-lead {
+        max-width: 100% !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        align-self: auto !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions-grid {
+        margin-top: 32px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .rx-ii-page .rx-ii-solution-card {
+        flex: 0 0 calc((100% - 24px) / 2) !important;
+        min-width: calc((100% - 24px) / 2) !important;
+    }
+
+    /* Arrow buttons rely on desktop hover/click; below the tablet tier the
+       track is short enough that swiping is the natural interaction, and the
+       arrows are absolutely positioned outside the wrap (negative left/right)
+       which reads awkwardly once the layout narrows. */
+    .rx-ii-page .rx-ii-solutions-next,
+    .rx-ii-page .rx-ii-solutions-prev {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-solutions {
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions-grid {
+        gap: 16px !important;
+        margin-top: 28px !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-card {
+        flex: 0 0 82% !important;
+        min-width: 82% !important;
+        padding: 26px 22px !important;
+        min-height: 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-icon-wrap {
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-card h3 {
+        font-size: 18px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-card p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-solutions-copy h2 {
+        font-size: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-card {
+        flex-basis: 88% !important;
+        min-width: 88% !important;
+    }
+}
+
+/* ==========================================================================
+   7. "Why Homeowners Choose Rectify" — shared dark advantage section
+      (renders as .rx-homeowner-advantage via homeowner-advantage.css, which
+      already ships its own responsive rules; these overrides only neutralise
+      the per-page pixel measurements layered on top in
+      industries-inner-pages.css so the two systems agree below 1024px).
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-homeowner-advantage {
+        min-height: 0 !important;
+        padding: 56px 0 88px !important;
+        background-size: cover !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-head {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        margin-bottom: 36px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage .rx-kicker {
+        font-size: 18px !important;
+        line-height: 24px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-head h2 {
+        max-width: 100% !important;
+        font-size: 28px !important;
+        line-height: 1.25 !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-head > p {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-card {
+        min-height: 0 !important;
+        padding: 24px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-homeowner-advantage {
+        padding: 48px 0 72px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-head h2 {
+        font-size: 24px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-card-head {
+        gap: 14px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-icon,
+    .rx-ii-page .rx-homeowner-advantage-icon img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-card-head h3,
+    .rx-ii-page .rx-homeowner-advantage-card h3 {
+        max-width: 100% !important;
+        font-size: 19px !important;
+        line-height: 1.3 !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-card > p {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-homeowner-advantage-head h2 {
+        font-size: 21px !important;
+    }
+
+    .rx-ii-page .rx-homeowner-advantage-card {
+        padding: 20px !important;
+    }
+}
+
+/* ---- Legacy .rx-ii-why-choose-* selectors -------------------------------
+   Not produced by the current renderer (it always outputs the shared
+   .rx-homeowner-advantage component above), but kept trivially responsive in
+   case an older/edited block still emits this markup. Cheap insurance,
+   mirrors the section above 1:1. */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-why-choose {
+        min-height: 0 !important;
+        padding: 56px 0 88px !important;
+    }
+
+    .rx-ii-page .rx-ii-why-choose h2 {
+        font-size: 28px !important;
+    }
+
+    .rx-ii-page .rx-ii-why-choose-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-why-choose-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .rx-ii-page .rx-ii-why-choose h2 {
+        font-size: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-why-choose-card {
+        padding: 22px !important;
+    }
+}
+
+/* ==========================================================================
+   8. Our Structured Engineering Approach (process)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-process {
+        min-height: 0 !important;
+        padding: 56px 0 !important;
+    }
+
+    /* Several pages lay this section out as a 2-column/2-row CSS grid with
+       the heading, steps and media pinned to explicit grid-column/grid-row
+       slots (e.g. h2 at column 1 row 1, media spanning both rows). Below
+       tablet width that placement has to be abandoned entirely, not just
+       resized, otherwise the heading/steps/media overlap. */
+    .rx-ii-page .rx-ii-process > .rx-ii-wrap {
+        display: block !important;
+    }
+
+    .rx-ii-page .rx-ii-process-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+    }
+
+    .rx-ii-page .rx-ii-process h2,
+    .rx-ii-page .rx-ii-process-steps,
+    .rx-ii-page .rx-ii-process-media {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        width: 100% !important;
+    }
+
+    .rx-ii-page .rx-ii-process h2 {
+        font-size: 28px !important;
+        line-height: 1.25 !important;
+        text-align: left !important;
+        margin-bottom: 32px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-steps {
+        margin-top: 0 !important;
+        gap: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-media,
+    .rx-ii-page .rx-ii-process-media img {
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: 4 / 3;
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-process {
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-process h2 {
+        font-size: 24px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-layout {
+        gap: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-steps {
+        gap: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-step {
+        gap: 14px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-number {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-step-text h3 {
+        font-size: 17px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 6px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-step-text p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-process h2 {
+        font-size: 21px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-number {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 15px !important;
+    }
+}
+
+/* ==========================================================================
+   9. Assets We Support (photo + checklist)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-assets {
+        min-height: 0 !important;
+        padding: 56px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-assets .rx-ii-two-col {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets .rx-ii-media,
+    .rx-ii-page .rx-ii-assets .rx-ii-media img {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: 4 / 3;
+    }
+
+    .rx-ii-page .rx-ii-assets-copy h2 {
+        font-size: 26px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-list li {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-assets {
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-copy h2 {
+        font-size: 22px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-list {
+        gap: 12px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-list li {
+        font-size: 15px !important;
+        line-height: 1.4 !important;
+        gap: 10px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-check {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-assets-copy h2 {
+        font-size: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-assets-list li {
+        font-size: 14px !important;
+    }
+}
+
+/* ==========================================================================
+   10. Frequently Asked Questions
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-faq {
+        min-height: 0 !important;
+        padding: 56px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-faq h2 {
+        font-size: 28px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 32px !important;
+        text-align: left !important;
+    }
+
+    .rx-ii-page .rx-ii-faq-list {
+        max-width: 100% !important;
+    }
+
+    .rx-ii-page .rx-ii-faq-answer {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-faq {
+        padding: 44px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-faq h2 {
+        font-size: 24px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-faq-item summary {
+        align-items: flex-start !important;
+        gap: 14px !important;
+        padding: 14px 0 !important;
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+
+    .rx-ii-page .rx-ii-faq-icon {
+        width: 24px !important;
+        height: 24px !important;
+        margin-top: 2px;
+        flex: none;
+    }
+
+    .rx-ii-page .rx-ii-faq-answer {
+        padding: 0 0 14px !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-faq h2 {
+        font-size: 21px !important;
+    }
+
+    .rx-ii-page .rx-ii-faq-item summary {
+        font-size: 15px !important;
+    }
+}
+
+/* ==========================================================================
+   11. Final CTA (dark, "Let's Find The Right Engineering Solution")
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ii-page .rx-ii-cta {
+        min-height: 0 !important;
+        padding: 56px 0 !important;
+    }
+
+    .rx-ii-page .rx-ii-cta h2 {
+        max-width: 100% !important;
+        font-size: 28px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-lead {
+        max-width: 100% !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        margin-top: 32px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-card {
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 32px 24px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ii-page .rx-ii-cta h2 {
+        font-size: 24px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-lead {
+        font-size: 15px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-card {
+        padding: 28px 22px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-card h3 {
+        font-size: 19px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 12px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-card p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* Stack the outlined "Contact us" / "Get a quote" style buttons full
+       width on phones; the tel: buttons stay inline (they read as a large
+       plain-text phone number, not a boxed button, so forcing them to block
+       width would just add empty space around short digits). */
+    .rx-ii-page .rx-ii-cta-card-button {
+        display: flex !important;
+        width: 100% !important;
+        white-space: normal !important;
+        text-align: center;
+    }
+
+    .rx-ii-page .rx-ii-cta-card-button.is-phone {
+        display: inline-flex !important;
+        width: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ii-page .rx-ii-cta h2 {
+        font-size: 21px !important;
+    }
+
+    .rx-ii-page .rx-ii-cta-card-button.is-phone {
+        font-size: 19px !important;
+    }
+}
+
+/* ==========================================================================
+   12. Page-specific fine-tuning
+   ========================================================================== */
+
+/* Commercial Buildings-family banner uses large fixed side padding on its
+   inner .rx-ii-wrap (0 157px) that the generic container rule above already
+   neutralises, but the banner is also flagged `display:flex;align-items:center`
+   with no explicit min-height fallback once padding shrinks — nothing further
+   required, listed here for documentation. */
+
+/* Civil Infrastructure's Concrete Repair solution icon ships with
+   preserveAspectRatio="none" and overflow:visible, which the desktop file
+   already fixes by clipping `.rx-ii-solution-icon-wrap` and pinning the
+   `<img>` to 56x56 — that fix is width/height based, not viewport based, so
+   it holds unmodified at every breakpoint here. No override needed. */
+
+@media (max-width: 767px) {
+    /* Utilities & Energy / Mining & Resources / Residential & Strata place a
+       tighter object-position on the full-bleed photo banner so the subject
+       stays in frame once the crop gets shorter on phones. */
+    .rx-ii-utilities-energy .rx-ii-photo-banner img,
+    .rx-ii-mining-resources .rx-ii-photo-banner img {
+        object-position: center 60%;
+    }
+
+    .rx-ii-marine-coastal .rx-ii-photo-banner img {
+        object-position: 55% center;
+    }
+}
+
+/* ==========================================================================
+   13. Extra-small phones (≤375px)
+   ========================================================================== */
+
+@media (max-width: 375px) {
+    .rx-ii-page .rx-ii-wrap,
+    .rx-ii-page .rx-ii-banner .rx-ii-wrap,
+    .rx-ii-page .rx-ii-cta > .rx-ii-wrap,
+    .rx-ii-page .rx-ii-solutions > .rx-ii-wrap,
+    .rx-ii-page .rx-homeowner-advantage-wrap {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    .rx-ii-page .rx-ii-banner h1 {
+        font-size: 20px !important;
+    }
+
+    .rx-ii-page .rx-ii-kicker {
+        font-size: 13px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenges h2,
+    .rx-ii-page .rx-ii-process h2,
+    .rx-ii-page .rx-ii-faq h2,
+    .rx-ii-page .rx-ii-cta h2,
+    .rx-ii-page .rx-homeowner-advantage-head h2 {
+        font-size: 19px !important;
+    }
+
+    .rx-ii-page .rx-ii-solutions-copy h2,
+    .rx-ii-page .rx-ii-assets-copy h2 {
+        font-size: 19px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-card,
+    .rx-ii-page .rx-ii-solution-card,
+    .rx-ii-page .rx-homeowner-advantage-card,
+    .rx-ii-page .rx-ii-cta-card {
+        padding: 18px !important;
+    }
+
+    .rx-ii-page .rx-ii-solution-card {
+        flex-basis: 90% !important;
+        min-width: 90% !important;
+    }
+
+    .rx-ii-page .rx-ii-photo-banner,
+    .rx-ii-page .rx-ii-photo-banner img {
+        height: 140px !important;
+    }
+
+    .rx-ii-page .rx-ii-process-number {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 14px !important;
+    }
+
+    .rx-ii-page .rx-ii-challenge-icon-wrap,
+    .rx-ii-page .rx-ii-solution-icon-wrap {
+        width: 44px !important;
+        height: 44px !important;
+    }
+}

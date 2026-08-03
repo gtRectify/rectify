@@ -1,0 +1,52 @@
+/* Rectify WordPress admin typography. */
+
+body.wp-admin,
+body.login,
+body.wp-admin #wpadminbar,
+body.wp-admin #adminmenu,
+body.wp-admin #adminmenu .wp-submenu,
+body.wp-admin .wrap,
+body.wp-admin .postbox,
+body.wp-admin .notice,
+body.wp-admin .media-modal,
+body.wp-admin .media-frame,
+body.wp-admin .components-popover,
+body.wp-admin .components-modal__frame,
+body.wp-admin .interface-interface-skeleton,
+body.wp-admin input,
+body.wp-admin select,
+body.wp-admin textarea,
+body.wp-admin button,
+body.wp-admin .button,
+body.wp-admin .components-button,
+body.wp-admin .components-text-control__input,
+body.wp-admin .components-textarea-control__input,
+body.wp-admin .components-select-control__input,
+body.login input,
+body.login select,
+body.login textarea,
+body.login button,
+body.login .button {
+    font-family: Helvetica, sans-serif !important;
+}
+
+/* WordPress icons rely on their own glyph font. */
+body.wp-admin .dashicons,
+body.wp-admin .dashicons-before::before,
+body.wp-admin #adminmenu .wp-menu-image::before,
+body.wp-admin #wpadminbar .ab-icon::before,
+body.wp-admin #wpadminbar .ab-item::before {
+    font-family: dashicons !important;
+}
+
+/* Code and raw SVG inputs remain legible and structurally distinct. */
+body.wp-admin code,
+body.wp-admin pre,
+body.wp-admin kbd,
+body.wp-admin samp,
+body.wp-admin .code,
+body.wp-admin .rpb-icon-paste-input,
+body.wp-admin .CodeMirror,
+body.wp-admin .CodeMirror * {
+    font-family: Consolas, Monaco, "Courier New", monospace !important;
+}

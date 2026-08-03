@@ -1,0 +1,265 @@
+/*
+ * Rectify typography system
+ *
+ * Source: Figma "Rectify - New Home", Homepage Draft 2 (node 69:2).
+ * The design uses Helvetica Regular (400) and Helvetica Bold (700) only,
+ * with zero letter spacing throughout the inspected type styles.
+ */
+
+:root {
+    /* Arial before the generic sans-serif: it is metrically near-identical to
+       Helvetica, so the font-display: swap handoff causes no visible reflow. */
+    --rectify-font-sans: Helvetica, Arial, "Helvetica Neue", sans-serif;
+    --rectify-font-regular: 400;
+    --rectify-font-bold: 700;
+    --rectify-leading-body: 22px;
+    --rectify-leading-body-large: 30px;
+    --rectify-leading-subheading: 24px;
+    --rectify-leading-card-title: 30px;
+    --rectify-leading-section-title: 54px;
+    --rectify-tracking: 0;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: var(--rectify-font-sans);
+}
+
+body {
+    font-weight: var(--rectify-font-regular);
+    letter-spacing: var(--rectify-tracking);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body :where(
+    h1, h2, h3, h4, h5, h6,
+    p, a, span, li, dt, dd, th, td, blockquote, figcaption,
+    label, legend, summary, button, input, select, textarea,
+    strong, b, small
+) {
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6, strong, b) {
+    font-weight: var(--rectify-font-bold) !important;
+}
+
+body :where(button, [type="button"], [type="submit"], [type="reset"]) {
+    font-family: var(--rectify-font-sans);
+    font-weight: var(--rectify-font-bold);
+}
+
+/* Preserve deliberate spacing between visual rating stars. */
+body :where(.rx-stars, .google-stars, [class*="rating-stars"], [class*="review-stars"]) {
+    letter-spacing: 1px !important;
+}
+
+/*
+ * Homepage reference scale
+ * Hero: 20/24 label, 64/64 title, 20/26 body.
+ * Sections: 24/30 label, 48/54 title, 20/30 large body.
+ * Default body: 16/22. Cards: 24/30 title.
+ */
+.rx-home {
+    font-family: var(--rectify-font-sans);
+    font-size: 16px;
+    font-weight: var(--rectify-font-regular);
+    line-height: var(--rectify-leading-body);
+    letter-spacing: var(--rectify-tracking);
+}
+
+.rx-home .rx-kicker {
+    font-size: 24px;
+    font-weight: var(--rectify-font-bold);
+    line-height: 30px;
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+.rx-home .rx-title {
+    font-size: 48px;
+    font-weight: var(--rectify-font-bold);
+    line-height: var(--rectify-leading-section-title);
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+.rx-home .rx-hero .rx-kicker {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.rx-home .rx-hero h1 {
+    font-size: 64px;
+    font-weight: var(--rectify-font-bold);
+    line-height: 64px;
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+.rx-home .rx-hero p {
+    font-size: 20px;
+    font-weight: var(--rectify-font-regular);
+    line-height: 26px;
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+.rx-home .rx-lead {
+    font-size: 16px;
+    font-weight: var(--rectify-font-regular);
+    line-height: var(--rectify-leading-body);
+}
+
+.rx-home .rx-row-head > p,
+.rx-home .rx-performance > .rx-wrap > p,
+.rx-home .rx-map > .rx-wrap > p,
+.rx-home .rx-partners > .rx-wrap > p {
+    font-size: 20px;
+    font-weight: var(--rectify-font-regular);
+    line-height: var(--rectify-leading-body-large);
+}
+
+.rx-home .rx-service,
+.rx-home .rx-service-item,
+.rx-home .rx-service-item-text {
+    font-size: 16px;
+    font-weight: var(--rectify-font-bold);
+    line-height: var(--rectify-leading-body);
+}
+
+.rx-home .rx-cause-card h3 {
+    font-size: 24px;
+    font-weight: var(--rectify-font-bold);
+    line-height: 24px;
+}
+
+.rx-home .rx-cause-card p,
+.rx-home .rx-adv-card p,
+.rx-home .rx-home-faq__answer,
+.rx-home .rx-contact-cta-card p {
+    font-size: 16px;
+    font-weight: var(--rectify-font-regular);
+    line-height: var(--rectify-leading-body);
+}
+
+.rx-home .rx-adv-card h3,
+.rx-home .rx-contact-cta-card h3 {
+    font-size: 24px;
+    font-weight: var(--rectify-font-bold);
+    line-height: var(--rectify-leading-card-title);
+}
+
+.rx-home .rx-case-study-card > h3,
+.rx-home .rx-case-study-card .rx-home-article-link > h3,
+.rx-home .rx-social-card-content p {
+    font-size: 20px;
+    font-weight: var(--rectify-font-bold) !important;
+    line-height: 26px;
+}
+
+.rx-home .rx-case-card h3,
+.rx-home .rx-case-study-card [class*="category"] {
+    font-size: 12px;
+    font-weight: var(--rectify-font-bold);
+    line-height: normal;
+}
+
+.rx-home .rx-btn {
+    font-size: 14px;
+    font-weight: var(--rectify-font-bold);
+    line-height: normal;
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+/* Figma header typography. */
+.rx-home .rx-top-strip {
+    font-size: 13px;
+    font-weight: var(--rectify-font-regular);
+    line-height: normal;
+}
+
+.rx-home .rx-top-strip-phrase {
+    font-size: 15px;
+    font-weight: var(--rectify-font-bold);
+    line-height: normal;
+}
+
+.rx-home .rx-top-strip-badge {
+    font-size: 13px;
+    font-weight: var(--rectify-font-regular);
+    line-height: normal;
+}
+
+.rx-home .rx-menu,
+.rx-home .rx-menu a,
+.rx-home .rx-mega-link-text {
+    font-size: 16px;
+    font-weight: var(--rectify-font-regular);
+    line-height: normal;
+}
+
+.rx-home .rx-phone {
+    font-size: 24px;
+    font-weight: var(--rectify-font-bold);
+    line-height: normal;
+}
+
+/* Homepage FAQ: Figma node 1015:16181. */
+.rx-home .rx-home-faq__heading {
+    font-size: 48px;
+    font-weight: var(--rectify-font-bold);
+    line-height: var(--rectify-leading-section-title);
+    letter-spacing: var(--rectify-tracking) !important;
+}
+
+.rx-home .rx-home-faq__item summary {
+    font-size: 20px;
+    font-weight: var(--rectify-font-bold);
+    line-height: 26px;
+}
+
+@media (max-width: 860px) {
+    .rx-home .rx-title,
+    .rx-home .rx-home-faq__heading {
+        font-size: 38px;
+        line-height: 44px;
+    }
+
+    .rx-home .rx-kicker {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-home .rx-hero h1 {
+        font-size: 48px;
+        line-height: 52px;
+    }
+}
+
+@media (max-width: 520px) {
+    .rx-home .rx-title,
+    .rx-home .rx-home-faq__heading {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .rx-home .rx-kicker,
+    .rx-home .rx-hero .rx-kicker {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-home .rx-hero h1 {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .rx-home .rx-hero p,
+    .rx-home .rx-row-head > p {
+        font-size: 18px;
+        line-height: 26px;
+    }
+}

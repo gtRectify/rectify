@@ -1,0 +1,330 @@
+/* =======================================================================
+ * Resources / Case Studies — Mobile & Tablet Overrides
+ * =======================================================================
+ * Loads on: the Case Studies archive (page slug "case-studies") and every
+ * single Case Study page (CPT `rectify_article`, template
+ * content-case-studies-sigle-page.php via single-rectify_article.php).
+ *
+ * Scope note — read before adding to this file:
+ * The desktop stylesheet this file overrides (resources-inner-pages.css)
+ * is a large shared file, but the only rules in it that actually match
+ * anything rendered by these two templates are the shared bottom
+ * "Need Help Choosing the Right Solution?" CTA band:
+ *   - Archive variant:  .rx-case-study-cta / .rx-case-study-help-*
+ *   - Single variant:   .rx-case-single-cta / .rx-case-single-help-*
+ * Everything else on these pages (hero, breadcrumb, filter bar, card
+ * grid, "Load More" button, article body, sidebar, related list) is
+ * rendered from inner-pages.css (archive) / inner-page.css (single) and
+ * is handled by mobile/inner-mobile.css. This file intentionally does not
+ * duplicate that work.
+ *
+ * Every selector below is prefixed with the page wrapper class
+ * (.rx-case-study-page / .rx-case-single-page) purely to guarantee this
+ * file's rules out-specificity the desktop rules they override —
+ * the desktop selectors never include that wrapper class.
+ * ===================================================================== */
+
+
+/* =======================================================================
+ * Safety net — no horizontal overflow, images always fluid
+ * (applies from tablet width down; desktop layout is untouched)
+ * ===================================================================== */
+@media (max-width: 1024px) {
+    .rx-case-study-page,
+    .rx-case-single-page {
+        overflow-x: hidden;
+    }
+
+    .rx-case-study-page img,
+    .rx-case-single-page img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card,
+    .rx-case-study-page .rx-case-study-cta,
+    .rx-case-single-page .rx-case-single-cta {
+        box-sizing: border-box;
+    }
+}
+
+
+/* =======================================================================
+ * Bottom CTA band ("Need Help Choosing the Right Solution?") — tablet
+ * Shared by the archive (.rx-case-study-cta) and single (.rx-case-single-cta)
+ * ===================================================================== */
+@media (max-width: 1024px) {
+    .rx-case-study-page .rx-case-study-cta,
+    .rx-case-single-page .rx-case-single-cta {
+        padding: 64px 0 56px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta h2,
+    .rx-case-single-page .rx-case-single-cta h2 {
+        font-size: 40px;
+        line-height: 46px;
+        margin-bottom: 20px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta > .rx-wrap > p,
+    .rx-case-single-page .rx-case-single-cta p {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 40px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-grid,
+    .rx-case-single-page .rx-case-single-help-grid {
+        gap: 24px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card {
+        padding: 40px 28px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta::after,
+    .rx-case-single-page .rx-case-single-cta::after {
+        height: 320px;
+        background-size: 100% 320px;
+    }
+}
+
+/* --- 900px tier: matches the grid's own 3→2 column breakpoint already
+   set in resources-inner-pages.css; refine spacing to suit 2 columns --- */
+@media (max-width: 900px) {
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card {
+        padding: 36px 28px;
+        gap: 16px;
+    }
+
+    .rx-case-study-page .rx-case-study-card-icon,
+    .rx-case-single-page .rx-case-single-card-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card h3,
+    .rx-case-single-page .rx-case-single-help-card h3 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta::after,
+    .rx-case-single-page .rx-case-single-cta::after {
+        height: 260px;
+        background-size: 100% 260px;
+        background-position: center bottom;
+    }
+}
+
+/* --- 768px tier: common tablet-portrait width --- */
+@media (max-width: 768px) {
+    .rx-case-study-page .rx-case-study-cta,
+    .rx-case-single-page .rx-case-single-cta {
+        padding: 56px 0 48px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta h2,
+    .rx-case-single-page .rx-case-single-cta h2 {
+        font-size: 34px;
+        line-height: 40px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-grid,
+    .rx-case-single-page .rx-case-single-help-grid {
+        gap: 20px;
+    }
+}
+
+
+/* =======================================================================
+ * Bottom CTA band — mobile phones
+ * Matches the existing 640px 3→1 column breakpoint from the desktop
+ * stylesheet; adds full-width stacked buttons and overflow-safe wrapping
+ * for the phone number / link so nothing runs wider than the viewport.
+ * ===================================================================== */
+@media (max-width: 640px) {
+    .rx-case-study-page .rx-case-study-cta,
+    .rx-case-single-page .rx-case-single-cta {
+        padding: 48px 0 40px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta h2,
+    .rx-case-single-page .rx-case-single-cta h2 {
+        font-size: 28px;
+        line-height: 34px;
+        margin-bottom: 16px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta > .rx-wrap > p,
+    .rx-case-single-page .rx-case-single-cta p {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 32px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta::after,
+    .rx-case-single-page .rx-case-single-cta::after {
+        height: 180px;
+        background-size: 100% 180px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-grid,
+    .rx-case-single-page .rx-case-single-help-grid {
+        gap: 16px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 28px 20px;
+        gap: 14px;
+    }
+
+    .rx-case-study-page .rx-case-study-card-icon,
+    .rx-case-single-page .rx-case-single-card-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card h3,
+    .rx-case-single-page .rx-case-single-help-card h3 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card p,
+    .rx-case-single-page .rx-case-single-help-card p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    /* Phone number: allow it to wrap under the icon instead of forcing
+       the card wider than the viewport. */
+    .rx-case-study-page .rx-case-study-help-phone,
+    .rx-case-single-page .rx-case-single-help-phone {
+        flex-wrap: wrap;
+        row-gap: 8px;
+        max-width: 100%;
+        font-size: 19px;
+        line-height: 24px;
+    }
+
+    /* CTA buttons stack full-width on phones. */
+    .rx-case-study-page .rx-case-study-help-link,
+    .rx-case-single-page .rx-case-single-help-link {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        text-align: center;
+    }
+}
+
+
+/* =======================================================================
+ * Bottom CTA band — small phones (~480px and down)
+ * ===================================================================== */
+@media (max-width: 480px) {
+    .rx-case-study-page .rx-case-study-cta,
+    .rx-case-single-page .rx-case-single-cta {
+        padding: 40px 0 32px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta h2,
+    .rx-case-single-page .rx-case-single-cta h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta > .rx-wrap > p,
+    .rx-case-single-page .rx-case-single-cta p {
+        font-size: 15px;
+        line-height: 22px;
+        margin-bottom: 28px;
+    }
+
+    .rx-case-study-page .rx-case-study-cta::after,
+    .rx-case-single-page .rx-case-single-cta::after {
+        height: 140px;
+        background-size: 100% 140px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card {
+        padding: 24px 18px;
+        border-radius: 14px;
+    }
+
+    .rx-case-study-page .rx-case-study-card-icon,
+    .rx-case-single-page .rx-case-single-card-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card h3,
+    .rx-case-single-page .rx-case-single-help-card h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-phone,
+    .rx-case-single-page .rx-case-single-help-phone {
+        font-size: 17px;
+        line-height: 22px;
+        gap: 12px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-phone span[aria-hidden],
+    .rx-case-single-page .rx-case-single-help-phone span[aria-hidden] {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+
+    .rx-case-study-page .rx-case-study-help-link,
+    .rx-case-single-page .rx-case-single-help-link {
+        min-height: 44px;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+
+/* =======================================================================
+ * Bottom CTA band — very small phones (~360px and down)
+ * ===================================================================== */
+@media (max-width: 360px) {
+    .rx-case-study-page .rx-case-study-cta h2,
+    .rx-case-single-page .rx-case-single-cta h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card,
+    .rx-case-single-page .rx-case-single-help-card {
+        padding: 20px 16px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card h3,
+    .rx-case-single-page .rx-case-single-help-card h3 {
+        font-size: 17px;
+        line-height: 22px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-card p,
+    .rx-case-single-page .rx-case-single-help-card p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .rx-case-study-page .rx-case-study-help-phone,
+    .rx-case-single-page .rx-case-single-help-phone {
+        font-size: 15px;
+    }
+}

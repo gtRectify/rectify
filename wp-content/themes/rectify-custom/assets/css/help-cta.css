@@ -1,0 +1,1027 @@
+/**
+ * Shared "Need Help Choosing" card CTA.
+ *
+ * The site historically shipped this same three-card component under several
+ * page-specific class names. This layer intentionally targets only those
+ * existing CTA variants and gives them the Case Studies / Figma 288:4850
+ * presentation without changing their page-specific content.
+ */
+
+:is(
+    .rx-case-study-cta,
+    .rx-case-single-cta,
+    .rx-news-cta,
+    .rx-faq-cta,
+    .rx-contact-cta,
+    .rx-cracked-help,
+    .rx-careers-cta,
+    .rx-cert-cta,
+    .rx-mtt-cta,
+    .rx-loc-cta,
+    .rx-about-rectify-cta,
+    .rx-career-detail-cta,
+    .rx-commercial-why
+) {
+    position: relative;
+    min-height: 706px;
+    overflow: hidden;
+    padding: 70px 44px 47px;
+    color: #fff;
+    background: #222840;
+    text-align: center;
+}
+
+:is(
+    .rx-case-study-cta,
+    .rx-case-single-cta,
+    .rx-news-cta,
+    .rx-faq-cta,
+    .rx-contact-cta,
+    .rx-cracked-help,
+    .rx-careers-cta,
+    .rx-cert-cta,
+    .rx-mtt-cta,
+    .rx-loc-cta,
+    .rx-about-rectify-cta,
+    .rx-career-detail-cta,
+    .rx-commercial-why
+)::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: auto 0 -1px;
+    display: block;
+    width: auto;
+    height: 402px;
+    background: url("../../rectify-homepage-draft2-v3/assets/images/home/Contour on Navy Blue.png") center bottom / 100% 402px no-repeat;
+    opacity: 1;
+    pointer-events: none;
+}
+
+:is(
+    .rx-case-study-cta,
+    .rx-case-single-cta,
+    .rx-news-cta,
+    .rx-faq-cta,
+    .rx-contact-cta,
+    .rx-cracked-help,
+    .rx-careers-cta,
+    .rx-cert-cta,
+    .rx-mtt-cta,
+    .rx-loc-cta,
+    .rx-about-rectify-cta,
+    .rx-career-detail-cta
+) > .rx-wrap {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1352px);
+    max-width: none;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.rx-commercial-why > :is(.rx-commercial-help-heading, .rx-commercial-why-grid) {
+    position: relative;
+    z-index: 1;
+}
+
+:is(
+    .rx-case-study-cta,
+    .rx-case-single-cta,
+    .rx-news-cta,
+    .rx-faq-cta,
+    .rx-contact-cta,
+    .rx-cracked-help,
+    .rx-careers-cta,
+    .rx-cert-cta,
+    .rx-mtt-cta,
+    .rx-loc-cta,
+    .rx-about-rectify-cta,
+    .rx-career-detail-cta,
+    .rx-commercial-why
+) h2 {
+    width: min(100%, 1000px);
+    max-width: none;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 54px;
+    text-align: center;
+    text-transform: none;
+}
+
+:is(
+    .rx-case-study-cta,
+    .rx-case-single-cta,
+    .rx-news-cta,
+    .rx-faq-cta,
+    .rx-contact-cta,
+    .rx-cracked-help,
+    .rx-careers-cta,
+    .rx-cert-cta,
+    .rx-loc-cta,
+    .rx-about-rectify-cta,
+    .rx-career-detail-cta
+) > .rx-wrap > p,
+.rx-mtt-cta .rx-mtt-cta-heading > p,
+.rx-commercial-why .rx-commercial-why-copy,
+.rx-commercial-why .rx-commercial-why-copy > p {
+    width: min(100%, 1000px);
+    max-width: none;
+    margin: 32px auto 0;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+}
+
+.rx-commercial-why .rx-commercial-why-copy > p {
+    margin-top: 0;
+}
+
+:is(
+    .rx-case-study-help-grid,
+    .rx-case-single-help-grid,
+    .rx-news-help-grid,
+    .rx-faq-help-grid,
+    .rx-contact-cta-grid,
+    .rx-cracked-help-grid,
+    .rx-careers-help-grid,
+    .rx-cert-help-grid,
+    .rx-mtt-help-grid,
+    .rx-loc-help-grid,
+    .rx-about-rectify-help-grid,
+    .rx-career-detail-help-grid,
+    .rx-commercial-why-grid
+) {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 100%;
+    max-width: 1352px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 24px;
+    margin: 56px auto 0;
+    text-align: left;
+}
+
+:is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+) {
+    display: flex;
+    min-width: 0;
+    min-height: 370px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 48px 32px;
+    border: 0;
+    border-radius: 12px;
+    color: #222840;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+    text-align: left;
+}
+
+:is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-why-card .rx-commercial-card-icon
+) {
+    display: block;
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    margin: 0;
+}
+
+:is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-why-card .rx-commercial-card-icon
+) :is(img, svg) {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+/*
+ * Use the homepage artwork consistently. Several older templates contain
+ * inline or legacy icon variants, so the shared card position is the stable
+ * source of truth for the visible icon without changing unrelated icons.
+ */
+:is(
+    .rx-case-study-help-grid,
+    .rx-case-single-help-grid,
+    .rx-news-help-grid,
+    .rx-faq-help-grid,
+    .rx-contact-cta-grid,
+    .rx-cracked-help-grid,
+    .rx-careers-help-grid,
+    .rx-cert-help-grid,
+    .rx-mtt-help-grid,
+    .rx-loc-help-grid,
+    .rx-about-rectify-help-grid,
+    .rx-career-detail-help-grid,
+    .rx-commercial-why-grid
+) > :is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+) > :is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-card-icon
+) {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 72px 72px;
+}
+
+:is(
+    .rx-case-study-help-grid,
+    .rx-case-single-help-grid,
+    .rx-news-help-grid,
+    .rx-faq-help-grid,
+    .rx-contact-cta-grid,
+    .rx-cracked-help-grid,
+    .rx-careers-help-grid,
+    .rx-cert-help-grid,
+    .rx-mtt-help-grid,
+    .rx-loc-help-grid,
+    .rx-about-rectify-help-grid,
+    .rx-career-detail-help-grid,
+    .rx-commercial-why-grid
+) > :is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+):nth-child(1) > :is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-card-icon
+) {
+    background-image: url("../icons-red/Rectify Icon Set_Call Expert.svg");
+}
+
+:is(
+    .rx-case-study-help-grid,
+    .rx-case-single-help-grid,
+    .rx-news-help-grid,
+    .rx-faq-help-grid,
+    .rx-contact-cta-grid,
+    .rx-cracked-help-grid,
+    .rx-careers-help-grid,
+    .rx-cert-help-grid,
+    .rx-mtt-help-grid,
+    .rx-loc-help-grid,
+    .rx-about-rectify-help-grid,
+    .rx-career-detail-help-grid,
+    .rx-commercial-why-grid
+) > :is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+):nth-child(2) > :is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-card-icon
+) {
+    background-image: url("../icons-red/Rectify Icon Set_Realignment_red.svg");
+}
+
+:is(
+    .rx-case-study-help-grid,
+    .rx-case-single-help-grid,
+    .rx-news-help-grid,
+    .rx-faq-help-grid,
+    .rx-contact-cta-grid,
+    .rx-cracked-help-grid,
+    .rx-careers-help-grid,
+    .rx-cert-help-grid,
+    .rx-mtt-help-grid,
+    .rx-loc-help-grid,
+    .rx-about-rectify-help-grid,
+    .rx-career-detail-help-grid,
+    .rx-commercial-why-grid
+) > :is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+):nth-child(3) > :is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-card-icon
+) {
+    background-image: url("../icons-red/Rectify Icon Set_Explore Resources 1.svg");
+}
+
+:is(
+    .rx-case-study-card-icon,
+    .rx-case-single-card-icon,
+    .rx-news-card-icon,
+    .rx-faq-card-icon,
+    .rx-contact-cta-icon,
+    .rx-cracked-help-icon,
+    .rx-careers-card-icon,
+    .rx-cert-card-icon,
+    .rx-mtt-card-icon,
+    .rx-loc-card-icon,
+    .rx-about-rectify-card-icon,
+    .rx-career-detail-card-icon,
+    .rx-commercial-why-card .rx-commercial-card-icon
+) > * {
+    visibility: hidden;
+}
+
+:is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+) h3 {
+    width: 100%;
+    margin: 0;
+    color: #222840;
+    font-family: Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+:is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+) > :is(p, .rx-mtt-help-copy, .rx-loc-help-copy, .rx-commercial-help-description),
+:is(
+    .rx-case-study-help-card,
+    .rx-case-single-help-card,
+    .rx-news-help-card,
+    .rx-faq-help-card,
+    .rx-contact-cta-card,
+    .rx-cracked-help-card,
+    .rx-careers-help-card,
+    .rx-cert-help-card,
+    .rx-mtt-help-card,
+    .rx-loc-help-card,
+    .rx-about-rectify-help-card,
+    .rx-career-detail-help-card,
+    .rx-commercial-why-card
+) > :is(.rx-mtt-help-copy, .rx-loc-help-copy, .rx-commercial-help-description) > p {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+    color: #676767;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 48px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 18px;
+    border: 1px solid #bd1726;
+    border-radius: 8px;
+    color: #bd1726;
+    background: transparent;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) > :is(span[aria-hidden="true"], .rx-cracked-help-arrow, .rx-careers-arrow-icon) {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    place-items: center;
+    font-size: 28px;
+    line-height: 1;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) > :is(span[aria-hidden="true"], .rx-cracked-help-arrow, .rx-careers-arrow-icon) {
+    background: currentColor;
+    font-size: 0;
+    -webkit-mask: url("../icons-red/right-arrow.svg") center / 36px 18px no-repeat;
+    mask: url("../icons-red/right-arrow.svg") center / 23px 12px no-repeat;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) :is(img, svg) {
+    display: block;
+    width: 36px;
+    height: 18px;
+    object-fit: contain;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) > :is(span[aria-hidden="true"], .rx-cracked-help-arrow, .rx-careers-arrow-icon) :is(img, svg) {
+    display: none;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+)::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    background: currentColor;
+    -webkit-mask: url("../icons-red/right-arrow.svg") center / 36px 18px no-repeat;
+    mask: url("../icons-red/right-arrow.svg") center / 23px 12px no-repeat;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) > :is(
+    span[aria-hidden="true"],
+    .rx-cracked-help-arrow,
+    .rx-careers-arrow-icon,
+    .rx-ci-ws-help-link-arrow
+) {
+    display: none;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+) > :is(img, svg) {
+    display: none;
+}
+
+:is(
+    .rx-case-study-help-link,
+    .rx-case-single-help-link,
+    .rx-news-help-link,
+    .rx-faq-help-link,
+    .rx-contact-cta-link,
+    .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+    .rx-careers-help-link,
+    .rx-cert-help-link,
+    .rx-mtt-help-link,
+    .rx-loc-help-link,
+    .rx-about-rectify-help-link,
+    .rx-career-detail-help-link,
+    .rx-commercial-help-link
+):is(:hover, :focus-visible) {
+    color: #fff;
+    background: #bd1726;
+}
+
+:is(
+    .rx-case-study-help-phone,
+    .rx-case-single-help-phone,
+    .rx-news-help-phone,
+    .rx-faq-help-phone,
+    .rx-contact-cta-phone,
+    .rx-cracked-help-link-phone,
+    .rx-careers-help-phone,
+    .rx-cert-help-phone,
+    .rx-mtt-help-phone,
+    .rx-loc-help-phone,
+    .rx-about-rectify-help-phone,
+    .rx-career-detail-help-phone,
+    .rx-commercial-help-phone
+) {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 30px;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #bd1726;
+    background: transparent;
+    font-family: Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+:is(
+    .rx-case-study-help-phone,
+    .rx-case-single-help-phone,
+    .rx-news-help-phone,
+    .rx-faq-help-phone,
+    .rx-contact-cta-phone,
+    .rx-cracked-help-link-phone,
+    .rx-careers-help-phone,
+    .rx-cert-help-phone,
+    .rx-mtt-help-phone,
+    .rx-loc-help-phone,
+    .rx-about-rectify-help-phone,
+    .rx-career-detail-help-phone,
+    .rx-commercial-help-phone
+) :is(
+    svg,
+    img,
+    span[aria-hidden="true"],
+    .rx-careers-help-phone-icon,
+    .rx-about-rectify-phone-icon
+) {
+    display: block;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    object-fit: contain;
+}
+
+@media (max-width: 900px) {
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-mtt-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta,
+        .rx-commercial-why
+    ) {
+        min-height: 0;
+        padding: 56px 32px;
+    }
+
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-mtt-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta,
+        .rx-commercial-why
+    ) h2 {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    :is(
+        .rx-case-study-help-grid,
+        .rx-case-single-help-grid,
+        .rx-news-help-grid,
+        .rx-faq-help-grid,
+        .rx-contact-cta-grid,
+        .rx-cracked-help-grid,
+        .rx-careers-help-grid,
+        .rx-cert-help-grid,
+        .rx-mtt-help-grid,
+        .rx-loc-help-grid,
+        .rx-about-rectify-help-grid,
+        .rx-career-detail-help-grid,
+        .rx-commercial-why-grid
+    ) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-mtt-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta,
+        .rx-commercial-why
+    ) {
+        padding: 48px 20px;
+    }
+
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-mtt-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta
+    ) > .rx-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-mtt-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta,
+        .rx-commercial-why
+    ) h2 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    :is(
+        .rx-case-study-cta,
+        .rx-case-single-cta,
+        .rx-news-cta,
+        .rx-faq-cta,
+        .rx-contact-cta,
+        .rx-cracked-help,
+        .rx-careers-cta,
+        .rx-cert-cta,
+        .rx-loc-cta,
+        .rx-about-rectify-cta,
+        .rx-career-detail-cta
+    ) > .rx-wrap > p,
+    .rx-mtt-cta .rx-mtt-cta-heading > p,
+    .rx-commercial-why .rx-commercial-why-copy,
+    .rx-commercial-why .rx-commercial-why-copy > p {
+        margin-top: 24px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    :is(
+        .rx-case-study-help-grid,
+        .rx-case-single-help-grid,
+        .rx-news-help-grid,
+        .rx-faq-help-grid,
+        .rx-contact-cta-grid,
+        .rx-cracked-help-grid,
+        .rx-careers-help-grid,
+        .rx-cert-help-grid,
+        .rx-mtt-help-grid,
+        .rx-loc-help-grid,
+        .rx-about-rectify-help-grid,
+        .rx-career-detail-help-grid,
+        .rx-commercial-why-grid
+    ) {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 32px;
+    }
+
+    :is(
+        .rx-case-study-help-card,
+        .rx-case-single-help-card,
+        .rx-news-help-card,
+        .rx-faq-help-card,
+        .rx-contact-cta-card,
+        .rx-cracked-help-card,
+        .rx-careers-help-card,
+        .rx-cert-help-card,
+        .rx-mtt-help-card,
+        .rx-loc-help-card,
+        .rx-about-rectify-help-card,
+        .rx-career-detail-help-card,
+        .rx-commercial-why-card
+    ) {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        padding: 32px 24px;
+    }
+
+    :is(
+        .rx-case-study-help-card,
+        .rx-case-single-help-card,
+        .rx-news-help-card,
+        .rx-faq-help-card,
+        .rx-contact-cta-card,
+        .rx-cracked-help-card,
+        .rx-careers-help-card,
+        .rx-cert-help-card,
+        .rx-mtt-help-card,
+        .rx-loc-help-card,
+        .rx-about-rectify-help-card,
+        .rx-career-detail-help-card,
+        .rx-commercial-why-card
+    ) > :is(h3, p, .rx-mtt-help-copy, .rx-loc-help-copy, .rx-commercial-help-description) {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    :is(
+        .rx-case-study-help-link,
+        .rx-case-single-help-link,
+        .rx-news-help-link,
+        .rx-faq-help-link,
+        .rx-contact-cta-link,
+        .rx-cracked-help-link:not(.rx-cracked-help-link-phone),
+        .rx-careers-help-link,
+        .rx-cert-help-link,
+        .rx-mtt-help-link,
+        .rx-loc-help-link,
+        .rx-about-rectify-help-link,
+        .rx-career-detail-help-link,
+        .rx-commercial-help-link
+    ) {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    :is(
+        .rx-case-study-help-phone,
+        .rx-case-single-help-phone,
+        .rx-news-help-phone,
+        .rx-faq-help-phone,
+        .rx-contact-cta-phone,
+        .rx-cracked-help-link-phone,
+        .rx-careers-help-phone,
+        .rx-cert-help-phone,
+        .rx-mtt-help-phone,
+        .rx-loc-help-phone,
+        .rx-about-rectify-help-phone,
+        .rx-career-detail-help-phone,
+        .rx-commercial-help-phone
+    ) {
+        font-size: 21px;
+        line-height: 28px;
+        white-space: normal;
+    }
+}

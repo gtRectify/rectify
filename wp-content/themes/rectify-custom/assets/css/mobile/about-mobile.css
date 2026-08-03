@@ -1,0 +1,946 @@
+/* ==========================================================================
+   About Us — Mobile & Tablet Overrides
+   ==========================================================================
+
+   Loads immediately after assets/css/about-inner-pages.css on:
+   About Rectify, Our Story, Our Locations, Meet the Team, Our Technology,
+   Our Process, Certifications & Compliance, and Careers (listing).
+
+   about-inner-pages.css already carries thorough tablet/mobile treatment for
+   most sections at 1180px / 900px / 640px. This file is intentionally
+   organised the same way (grep the desktop file for `@media` before adding
+   anything new) and focuses on:
+
+     1. A smaller "small phone" tier (<=480px, plus a couple of <=380px
+        micro-fixes) that the desktop file does not have, for further type
+        scale / spacing / stacking refinement on narrow handsets.
+     2. Concrete parity gaps between page groups (Meet the Team and Careers
+        are missing safety nets the other five groups already carry).
+     3. Component-specific polish (Google Map + InfoWindow on Our Locations,
+        job filters/cards on Careers, checklists, step numbers, logo grids).
+
+   Two component families are DELIBERATELY left untouched here:
+
+     - `.rx-homeowner-advantage*` (About Rectify's "ar-advantage" section) is
+       owned by assets/css/homeowner-advantage.css, which is enqueued AFTER
+       this file on every one of these pages and already has its own
+       1100px/860px/620px responsive treatment.
+     - `.rx-*-cta`, `.rx-*-help-grid`, `.rx-*-help-card`, `.rx-*-card-icon`,
+       `.rx-*-help-link`, `.rx-*-help-phone` (the shared "Need Help Choosing
+       the Right Solution?" band used at the bottom of About Rectify, Our
+       Locations, Meet the Team, Certifications & Compliance and Careers) are
+       owned by assets/css/help-cta.css, also enqueued AFTER this file, and
+       already has its own thorough 900px/640px responsive treatment
+       (grid -> 2 cols -> 1 col, box-sizing, overflow-wrap, font scaling).
+
+   Because both of those stylesheets load after this one, any rules written
+   here for their selectors would simply be overridden and do nothing useful.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. ABOUT RECTIFY — .rx-about-rectify-page
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-about-rectify-hero {
+        padding: 32px 0;
+    }
+
+    .rx-about-rectify-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-about-rectify-hero h1 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-about-rectify-hero-intro h2 {
+        margin-bottom: 14px;
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-about-rectify-breadcrumb {
+        gap: 6px;
+        font-size: 11px;
+    }
+
+    .rx-about-rectify-banner {
+        height: 168px;
+    }
+
+    .rx-about-rectify-intro {
+        padding: 40px 0;
+    }
+
+    .rx-about-rectify-intro-copy h2,
+    .rx-about-rectify-vision h2,
+    .rx-about-rectify-section-head h2,
+    .rx-about-rectify-advantage-head h2,
+    .rx-about-rectify-difference-heading h2,
+    .rx-about-rectify-approach h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-about-rectify-intro-lead {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-about-rectify-vision {
+        min-height: 0;
+        padding: 40px 0;
+    }
+
+    .rx-about-rectify-vision h2,
+    .rx-about-rectify-vision p {
+        margin-top: 22px;
+    }
+
+    .rx-about-rectify-what {
+        padding: 40px 0;
+    }
+
+    .rx-about-rectify-what-card {
+        padding: 24px 20px;
+    }
+
+    .rx-about-rectify-what-icon,
+    .rx-about-rectify-what-icon img,
+    .rx-about-rectify-what-icon svg {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+    }
+
+    .rx-about-rectify-advantage {
+        padding: 48px 0 68px;
+    }
+
+    .rx-about-rectify-advantage-head > p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-about-rectify-advantage-card {
+        padding: 24px 20px;
+    }
+
+    .rx-about-rectify-difference-media {
+        min-height: 560px;
+    }
+
+    .rx-about-rectify-difference-grid {
+        padding-top: 44px !important;
+    }
+
+    .rx-about-rectify-difference-heading > p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-about-rectify-difference-copy {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .rx-about-rectify-focus {
+        padding: 40px 0;
+    }
+
+    .rx-about-rectify-focus p {
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-about-rectify-approach {
+        padding: 40px 0;
+    }
+
+    .rx-about-rectify-approach-copy h3,
+    .rx-about-rectify-principles > h3 {
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-about-rectify-step {
+        width: 48px;
+        height: 48px;
+        font-size: 17px;
+        line-height: 22px;
+    }
+
+    .rx-about-rectify-principles li {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .rx-about-rectify-principles ol {
+        gap: 22px;
+    }
+}
+
+/* ==========================================================================
+   2. OUR STORY — .rx-story-page
+   ========================================================================== */
+
+/* Parity fix: About Rectify / Meet the Team / Locations / Certifications /
+   Technology / Process all reset box-sizing to border-box for every
+   descendant of their page wrapper; Our Story never got that rule, which
+   means any padded, fixed-width block here (checklists, pillars, cards)
+   silently grows past its intended box on narrow screens. */
+.rx-story-page,
+.rx-story-page *,
+.rx-story-page *::before,
+.rx-story-page *::after {
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .rx-story-page .rx-story-hero {
+        padding: 32px 0;
+    }
+
+    .rx-story-page .rx-story-hero h1,
+    .rx-story-began-copy h2,
+    .rx-story-problem-copy h2,
+    .rx-story-work-copy h2,
+    .rx-story-growth-copy h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-story-page .rx-story-hero .rx-mtt-hero-intro h2,
+    .rx-story-began-copy h3,
+    .rx-story-problem-copy h3,
+    .rx-story-work-copy h3,
+    .rx-story-name-copy h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-story-began,
+    .rx-story-began-grid {
+        min-height: 580px;
+    }
+
+    .rx-story-began-copy {
+        padding-top: 44px;
+        padding-bottom: 44px;
+    }
+
+    .rx-story-problem,
+    .rx-story-growth,
+    .rx-story-name {
+        padding: 44px 0;
+    }
+
+    .rx-story-work {
+        padding-bottom: 44px;
+    }
+
+    .rx-story-checklist li {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    /* Two columns of very short labels can still look cramped at <=480px;
+       stack them so the divider rule never sits against wrapped text. */
+    .rx-story-pillars {
+        grid-template-columns: 1fr;
+        row-gap: 18px;
+    }
+
+    .rx-story-pillar {
+        flex-direction: row;
+        justify-content: flex-start;
+        min-height: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    .rx-story-pillar + .rx-story-pillar::before {
+        content: none;
+    }
+
+    .rx-story-values-panel {
+        padding: 36px 16px;
+    }
+
+    .rx-story-values-panel h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-story-belief-copy {
+        padding-top: 44px;
+    }
+
+    .rx-story-belief-copy h2,
+    .rx-story-name-copy h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .rx-story-belief-intro {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-story-belief-media {
+        height: 380px;
+    }
+}
+
+/* ==========================================================================
+   3. OUR LOCATIONS — .rx-loc-page (includes the Google Map)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-loc-hero {
+        padding: 32px 0;
+    }
+
+    .rx-loc-hero .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-loc-hero h1,
+    .rx-loc-section-head h2,
+    .rx-loc-footprint-content h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-loc-hero-copy,
+    .rx-loc-section-head > p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .rx-loc-banner {
+        height: 168px;
+    }
+
+    .rx-loc-offices {
+        padding: 40px 0;
+    }
+
+    .rx-loc-office-card {
+        padding: 22px 20px;
+        gap: 22px;
+    }
+
+    .rx-loc-office-icon,
+    .rx-loc-office-icon img,
+    .rx-loc-office-icon svg {
+        width: 52px;
+        height: 52px;
+    }
+
+    .rx-loc-office-card h3 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-loc-contact-row,
+    .rx-loc-address {
+        font-size: 15px;
+        line-height: 21px;
+        word-break: break-word;
+    }
+
+    /* Google Maps injects its own absolutely-positioned tile/control divs
+       inside #rxLocMap; only constrain the outer container so the widget
+       never forces the page wider than the viewport. */
+    .rx-loc-map {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 1 / 1.05;
+    }
+
+    .rx-loc-map-section {
+        padding-bottom: 44px;
+    }
+
+    /* The InfoWindow bubble Google renders on pin click uses this markup
+       (see our-locations-map.js); without a max-width it can render wider
+       than a small phone's viewport and force the whole map to pan/scroll. */
+    .rx-loc-map-infowindow {
+        max-width: 220px;
+    }
+
+    .rx-loc-map-infowindow-title {
+        font-size: 15px;
+    }
+
+    .rx-loc-footprint {
+        height: 380px;
+    }
+
+    .rx-loc-footprint .rx-loc-footprint-content {
+        padding-top: 56px;
+    }
+
+    .rx-loc-footprint-copy {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+/* ==========================================================================
+   4. MEET THE TEAM — .rx-mtt-page
+   ========================================================================== */
+
+/* Parity fix: About Rectify / Locations / Certifications / Technology /
+   Process / Our Story all get a final ":where()" overflow-wrap safety net
+   in their mobile tier so long builder-entered copy can never force
+   horizontal scroll; Meet the Team never received the equivalent block. */
+@media (max-width: 640px) {
+    .rx-mtt-page :where(
+        .rx-mtt-hero,
+        .rx-mtt-hero-intro,
+        .rx-mtt-philosophy,
+        .rx-mtt-philosophy-copy,
+        .rx-mtt-card,
+        .rx-mtt-card-body,
+        .rx-mtt-card-description,
+        .rx-mtt-why-copy
+    ) {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .rx-mtt-page :where(h1, h2, h3, p, span, a, li) {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-mtt-hero {
+        padding: 32px 0;
+    }
+
+    .rx-mtt-hero .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-mtt-hero h1,
+    .rx-mtt-philosophy h2,
+    .rx-mtt-why h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-mtt-hero-intro,
+    .rx-mtt-hero-intro .rx-mtt-richtext {
+        font-size: 16px;
+        line-height: 23px;
+    }
+
+    .rx-mtt-philosophy {
+        padding: 32px 20px;
+    }
+
+    .rx-mtt-philosophy-lead {
+        font-size: 17px !important;
+        line-height: 24px !important;
+    }
+
+    .rx-mtt-grid-section {
+        padding: 28px 0 56px;
+    }
+
+    .rx-mtt-grid {
+        row-gap: 40px;
+    }
+
+    .rx-mtt-card-photo {
+        max-height: 380px;
+    }
+
+    .rx-mtt-card-heading h3 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-mtt-card-contact {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .rx-mtt-why-media {
+        height: 220px;
+    }
+
+    .rx-mtt-why-copy {
+        padding: 40px 0 32px;
+    }
+
+    /* Email modal opened by the "EMAIL" action on each team card */
+    .rx-mtt-email-card {
+        padding: 28px 16px;
+    }
+
+    .rx-mtt-email-card h2 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+}
+
+/* ==========================================================================
+   5. OUR TECHNOLOGY — .rx-tech-page
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-tech-hero {
+        padding: 32px 0;
+    }
+
+    .rx-tech-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-tech-hero h1,
+    .rx-tech-why-copy h2,
+    .rx-tech-approach h2,
+    .rx-tech-engineered-copy h2,
+    .rx-tech-measuring-copy h2,
+    .rx-tech-innovation-copy h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-tech-hero-intro {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .rx-tech-why,
+    .rx-tech-engineered,
+    .rx-tech-measuring,
+    .rx-tech-innovation {
+        padding: 40px 0;
+    }
+
+    .rx-tech-approach {
+        padding: 40px 0;
+    }
+
+    .rx-tech-approach h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-tech-expertise {
+        padding: 40px 0;
+    }
+
+    .rx-tech-expertise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rx-tech-expertise-card {
+        padding: 32px 22px;
+    }
+
+    .rx-tech-expertise-card h3 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .rx-tech-innovation-callout {
+        padding: 24px;
+    }
+
+    .rx-tech-innovation-callout h3 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .rx-tech-innovation-callout p {
+        margin-top: 20px;
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .rx-tech-checklist li {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+/* ==========================================================================
+   6. OUR PROCESS — .rx-process-page
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-process-hero {
+        padding: 32px 0;
+    }
+
+    .rx-process-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-process-hero h1,
+    .rx-process-principles-copy h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-process-hero-intro {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .rx-process-banner {
+        height: 168px;
+    }
+
+    .rx-process-principles {
+        padding: 40px 0;
+    }
+
+    .rx-process-principles-copy h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-process-photo {
+        margin-top: 32px;
+    }
+
+    .rx-process-steps {
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .rx-process-step-number {
+        width: 48px;
+        height: 48px;
+        font-size: 17px;
+        line-height: 22px;
+    }
+
+    .rx-process-steps li {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .rx-process-step-body h4 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+/* ==========================================================================
+   7. CERTIFICATIONS & COMPLIANCE — .rx-cert-page
+   ========================================================================== */
+
+/*
+ * The body-class helper that gives every other group in this file a
+ * full-bleed ".content-wrapper"/".site-content" (see functions.php) has no
+ * `is_page( 'certifications-compliance' )` branch, so this page never gets
+ * that reset and its outer wrapper keeps the theme's default white
+ * background + 4px border-radius. It's a cosmetic gap only (no width/padding
+ * is added by the default rule), but it can show as thin rounded-corner
+ * slivers behind this page's full-bleed hero/CTA bands on small screens
+ * where every pixel of width is visible. `:has()` support is assumed
+ * (Chrome/Edge/Safari/Firefox all ship it); browsers without it simply keep
+ * today's appearance.
+ */
+@media (max-width: 1024px) {
+    body:has(.rx-cert-page) .site-content,
+    body:has(.rx-cert-page) .content-wrapper {
+        background: transparent;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-cert-hero {
+        padding: 32px 0;
+    }
+
+    .rx-cert-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-cert-hero h1,
+    .rx-cert-why-copy h2,
+    .rx-cert-standards-head h2,
+    .rx-cert-confidence h2,
+    .rx-cert-systems-copy h2,
+    .rx-cert-engineering-copy h2 {
+        font-size: 27px;
+        line-height: 33px;
+    }
+
+    .rx-cert-builder-copy h2 {
+        font-size: 23px;
+        line-height: 29px;
+    }
+
+    .rx-cert-lead {
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-cert-hero-grid > div:last-child h2 {
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-cert-banner {
+        height: 168px;
+    }
+
+    .rx-cert-why,
+    .rx-cert-builder,
+    .rx-cert-engineering,
+    .rx-cert-confidence,
+    .rx-cert-systems {
+        padding: 40px 0;
+    }
+
+    .rx-cert-standards {
+        padding: 40px 0 48px;
+    }
+
+    .rx-cert-standards-card {
+        padding: 24px 20px;
+    }
+
+    .rx-cert-standards-icon,
+    .rx-cert-standards-icon img,
+    .rx-cert-standards-icon svg {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+    }
+
+    /* A 2-column logo grid can crowd registration-body logos on very small
+       screens; stack them so each logo has room to breathe. */
+    .rx-cert-builder-logos {
+        grid-template-columns: 1fr;
+        justify-items: start;
+        gap: 20px;
+    }
+
+    .rx-cert-split-col {
+        padding: 36px 20px;
+    }
+
+    .rx-cert-split-inner h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .rx-cert-split-inner .rx-cert-lead {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-cert-split-inner .rx-cert-richtext,
+    .rx-cert-split-inner .rx-cert-body {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-cert-confidence h2,
+    .rx-cert-systems-copy h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+}
+
+/* ==========================================================================
+   8. CAREERS (listing) — .rx-careers-page
+   ========================================================================== */
+
+/* Parity fix: every other page group resets box-sizing to border-box and
+   clips accidental overflow at the page-wrapper level; Careers never got
+   either rule, which matters most here because of the job-filter row and
+   the two-column "standards"/"fit" bands below. */
+.rx-careers-page,
+.rx-careers-page *,
+.rx-careers-page *::before,
+.rx-careers-page *::after {
+    box-sizing: border-box;
+}
+
+.rx-careers-page {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+@media (max-width: 640px) {
+    /* Every sibling group tightens its .rx-wrap gutter to 40px total at this
+       breakpoint; Careers kept the desktop 48px gutter at every size. */
+    .rx-careers-page .rx-wrap {
+        width: calc(100% - 40px);
+    }
+
+    /* Unlike every sibling breadcrumb nav, this one was never given
+       flex-wrap, so a long title can push the row wider than a narrow
+       phone. */
+    .rx-careers-breadcrumb {
+        flex-wrap: wrap;
+        row-gap: 6px;
+    }
+
+    /* Safety net matching the pattern used by About Rectify / Locations /
+       Certifications / Technology / Process / Our Story, scoped to this
+       page's OWN sections (the shared CTA band at the bottom is already
+       covered by help-cta.css). */
+    .rx-careers-page :where(
+        .rx-careers-hero-grid > div,
+        .rx-careers-why-work-copy,
+        .rx-careers-culture-copy,
+        .rx-careers-why-join-copy,
+        .rx-careers-standards-inner,
+        .rx-careers-standards-matter-copy,
+        .rx-careers-fit-card,
+        .rx-careers-job-card
+    ) {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .rx-careers-page :where(h1, h2, h3, p, span, a, li) {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    /* Card padding never stepped down on phones the way About Rectify /
+       Locations / Certifications do for their own three-card grids. */
+    .rx-careers-fit-card {
+        padding: 32px 24px;
+    }
+
+    .rx-careers-job-card {
+        padding: 28px 24px;
+    }
+
+    .rx-careers-job-icon img {
+        width: 52px;
+    }
+
+    .rx-careers-standards-inner {
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-careers-page .rx-kicker,
+    .rx-careers-subtitle {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-careers-hero {
+        padding: 28px 0;
+    }
+
+    .rx-careers-hero-grid {
+        gap: 28px;
+    }
+
+    .rx-careers-hero-grid h1,
+    .rx-careers-why-work-copy h2,
+    .rx-careers-standards-matter-copy h2,
+    .rx-careers-culture-copy h2,
+    .rx-careers-why-join-copy h2,
+    .rx-careers-section-head h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-careers-why-work,
+    .rx-careers-standards-matter {
+        padding: 40px 0;
+    }
+
+    .rx-careers-why-work-copy h3,
+    .rx-careers-standards-matter-copy h3,
+    .rx-careers-culture-copy h3,
+    .rx-careers-why-join-copy h3,
+    .rx-careers-standards-inner h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .rx-careers-culture,
+    .rx-careers-why-join {
+        min-height: 260px;
+        padding: 32px 0;
+    }
+
+    .rx-careers-standards-col {
+        padding: 40px 24px;
+    }
+
+    .rx-careers-standards-inner h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-careers-fit {
+        padding: 32px 0 40px;
+    }
+
+    .rx-careers-fit-card h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-careers-fit-card > p {
+        margin-bottom: 28px;
+    }
+
+    .rx-careers-jobs {
+        padding: 40px 0;
+    }
+
+    /* Filter pills need to stay tappable but shouldn't force a scrolling row
+       on the narrowest phones. */
+    .rx-careers-filters {
+        gap: 10px;
+        margin-bottom: 32px;
+    }
+
+    .rx-careers-filter {
+        height: 42px;
+        padding: 8px 14px;
+        font-size: 11px;
+    }
+
+    .rx-careers-job-card {
+        gap: 16px;
+    }
+
+    .rx-careers-job-card h3 {
+        font-size: 21px;
+        line-height: 26px;
+    }
+}

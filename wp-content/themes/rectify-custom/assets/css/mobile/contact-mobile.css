@@ -1,0 +1,474 @@
+/* ==========================================================================
+   CONTACT US — MOBILE / TABLET OVERRIDES
+   ==========================================================================
+   Pairs with the desktop stylesheet:
+   wp-content/themes/rectify-custom/rectify-homepage.css
+
+   Loads ONLY on the Contact Us page, right after the file above, so every
+   rule here is free to target the bespoke ".rx-contact-*" selectors that
+   file defines without touching any other template.
+
+   Breakpoints are chosen to match rectify-homepage.css's own convention
+   (it already breaks at 1100px, 1024px, 760px and 480px):
+     - Tablet tier ......... max-width: 1024px
+     - Mobile tier ......... max-width: 760px
+     - Small-phone tier .... max-width: 480px
+
+   The Contact Us page markup (template-parts/content-contact-us.php) can
+   render in one of two shapes:
+     1. The plain fallback markup - .rx-contact-hero-panel, .rx-contact-offices,
+        .rx-contact-office-grid/-card, .rx-contact-form-section, .rx-contact-
+        form-grid/-panel/-copy, .rx-contact-direct, .rx-contact-cta, .rx-
+        contact-cta-grid/-card - which is what currently renders live.
+     2. A page-builder-rendered variant (rectify_builder_render_section()),
+        which - going by rectify-homepage.css's own selectors - would use the
+        older .rx-contact / .rx-contact-hero / .rx-contact-actions / .rx-
+        contact-cards / .rx-contact-card / .rx-contact-support* naming.
+
+   Both shapes are covered below so this file keeps working regardless of
+   which one is active. Generic inner-page chrome (shared with the rest of
+   the site's content pages) lives in assets/css/inner-pages.css and is
+   handled by its own assets/css/mobile/inner-mobile.css - no need to
+   duplicate that here beyond harmless, defensive overlap.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Global safety nets
+   -------------------------------------------------------------------------- */
+.rx-contact-page img,
+.rx-contact-hero-panel img,
+.rx-contact-offices img,
+.rx-contact-form-section img,
+.rx-contact-cta img {
+    max-width: 100%;
+    height: auto;
+}
+
+.rx-contact-page {
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   HERO PANEL + BREADCRUMB
+   .rx-contact-hero-panel > .rx-wrap.rx-contact-hero-grid
+     > .rx-contact-hero-copy (.rx-kicker, h1, .rx-contact-breadcrumb)
+     > .rx-contact-hero-lead (p)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .rx-contact-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .rx-contact-hero-lead {
+        max-width: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-hero-panel {
+        padding: 44px 0 36px;
+    }
+
+    .rx-contact-hero-grid {
+        gap: 20px;
+    }
+
+    .rx-contact-hero-copy h1 {
+        font-size: clamp(26px, 8vw, 34px);
+        line-height: 1.16;
+        margin-bottom: 16px;
+    }
+
+    .rx-kicker {
+        margin-bottom: 12px;
+    }
+
+    .rx-contact-breadcrumb {
+        margin-bottom: 18px;
+        font-size: 12px;
+        gap: 8px;
+    }
+
+    .rx-contact-hero-lead {
+        font-size: 14px;
+        line-height: 1.65;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-contact-hero-panel {
+        padding: 36px 0 28px;
+    }
+
+    .rx-contact-hero-copy h1 {
+        font-size: 26px;
+    }
+
+    .rx-contact-breadcrumb {
+        gap: 6px;
+        font-size: 11px;
+    }
+}
+
+/* ==========================================================================
+   OFFICES GRID
+   .rx-contact-offices > .rx-wrap
+     > h2.rx-contact-offices-title
+     > .rx-contact-office-grid > .rx-contact-office-card
+         (.rx-contact-office-icon > img, h3, p, .rx-contact-map-link)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .rx-contact-offices {
+        padding: 52px 0 56px;
+    }
+
+    .rx-contact-office-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .rx-contact-offices-title {
+        margin-bottom: 28px;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-offices {
+        padding: 40px 0 44px;
+    }
+
+    .rx-contact-offices-title {
+        font-size: 22px;
+        margin-bottom: 22px;
+    }
+
+    .rx-contact-office-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .rx-contact-office-card {
+        padding: 24px 22px;
+    }
+
+    .rx-contact-office-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 16px;
+    }
+
+    .rx-contact-office-icon img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .rx-contact-office-card h3 {
+        font-size: 17px;
+    }
+
+    .rx-contact-office-card > p {
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
+
+    .rx-contact-map-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-contact-offices {
+        padding: 32px 0 36px;
+    }
+
+    .rx-contact-office-card {
+        padding: 20px 18px;
+    }
+}
+
+/* ==========================================================================
+   FORM SECTION
+   .rx-contact-form-section > .rx-wrap.rx-contact-form-grid
+     > .rx-contact-form-panel (embedded HubSpot / Gravity Forms markup)
+     > .rx-contact-form-copy (h2, .rx-richtext, .rx-contact-direct x2)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .rx-contact-form-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Copy reads better above the form panel once the grid stacks. */
+    .rx-contact-form-copy {
+        order: -1;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-form-section {
+        padding: 12px 0 48px;
+    }
+
+    .rx-contact-form-grid {
+        gap: 32px;
+    }
+
+    .rx-contact-form-panel {
+        padding: 28px 20px;
+        border-radius: 14px;
+    }
+
+    .rx-contact-form-copy h2 {
+        font-size: clamp(22px, 7vw, 28px);
+        margin-bottom: 16px;
+    }
+
+    .rx-contact-form-copy .rx-richtext,
+    .rx-contact-form-copy .rx-richtext p {
+        font-size: 14px;
+        line-height: 1.65;
+        margin-bottom: 20px;
+    }
+
+    .rx-contact-direct {
+        margin-top: 16px;
+    }
+
+    .rx-contact-direct-value {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-contact-form-panel {
+        padding: 22px 16px;
+    }
+}
+
+/* Wrapping container + field-width safety net for whichever form plugin
+   renders inside the panel (HubSpot / Gravity Forms). Field-level styling
+   is intentionally left to the plugin's own markup / inner-pages.css - this
+   only guarantees nothing can force horizontal overflow at narrow widths. */
+@media (max-width: 760px) {
+    .rx-contact-form-panel,
+    .rx-contact-form-panel form,
+    .rx-contact-form-panel .hbspt-form,
+    .rx-contact-form-panel .rx-hubspot-embed,
+    .rx-contact-form-panel .gform_wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .rx-contact-form-panel input,
+    .rx-contact-form-panel textarea,
+    .rx-contact-form-panel select,
+    .rx-contact-form-panel button,
+    .rx-contact-form-panel iframe {
+        max-width: 100%;
+    }
+
+    .rx-contact-form-panel .hs-form .form-columns-2,
+    .rx-contact-form-panel .hs-form .form-columns-3,
+    .rx-contact-form-panel .gform_fields {
+        flex-wrap: wrap;
+    }
+}
+
+/* ==========================================================================
+   CTA SECTION
+   .rx-contact-cta (navy, --rx-contact-contours background) > .rx-wrap
+     > h2, p
+     > .rx-contact-cta-grid > .rx-contact-cta-card
+         (.rx-contact-cta-icon > img, h3, p, .rx-contact-cta-phone /
+          .rx-contact-cta-link)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .rx-contact-cta {
+        padding: 60px 0 68px;
+    }
+
+    .rx-contact-cta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-cta {
+        padding: 48px 0 88px;
+    }
+
+    /* The contour artwork is a decorative bottom strip - keep it
+       proportionate instead of eating most of the viewport height. */
+    .rx-contact-cta::after {
+        height: 130px;
+        background-size: auto 130px;
+    }
+
+    .rx-contact-cta h2 {
+        font-size: clamp(24px, 7vw, 30px);
+        margin-bottom: 14px;
+    }
+
+    .rx-contact-cta > .rx-wrap > p {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .rx-contact-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .rx-contact-cta-card {
+        padding: 24px 20px;
+    }
+
+    .rx-contact-cta-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 14px;
+    }
+
+    .rx-contact-cta-icon img {
+        width: 52px;
+        height: 52px;
+    }
+
+    .rx-contact-cta-card h3 {
+        font-size: 17px;
+    }
+
+    .rx-contact-cta-card p {
+        font-size: 13px;
+    }
+
+    .rx-contact-cta-phone,
+    .rx-contact-cta-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-contact-cta {
+        padding: 40px 0 72px;
+    }
+
+    .rx-contact-cta::after {
+        height: 96px;
+        background-size: auto 96px;
+    }
+
+    .rx-contact-cta-card {
+        padding: 20px 18px;
+    }
+}
+
+/* ==========================================================================
+   LEGACY / PAGE-BUILDER VARIANT
+   Only relevant if rectify_builder_render_section() renders this page's
+   sections instead of the plain fallback markup above. These are the exact
+   selectors rectify-homepage.css defines for its own (older) Contact layout:
+   .rx-contact, .rx-contact-hero, .rx-contact-actions, .rx-contact-cards,
+   .rx-contact-card, .rx-contact-form-section .rx-grid-2, .rx-form-row,
+   .rx-checkbox-field, .rx-contact-support, .rx-contact-support-cards,
+   .rx-contact-support-card.
+   ========================================================================== */
+@media (max-width: 480px) {
+    .rx-contact {
+        padding: 48px 0;
+    }
+
+    .rx-contact-hero h1 {
+        font-size: clamp(28px, 8vw, 38px);
+    }
+
+    .rx-contact-hero p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-actions .rx-contact-card {
+        padding: 24px;
+    }
+
+    .rx-contact-card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .rx-contact-card-icon img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .rx-contact-card h3 {
+        font-size: 18px;
+    }
+
+    .rx-contact-form-section .rx-grid-2 {
+        gap: 32px;
+    }
+
+    .rx-contact-form-copy h2 {
+        font-size: clamp(26px, 7vw, 32px);
+    }
+
+    .rx-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .rx-contact-form-panel {
+        padding: 24px 20px;
+    }
+
+    .rx-contact-form-panel .rx-btn {
+        width: 100%;
+    }
+
+    .rx-checkbox-field {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .rx-contact-support-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .rx-contact-support {
+        padding: 56px 0 52px;
+    }
+
+    .rx-contact-support .rx-row-head h2 {
+        font-size: clamp(26px, 7vw, 34px);
+    }
+
+    .rx-contact-support .rx-row-head .rx-lead {
+        font-size: 15px;
+        margin-top: 16px;
+    }
+
+    .rx-contact-support-cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .rx-contact-support-card {
+        padding: 26px 22px;
+    }
+
+    .rx-contact-support-card h3 {
+        font-size: 19px;
+    }
+}

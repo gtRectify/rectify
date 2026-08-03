@@ -1,0 +1,70 @@
+.rx-warranty-page {
+    --warranty-red: #bd1726;
+    --warranty-navy: #222840;
+    --warranty-grey: #676767;
+    color: var(--warranty-navy);
+    font-family: Helvetica, sans-serif;
+}
+.rx-warranty-page *,
+.rx-warranty-page *::before,
+.rx-warranty-page *::after { box-sizing: border-box; }
+.rx-warranty-page .rx-wrap { max-width: 1124px; width: calc(100% - 48px); }
+.rx-warranty-page h1,
+.rx-warranty-page h2,
+.rx-warranty-page h3,
+.rx-warranty-page p { margin-top: 0; }
+
+.rx-warranty-title-band { background: #f3f3f3; padding: 55px 24px 48px; text-align: center; }
+.rx-warranty-title-band h1 { font-size: 48px; line-height: 54px; margin-bottom: 18px; }
+.rx-warranty-breadcrumb { align-items: center; display: flex; font-size: 12px; gap: 12px; justify-content: center; }
+.rx-warranty-breadcrumb a { color: var(--warranty-grey); text-decoration: none; }
+.rx-warranty-breadcrumb strong { color: var(--warranty-red); }
+.rx-warranty-hero-grid { background: var(--warranty-navy); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.03fr); min-height: 360px; }
+.rx-warranty-hero-grid > img { height: 360px; object-fit: cover; width: 100%; }
+.rx-warranty-statement { align-items: center; color: #fff; display: flex; font-size: 32px; font-weight: 700; line-height: 39px; max-width: 620px; padding: 64px 70px; }
+.rx-warranty-statement p { margin: 0; }
+
+.rx-warranty-periods { padding: 64px 24px 96px; }
+.rx-warranty-periods h2 { font-size: 24px; line-height: 30px; margin-bottom: 48px; max-width: 460px; }
+.rx-warranty-cards { display: grid; gap: 48px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rx-warranty-card { background: #f3f3f3; border-radius: 8px; min-height: 412px; padding: 32px; }
+.rx-warranty-card-icon img { height: 64px; object-fit: contain; object-position: left center; width: 64px; }
+.rx-warranty-card h3 { font-size: 24px; line-height: 28px; margin: 20px 0 22px; }
+.rx-warranty-period { color: var(--warranty-red); font-size: 64px; font-weight: 700; line-height: 60px; margin-bottom: 8px; }
+.rx-warranty-type { color: var(--warranty-red); font-size: 24px; font-weight: 700; line-height: 28px; margin-bottom: 30px; }
+.rx-warranty-covers strong { color: var(--warranty-red); display: block; font-size: 20px; margin-bottom: 8px; }
+.rx-warranty-covers p { color: var(--warranty-grey); font-size: 16px; line-height: 22px; margin-bottom: 0; }
+
+.rx-warranty-terms { background: #f3f3f3; padding: 102px 24px 94px; }
+.rx-warranty-terms-grid { align-items: center; display: grid; gap: 86px; grid-template-columns: minmax(0, 458px) minmax(0, 552px); }
+.rx-warranty-terms-copy { color: var(--warranty-grey); font-size: 16px; line-height: 22px; }
+.rx-warranty-terms-copy p { margin-bottom: 28px; }
+.rx-warranty-terms-copy p:last-child { margin-bottom: 0; }
+.rx-warranty-terms img { border-radius: 8px; height: 354px; object-fit: cover; width: 100%; }
+
+.rx-warranty-page .rx-contact-cta { background: #222840; color: #fff; padding: 70px 24px 0; position: relative; text-align: center; }
+.rx-warranty-page .rx-contact-cta::after { background-image: var(--rx-contact-contours); background-position: bottom center; background-repeat: no-repeat; background-size: 100% auto; bottom: 0; content: ""; inset-inline: 0; height: 420px; pointer-events: none; position: absolute; }
+.rx-warranty-page .rx-contact-cta > .rx-wrap { max-width: 1352px; position: relative; z-index: 1; }
+.rx-warranty-page .rx-contact-cta > .rx-wrap > h2 { color: #fff; font-size: 48px; line-height: 54px; margin-bottom: 20px; }
+.rx-warranty-page .rx-contact-cta > .rx-wrap > p { font-size: 18px; line-height: 28px; margin: 0 auto 38px; max-width: 1124px; }
+.rx-warranty-page .rx-contact-cta-grid { display: grid; gap: 32px; grid-template-columns: repeat(3, 1fr); padding-bottom: 72px; text-align: left; }
+.rx-warranty-page .rx-contact-cta-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgb(0 0 0 / 25%); color: var(--warranty-navy); display: flex; flex-direction: column; min-height: 342px; padding: 42px 32px; }
+.rx-warranty-page .rx-contact-cta-icon img { height: 64px; object-fit: contain; object-position: left center; width: 64px; }
+.rx-warranty-page .rx-contact-cta-card h3 { font-size: 24px; line-height: 30px; margin: 18px 0; }
+.rx-warranty-page .rx-contact-cta-card p { color: var(--warranty-grey); flex: 1; font-size: 16px; line-height: 1.4; }
+.rx-warranty-page .rx-contact-cta-phone { color: var(--warranty-red); font-size: 20px; font-weight: 700; text-decoration: none; }
+.rx-warranty-page .rx-contact-cta-link { align-self: flex-start; border: 1px solid var(--warranty-red); border-radius: 8px; color: var(--warranty-red); font-size: 13px; font-weight: 700; padding: 14px 18px; text-decoration: none; }
+
+@media (max-width: 900px) {
+    .rx-warranty-page .rx-wrap { width: calc(100% - 32px); }
+    .rx-warranty-title-band h1 { font-size: 36px; line-height: 42px; }
+    .rx-warranty-hero-grid { grid-template-columns: 1fr; }
+    .rx-warranty-hero-grid > img { height: 300px; }
+    .rx-warranty-statement { font-size: 28px; line-height: 35px; max-width: none; padding: 48px 24px; }
+    .rx-warranty-cards { grid-template-columns: 1fr; }
+    .rx-warranty-period { font-size: 52px; }
+    .rx-warranty-terms-grid { gap: 42px; grid-template-columns: 1fr; }
+    .rx-warranty-terms img { height: auto; }
+    .rx-warranty-page .rx-contact-cta > .rx-wrap > h2 { font-size: 36px; line-height: 42px; }
+    .rx-warranty-page .rx-contact-cta-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,1130 @@
+/* ==========================================================================
+ * Commercial Solutions — Mobile & Tablet Overrides
+ * ==========================================================================
+ * Loads AFTER assets/css/commercial-inner-pages.css on:
+ *   - /commercial-solutions/                              (archive/landing)
+ *   - /commercial-solutions/ground-improvement/
+ *   - /commercial-solutions/void-filling/
+ *   - /commercial-solutions/realignment-levelling/
+ *   - /commercial-solutions/leak-sealing-water-stopping/
+ *   - /commercial-solutions/slab-lifting/
+ *   - /commercial-solutions/protective-coatings-concrete-repair/
+ *   - /commercial-solutions/engineered-fill/
+ *   - /commercial-solutions/pipe-abandonment/
+ *   - /commercial-solutions/civil-energy-utilities-sector/
+ *   - /commercial-solutions/undermining-treatment/
+ *   - /commercial-solutions/hospital-asset-remediation/
+ *
+ * Every selector below was checked against the LIVE rendered markup of all
+ * 11 pages (curl'd from localhost), not just the template source, since
+ * the Rectify Page Builder can render either its own saved data or the
+ * template's inline PHP fallback depending on section. Confirmed findings
+ * that shaped this file's structure:
+ *   - 8 of the 10 child pages (Ground Improvement, Void Filling,
+ *     Realignment & Levelling, Leak Sealing & Water Stopping, Slab
+ *     Lifting, Protective Coatings & Concrete Repair, Engineered Fill,
+ *     Pipe Abandonment) share one "rx-ci-*" component system.
+ *   - The "Why Choose Rectify" band (.rx-ci-why-choose / .rx-ci-void-why /
+ *     .rx-commercial-why-choose) and the plain .rx-ci-cta / .rx-ci-void-cta
+ *     final CTA are ALSO reused, unmodified, on the Civil/Energy/Utilities
+ *     and Undermining Treatment pages even though those two otherwise run
+ *     their own bespoke "rx-civil-*" / "rx-undermining-*" class systems.
+ *   - Hospital Asset Remediation is the only page that is fully bespoke
+ *     top to bottom ("rx-hospital-*"), never touching the rx-ci-* system.
+ *
+ * The desktop stylesheet already ships fairly extensive @media rules for
+ * every one of these pages (breakpoints at ~1180/1100/1200, ~900/980/1000
+ * and ~560/600/680/760). This file does NOT fight those rules — it reuses
+ * the same breakpoint values for tablet-tier reinforcement where a page
+ * skips straight from full desktop width down to ~900px with nothing in
+ * between, and then adds the two tiers the desktop file has none of: a
+ * true phone tier (<=480px) and a small/older-phone tier (<=380px), plus a
+ * defensive overflow/box-model safety net.
+ * ========================================================================== */
+
+
+/* ==========================================================================
+ * 1. GLOBAL SAFETY NET (all Commercial Solutions pages)
+ * ========================================================================== */
+
+.rx-commercial-page,
+.rx-ci-page,
+.rx-civil-page,
+.rx-hospital-page,
+.rx-undermining-page {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body:has(.rx-commercial-page),
+body:has(.rx-ci-page),
+body:has(.rx-civil-page),
+body:has(.rx-hospital-page),
+body:has(.rx-undermining-page) {
+    overflow-x: hidden;
+}
+
+/* Belt-and-suspenders: any image/figure/video the page builder renders
+   (instead of the seeded fallback content this file was audited against)
+   should never be able to force horizontal scroll on a narrow viewport. */
+.rx-commercial-page img,
+.rx-commercial-page svg,
+.rx-commercial-page video,
+.rx-ci-page img,
+.rx-ci-page svg,
+.rx-ci-page video,
+.rx-civil-page img,
+.rx-civil-page svg,
+.rx-civil-page video,
+.rx-hospital-page img,
+.rx-hospital-page svg,
+.rx-hospital-page video,
+.rx-undermining-page img,
+.rx-undermining-page svg,
+.rx-undermining-page video {
+    max-width: 100%;
+}
+
+/* Long unbroken strings (URLs, emails, resource names) in builder-authored
+   copy should wrap instead of pushing the layout wide on small screens. */
+@media (max-width: 767px) {
+    .rx-commercial-page h1,
+    .rx-commercial-page h2,
+    .rx-commercial-page h3,
+    .rx-commercial-page h4,
+    .rx-commercial-page p,
+    .rx-commercial-page li,
+    .rx-commercial-page a,
+    .rx-ci-page h1,
+    .rx-ci-page h2,
+    .rx-ci-page h3,
+    .rx-ci-page h4,
+    .rx-ci-page p,
+    .rx-ci-page li,
+    .rx-ci-page a,
+    .rx-civil-page h1,
+    .rx-civil-page h2,
+    .rx-civil-page h3,
+    .rx-civil-page h4,
+    .rx-civil-page p,
+    .rx-civil-page li,
+    .rx-hospital-page h1,
+    .rx-hospital-page h2,
+    .rx-hospital-page h3,
+    .rx-hospital-page h4,
+    .rx-hospital-page p,
+    .rx-hospital-page li,
+    .rx-undermining-page h1,
+    .rx-undermining-page h2,
+    .rx-undermining-page h3,
+    .rx-undermining-page h4,
+    .rx-undermining-page p,
+    .rx-undermining-page li {
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* ==========================================================================
+ * 2. COMMERCIAL SOLUTIONS ARCHIVE (body.rx-commercial-solutions-page)
+ * Desktop file already collapses this at 1180 / 980 / 680px (see
+ * commercial-inner-pages.css lines ~532-688). Reinforcing + adding a
+ * genuine phone / small-phone tier below its existing 680px floor.
+ * ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-commercial-wrap,
+    .rx-commercial-page .rx-wrap {
+        width: calc(100% - 32px);
+    }
+
+    .rx-commercial-hero-panel {
+        padding: 32px 0;
+    }
+
+    .rx-commercial-page .rx-kicker {
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-commercial-hero-grid h1,
+    .rx-commercial-section-title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-commercial-hero-summary h2,
+    .rx-commercial-intro h2 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-commercial-breadcrumb {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        white-space: normal;
+    }
+
+    .rx-commercial-strip {
+        height: 150px;
+    }
+
+    .rx-commercial-intro,
+    .rx-commercial-solutions {
+        padding-block: 40px;
+    }
+
+    .rx-commercial-intro-media {
+        height: min(280px, 62vw);
+    }
+
+    .rx-commercial-solution-grid {
+        margin-top: 28px;
+        gap: 16px;
+    }
+
+    .rx-commercial-solution-card {
+        gap: 18px;
+        padding: 20px;
+    }
+
+    .rx-commercial-card-icon {
+        flex-basis: 56px;
+        width: 56px;
+        height: 56px;
+    }
+
+    .rx-commercial-solution-card h3 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rx-commercial-learn {
+        min-height: 30px;
+        padding: 7px 14px;
+        font-size: 12px;
+    }
+
+    .rx-commercial-why {
+        padding: 40px 14px;
+    }
+
+    .rx-commercial-why-copy {
+        font-size: 15px;
+        line-height: 23px;
+    }
+
+    .rx-commercial-why-card {
+        padding: 24px 18px;
+    }
+
+    .rx-commercial-why-card .rx-commercial-card-icon {
+        flex-basis: 56px;
+        width: 56px;
+        height: 56px;
+    }
+
+    .rx-commercial-help-phone {
+        font-size: 19px;
+        line-height: 24px;
+    }
+
+    .rx-commercial-cta {
+        padding: 48px 0;
+    }
+
+    .rx-commercial-cta h2 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-commercial-cta p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .rx-commercial-cta-actions {
+        margin-top: 32px;
+        gap: 12px;
+    }
+
+    .rx-commercial-cta .rx-btn,
+    .rx-commercial-contact-pill {
+        width: 100%;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .rx-commercial-hero-grid h1,
+    .rx-commercial-section-title {
+        font-size: 25px;
+        line-height: 31px;
+    }
+
+    .rx-commercial-card-top {
+        flex-wrap: wrap;
+        row-gap: 12px;
+    }
+
+    .rx-commercial-cta h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+
+/* ==========================================================================
+ * 3. SHARED "rx-ci-*" COMPONENT LIBRARY
+ * Confirmed live on: Ground Improvement, Void Filling, Realignment &
+ * Levelling, Leak Sealing & Water Stopping, Slab Lifting, Protective
+ * Coatings & Concrete Repair, Engineered Fill, Pipe Abandonment — and the
+ * .rx-ci-why-choose / .rx-ci-void-why / .rx-ci-cta / .rx-ci-void-cta bands
+ * specifically are ALSO reused as-is on the Civil/Energy/Utilities and
+ * Undermining Treatment pages. Desktop already collapses these at 900px
+ * and 560px; this section reinforces the ~1024px gap several of these
+ * pages skip straight over (they jump from full desktop width to 900px),
+ * then adds the 480/380px phone tiers the desktop file has none of.
+ * ========================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ci-two-col,
+    .rx-ci-why-choose-layout,
+    .rx-ci-why-choose-grid,
+    .rx-ci-photo-grid,
+    .rx-ci-process-layout,
+    .rx-ci-void-section-head,
+    .rx-ci-void-process-head,
+    .rx-ci-void-process-layout,
+    .rx-ci-leak-section-head,
+    .rx-ci-leak-types-layout,
+    .rx-ci-realign-section-head,
+    .rx-ci-realign-impact-layout,
+    .rx-ci-realign-process-head,
+    .rx-ci-realign-process-layout,
+    .rx-ci-realign-industries-layout,
+    .rx-ci-pc-section-head,
+    .rx-ci-pc-solution-row {
+        column-gap: 32px;
+    }
+
+    .rx-ci-solutions-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .rx-ci-void-causes-grid,
+    .rx-ci-leak-causes-grid,
+    .rx-ci-realign-causes-grid,
+    .rx-ci-pc-causes-grid,
+    .rx-ci-engineered-required-grid,
+    .rx-ci-engineered-applications-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-ci-wrap {
+        padding-inline: 16px;
+    }
+
+    .rx-ci-band {
+        padding: 40px 0;
+    }
+
+    .rx-ci-banner {
+        padding: 28px 0 24px;
+    }
+
+    .rx-ci-kicker {
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-ci-banner h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-ci-breadcrumb {
+        gap: 6px;
+        flex-wrap: wrap;
+        white-space: normal;
+    }
+
+    /* Section headings across every rx-ci-* page (Ground Improvement,
+       Void, Leak, Realign, Protective Coatings all reuse the same 40-48px
+       desktop heading sizes for these). */
+    .rx-ci-why-matters h2,
+    .rx-ci-solutions h2,
+    .rx-ci-why-choose h2,
+    .rx-ci-industries-copy h2,
+    .rx-ci-process h2,
+    .rx-ci-void-section-head h2,
+    .rx-ci-void-why h2,
+    .rx-ci-leak-section-head h2,
+    .rx-ci-leak-types-copy h2,
+    .rx-ci-leak-diagnostics-head h2,
+    .rx-ci-realign-section-head h2,
+    .rx-ci-realign-impact h2,
+    .rx-ci-realign-process-head h2,
+    .rx-ci-realign-industries h2,
+    .rx-ci-pc-section-head h2,
+    .rx-ci-pc-solutions-head h2,
+    .rx-ci-pc-solution-copy h3,
+    .rx-ci-pc-feature h2,
+    .rx-ci-pc-repairs-head h2,
+    .rx-ci-engineered-section-head h2,
+    .rx-ci-engineered-applications h2,
+    .rx-ci-engineered-process h2 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-cta h2,
+    .rx-ci-void-cta h2 {
+        font-size: 28px !important;
+        line-height: 34px !important;
+    }
+
+    .rx-ci-void-cta-copy p {
+        font-size: 16px !important;
+        line-height: 23px !important;
+    }
+
+    /* Card/solution icons: 64-80px on desktop is comfortable, but eats a
+       big share of a 320-375px card — trim uniformly. */
+    .rx-ci-solution-icon,
+    .rx-ci-why-choose-icon {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .rx-ci-process-number,
+    .rx-ci-realign-step > span,
+    .rx-ci-engineered-step > span {
+        width: 48px;
+        height: 48px;
+        font-size: 17px;
+    }
+
+    .rx-ci-realign-step,
+    .rx-ci-engineered-step {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    /* Any remaining two/three/four-column grid collapses to one column on
+       phones. Desktop already does this at 560px for most of these; a few
+       (photo-grid, process-steps, solution rows) only collapse at 900px
+       and stay 2-up down to 560px, so this is a genuine phone-tier fix. */
+    .rx-ci-photo-grid,
+    .rx-ci-solutions-grid,
+    .rx-ci-void-causes-grid,
+    .rx-ci-leak-causes-grid,
+    .rx-ci-realign-causes-grid,
+    .rx-ci-realign-impact-grid,
+    .rx-ci-pc-causes-grid,
+    .rx-ci-pc-repair-grid,
+    .rx-ci-engineered-required-grid,
+    .rx-ci-engineered-applications-grid,
+    .rx-ci-why-choose-grid,
+    .rx-ci-void-why-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .rx-ci-pc-repair-card,
+    .rx-ci-pc-repair-card:nth-child(n + 4) {
+        grid-column: span 1 !important;
+    }
+
+    .rx-ci-check-list li img,
+    .rx-ci-check-list-lg li img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .rx-ci-check-list li span,
+    .rx-ci-check-list-lg li span {
+        font-size: 16px !important;
+        line-height: 22px !important;
+    }
+
+    /* CTA buttons: stack full-width and centred on phones across every
+       page in this family (void/realign/leak/pc/engineered/slab/ground
+       improvement/pipe abandonment all reuse .rx-ci-cta-actions). */
+    .rx-ci-cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-top: 28px !important;
+    }
+
+    .rx-ci-cta-primary,
+    .rx-ci-cta-outline {
+        width: 100%;
+        min-width: 0 !important;
+        justify-content: center;
+        padding: 13px 18px;
+    }
+
+    .rx-ci-process-media img,
+    .rx-ci-engineered-process-layout > figure,
+    .rx-ci-engineered-comparison-layout > figure,
+    .rx-ci-realign-process-layout > figure,
+    .rx-ci-void-process-layout > .rx-ci-media {
+        min-height: 200px;
+    }
+
+    /* Leak Sealing before/after diagnostic photo pairs: keep them stacked
+       and let the fixed-width crop shrink to fit rather than clipping. */
+    .rx-ci-leak-diagnostic-grid {
+        gap: 24px;
+    }
+
+    .rx-ci-leak-diagnostic-crop {
+        height: auto;
+        aspect-ratio: 343 / 208;
+    }
+
+    .rx-ci-leak-diagnostics-head p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 380px) {
+    .rx-ci-wrap {
+        padding-inline: 14px;
+    }
+
+    .rx-ci-banner h1 {
+        font-size: 23px;
+        line-height: 29px;
+    }
+
+    .rx-ci-why-matters h2,
+    .rx-ci-solutions h2,
+    .rx-ci-why-choose h2,
+    .rx-ci-industries-copy h2,
+    .rx-ci-process h2,
+    .rx-ci-void-section-head h2,
+    .rx-ci-void-why h2,
+    .rx-ci-leak-section-head h2,
+    .rx-ci-leak-types-copy h2,
+    .rx-ci-leak-diagnostics-head h2,
+    .rx-ci-realign-section-head h2,
+    .rx-ci-realign-impact h2,
+    .rx-ci-realign-process-head h2,
+    .rx-ci-realign-industries h2,
+    .rx-ci-pc-section-head h2,
+    .rx-ci-pc-solutions-head h2,
+    .rx-ci-pc-solution-copy h3,
+    .rx-ci-pc-feature h2,
+    .rx-ci-pc-repairs-head h2,
+    .rx-ci-engineered-section-head h2,
+    .rx-ci-engineered-applications h2,
+    .rx-ci-engineered-process h2 {
+        font-size: 23px !important;
+        line-height: 29px !important;
+    }
+
+    .rx-ci-cta h2,
+    .rx-ci-void-cta h2 {
+        font-size: 24px !important;
+        line-height: 30px !important;
+    }
+
+    .rx-ci-solution-card,
+    .rx-ci-why-choose-card,
+    .rx-ci-engineered-required-card,
+    .rx-ci-engineered-application-card {
+        padding: 18px !important;
+    }
+
+    .rx-ci-pc-repair-card h3 {
+        font-size: 22px !important;
+        line-height: 28px !important;
+    }
+}
+
+
+/* ==========================================================================
+ * 4. PAGE-SPECIFIC DELTAS WITHIN THE rx-ci-* FAMILY
+ * Only the fixed-pixel details Section 3's generic rules don't reach.
+ * Ground Improvement and Pipe Abandonment render through the generic
+ * .rx-ci-page selectors only (confirmed live — no dedicated page-level
+ * class on either), so Section 3 already covers them fully.
+ * ========================================================================== */
+
+/* ---- Void Filling (.rx-ci-void-page) ------------------------------------ */
+@media (max-width: 480px) {
+    .rx-ci-void-page .rx-ci-banner h1 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-void-page .rx-ci-void-intro .rx-ci-media {
+        aspect-ratio: 4 / 3;
+    }
+
+    .rx-ci-void-cause-image {
+        aspect-ratio: 358 / 240;
+    }
+}
+
+/* ---- Structural Realignment & Levelling (.rx-ci-realign-page) ----------- */
+@media (max-width: 480px) {
+    .rx-ci-realign-page .rx-ci-banner h1 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-realign-feature-copy {
+        padding: 32px 16px !important;
+    }
+
+    .rx-ci-realign-feature h2 {
+        font-size: 20px !important;
+        line-height: 26px !important;
+    }
+
+    .rx-ci-realign-impact-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .rx-ci-realign-impact-grid img {
+        aspect-ratio: 358 / 240;
+    }
+
+    .rx-ci-realign-map {
+        width: 100%;
+    }
+
+    .rx-ci-realign-page .rx-ci-void-why h2 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+}
+
+/* ---- Leak Sealing & Water Stopping (.rx-ci-leak-page) ------------------- */
+@media (max-width: 480px) {
+    .rx-ci-leak-page .rx-ci-banner h1 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-leak-scenario header {
+        margin-bottom: 20px;
+    }
+
+    .rx-ci-leak-solution {
+        padding: 20px;
+        margin-top: 20px;
+    }
+}
+
+/* ---- Slab Lifting (.rx-ci-slab-page) ------------------------------------ */
+@media (max-width: 480px) {
+    .rx-ci-slab-page .rx-ci-wrap {
+        width: calc(100% - 28px);
+    }
+
+    .rx-ci-slab-page .rx-ci-banner h1,
+    .rx-ci-slab-page .rx-ci-void-section-head h2,
+    .rx-ci-slab-page .rx-ci-why-choose h2 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-slab-page .rx-ci-void-section-head,
+    .rx-ci-slab-page .rx-ci-void-process-head,
+    .rx-ci-slab-page .rx-ci-void-process-layout {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .rx-ci-slab-page .rx-ci-void-process-layout > .rx-ci-media {
+        margin-top: 0 !important;
+        height: auto;
+        aspect-ratio: 510 / 420;
+    }
+
+    .rx-ci-slab-page .rx-ci-why-choose {
+        background-size: auto 40%;
+    }
+
+    .rx-ci-slab-page .rx-ci-cta h2 {
+        font-size: 28px !important;
+        line-height: 34px !important;
+    }
+}
+
+/* ---- Protective Coatings & Concrete Repair (.rx-ci-pc-page) ------------- */
+@media (max-width: 480px) {
+    .rx-ci-pc-page .rx-ci-banner h1 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-pc-solution-rows {
+        gap: 40px;
+        margin-top: 32px;
+    }
+
+    .rx-ci-pc-feature-copy {
+        padding: 32px 16px !important;
+    }
+
+    .rx-ci-pc-feature h2 {
+        font-size: 22px !important;
+        line-height: 28px !important;
+    }
+}
+
+/* ---- Engineered Fill (.rx-ci-engineered-page) --------------------------- */
+@media (max-width: 480px) {
+    .rx-ci-engineered-page .rx-ci-banner h1 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-ci-engineered-comparison-layout > figure,
+    .rx-ci-engineered-process-layout > figure {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+
+/* ==========================================================================
+ * 5. CIVIL, ENERGY & UTILITIES (.rx-civil-page)
+ * Desktop collapses at 1180 / 980 / 680px. Adding phone-tier reinforcement.
+ * Its "Why Choose Rectify" band and final CTA use the shared .rx-ci-why-
+ * choose / .rx-ci-void-why / .rx-ci-cta / .rx-ci-void-cta classes (Section
+ * 3 already covers those); only the bespoke .rx-civil-* sections are here.
+ * ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-civil-page .rx-wrap {
+        width: calc(100% - 28px);
+    }
+
+    .rx-civil-hero-panel {
+        min-height: 0;
+        padding: 32px 0;
+    }
+
+    .rx-civil-page .rx-kicker {
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-civil-hero-panel h1,
+    .rx-civil-section-title {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-civil-breadcrumb {
+        gap: 6px;
+        white-space: normal;
+    }
+
+    [data-rx-section='civil-intro'],
+    [data-rx-section='civil-where-help'],
+    [data-rx-section='civil-benefits'],
+    .rx-civil-band.rx-civil-soft[data-rx-section='civil-process'] {
+        padding: 40px 0;
+    }
+
+    .rx-civil-intro-grid .rx-civil-media {
+        height: 52vw;
+    }
+
+    .rx-civil-where-card {
+        grid-template-columns: 48px minmax(0, 1fr);
+        padding: 20px 18px;
+        gap: 16px 18px;
+    }
+
+    .rx-civil-card-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .rx-civil-where-card h3 {
+        font-size: 19px;
+        line-height: 25px;
+    }
+
+    .rx-civil-core > .rx-wrap {
+        padding-top: 40px;
+    }
+
+    .rx-civil-cap-row:nth-child(n) {
+        padding: 40px 0 !important;
+    }
+
+    .rx-civil-cap-grid {
+        grid-template-columns: 56px minmax(0, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    .rx-civil-cap-number {
+        width: 56px !important;
+        height: 64px !important;
+        font-size: 46px !important;
+        line-height: 46px !important;
+        border-radius: 6px;
+    }
+
+    .rx-civil-cap-summary h3 {
+        font-size: 17px;
+        line-height: 23px;
+    }
+
+    .rx-civil-cap-tag-list span {
+        font-size: 14px;
+    }
+
+    .rx-civil-process-grid {
+        gap: 32px !important;
+    }
+
+    .rx-civil-process-circle {
+        width: 88px;
+        height: 88px;
+        font-size: 34px;
+        line-height: 40px;
+    }
+
+    .rx-civil-benefit-list {
+        row-gap: 24px !important;
+    }
+
+    .rx-civil-why {
+        padding: 40px 0 56px;
+    }
+
+    .rx-civil-why-card {
+        padding: 24px;
+    }
+
+    .rx-civil-cta {
+        padding: 48px 0;
+    }
+
+    .rx-civil-cta h2 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-civil-cta p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    .rx-civil-cta-actions {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .rx-civil-hero-panel h1,
+    .rx-civil-section-title {
+        font-size: 23px;
+        line-height: 29px;
+    }
+
+    .rx-civil-cap-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .rx-civil-cap-number {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 24px !important;
+        line-height: 48px !important;
+    }
+
+    .rx-civil-cta h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+
+/* ==========================================================================
+ * 6. UNDERMINING TREATMENT (.rx-undermining-page)
+ * Desktop collapses at 1000 / 760px. Adding phone-tier reinforcement. Its
+ * "Why Choose Rectify" band and final CTA render with the shared
+ * .rx-ci-why-choose / .rx-ci-void-why / .rx-ci-cta / .rx-ci-void-cta
+ * classes (confirmed live), so those bits are scoped under
+ * .rx-undermining-page to nudge them without affecting the other pages
+ * that reuse the same shared classes.
+ * ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-undermining-page .rx-wrap,
+    .rx-undermining-page .rx-ci-wrap {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .rx-undermining-page .rx-ci-banner {
+        padding: 28px 0 24px;
+    }
+
+    .rx-undermining-page .rx-ci-kicker {
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-undermining-page .rx-ci-banner h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-undermining-band,
+    [data-rx-section="undermining-causes"],
+    [data-rx-section="undermining-process"],
+    [data-rx-section="undermining-benefits"],
+    [data-rx-section="undermining-notes"],
+    [data-rx-section="undermining-areas"] {
+        padding: 36px 0;
+    }
+
+    .rx-undermining-section-title,
+    .rx-undermining-benefits-title {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-undermining-intro-grid .rx-undermining-media,
+    .rx-undermining-symptoms-grid .rx-undermining-media,
+    .rx-undermining-benefits-grid .rx-undermining-media,
+    .rx-undermining-areas-grid .rx-undermining-media {
+        aspect-ratio: 4 / 3;
+    }
+
+    .rx-undermining-cause-item {
+        min-height: 0;
+        padding: 18px;
+    }
+
+    .rx-undermining-process-circle {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-undermining-notes-grid {
+        gap: 32px !important;
+    }
+
+    .rx-undermining-finish-copy-grid {
+        gap: 12px;
+    }
+
+    .rx-undermining-page .rx-ci-void-why {
+        padding: 40px 0;
+    }
+
+    .rx-undermining-page .rx-ci-void-why h2 {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-undermining-page .rx-ci-void-cta {
+        padding: 48px 0 !important;
+    }
+
+    .rx-undermining-page .rx-ci-void-cta h2 {
+        font-size: 28px !important;
+        line-height: 34px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .rx-undermining-page .rx-ci-banner h1 {
+        font-size: 23px;
+        line-height: 29px;
+    }
+
+    .rx-undermining-section-title,
+    .rx-undermining-benefits-title {
+        font-size: 23px !important;
+        line-height: 29px !important;
+    }
+}
+
+
+/* ==========================================================================
+ * 7. HOSPITAL ASSET REMEDIATION (.rx-hospital-page)
+ * Desktop collapses at 1180 / 900 / 600px. Adding phone-tier reinforcement.
+ * This page never touches the rx-ci-* system; every class below is its
+ * own bespoke "rx-hospital-*" set, confirmed live.
+ * ========================================================================== */
+
+@media (max-width: 480px) {
+    .rx-hospital-page .rx-wrap {
+        width: calc(100% - 28px);
+    }
+
+    .rx-hospital-hero-panel {
+        min-height: 0;
+        padding: 32px 0;
+    }
+
+    .rx-hospital-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-hospital-hero-panel h1,
+    .rx-hospital-section-title,
+    .rx-hospital-benefits-title {
+        font-size: 26px !important;
+        line-height: 32px !important;
+    }
+
+    .rx-hospital-breadcrumb {
+        gap: 6px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    [data-rx-section="hospital-intro"],
+    [data-rx-section="hospital-challenges"],
+    [data-rx-section="hospital-where-help"],
+    [data-rx-section="hospital-retrospective"],
+    [data-rx-section="hospital-process"],
+    [data-rx-section="hospital-benefits"] {
+        min-height: 0;
+        padding: 36px 0;
+    }
+
+    .rx-hospital-feature-card {
+        min-height: 0;
+        padding: 20px;
+    }
+
+    .rx-hospital-card-icon,
+    .rx-hospital-card-icon img {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .rx-hospital-where-card {
+        min-height: 0;
+    }
+
+    .rx-hospital-where-card > img {
+        height: 220px;
+    }
+
+    .rx-hospital-where-overlay {
+        position: static;
+        padding: 20px 18px;
+        background: #222840;
+    }
+
+    .rx-hospital-process-circle {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-hospital-why {
+        padding: 36px 0;
+    }
+
+    .rx-hospital-cta {
+        padding: 48px 0;
+    }
+
+    .rx-hospital-cta h2 {
+        font-size: 28px !important;
+        line-height: 34px !important;
+    }
+
+    .rx-hospital-cta p {
+        font-size: 15px !important;
+        line-height: 22px !important;
+    }
+
+    .rx-hospital-cta-actions {
+        margin-top: 28px !important;
+        gap: 10px;
+    }
+
+    .rx-hospital-cta .rx-btn,
+    .rx-hospital-contact-pill {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .rx-hospital-hero-panel h1,
+    .rx-hospital-section-title,
+    .rx-hospital-benefits-title {
+        font-size: 23px !important;
+        line-height: 29px !important;
+    }
+
+    .rx-hospital-where-card > img {
+        height: 180px;
+    }
+
+    .rx-hospital-cta h2 {
+        font-size: 24px !important;
+        line-height: 30px !important;
+    }
+}
+
+
+/* ==========================================================================
+ * 8. CROSS-CUTTING SMALL-PHONE CATCH-ALL (<=380px)
+ * Final defensive pass shared by every system in this file: guarantees
+ * every action row stacks full-width and every remaining multi-column grid
+ * collapses to one column at the very smallest common phone width, even
+ * for anything this file's more targeted rules above didn't name.
+ * ========================================================================== */
+
+@media (max-width: 380px) {
+    .rx-commercial-cta-actions,
+    .rx-civil-cta-actions,
+    .rx-hospital-cta-actions,
+    .rx-ci-cta-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rx-commercial-cta-actions > *,
+    .rx-civil-cta-actions > *,
+    .rx-hospital-cta-actions > *,
+    .rx-ci-cta-actions > * {
+        width: 100%;
+        min-width: 0 !important;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .rx-commercial-page [class*="-grid"],
+    .rx-ci-page [class*="-grid"],
+    .rx-civil-page [class*="-grid"],
+    .rx-hospital-page [class*="-grid"],
+    .rx-undermining-page [class*="-grid"] {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

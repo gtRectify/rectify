@@ -1,0 +1,854 @@
+/*
+ * Residential Solutions — Mobile / Tablet Overrides
+ * =======================================================================
+ * Loads AFTER assets/css/residential-inner-pages.css (see functions.php,
+ * 'rectify-residential-mobile' depends on 'rectify-residential-inner-pages')
+ * on the 11 "figma inner" Residential Solutions pages only:
+ *   ground-improvement, house-relevelling, weak-soils, foundation-repair,
+ *   leaning-pillars-chimneys, leaning-pillars, chemical-underpinning,
+ *   driveway-relevelling, sand-permeation, mailbox-brick-fence-releveling,
+ *   basement-construction-support.
+ *
+ * The desktop stylesheet already contains extensive per-page @media rules
+ * (roughly 48 blocks). This file does NOT reinvent those breakpoints — it
+ * reuses the same values (1180/1100/1024/900/860/768/760/620/560/520) and
+ * layers on:
+ *   1) a few genuine gap fixes found while auditing the desktop CSS
+ *      (documented inline below), and
+ *   2) a consistent small-phone tier (≈420px and down) that the desktop
+ *      file mostly stops short of, plus tablet-tier smoothing between the
+ *      desktop file's higher breakpoints (1180/1100) and 1024px.
+ *
+ * Breakpoint tiers used throughout this file:
+ *   Tablet:      max-width: 1024px
+ *   Mobile:      max-width: 767px
+ *   Small phone: max-width: 420px
+ *
+ * Nothing here touches `.is-active`, `[hidden]`, `<details>`/`<summary>`,
+ * before/after slider controls, or the `.rx-reveal` / `.rx-stagger`
+ * scroll-reveal classes (already neutralised for `.rx-residential-figma`
+ * pages in inner-page.css) — only layout, spacing and type scale.
+ */
+
+/* =======================================================================
+ * 0. Shared safety net (applies across every page family in scope)
+ * ===================================================================== */
+
+.rx-ground-page,
+.rx-driveway-page,
+.rx-basement-page,
+.rx-cracked-page,
+.rx-ci-ws-page,
+.rx-ci-lp-page,
+.rx-chemical-page,
+.rx-sand-page,
+.rx-brick-page,
+.rx-foundation-page {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Figures/images that still carry an intrinsic width should never force
+   the viewport wider than the wrap around them. object-fit:cover figures
+   already use width:100%, this is a net for anything that doesn't. */
+.rx-ground-page img,
+.rx-driveway-page img,
+.rx-basement-page img,
+.rx-cracked-page img,
+.rx-ci-ws-page img,
+.rx-ci-lp-page img,
+.rx-chemical-page img,
+.rx-sand-page img,
+.rx-brick-page img,
+.rx-foundation-page img {
+    max-width: 100%;
+}
+
+/* iOS Safari renders `background-attachment: fixed` unreliably (and can
+   visually "freeze" or jump the background) inside a scrolling page — the
+   Chemical Underpinning final CTA is the only section in scope using it. */
+@media (max-width: 1024px) {
+    .rx-chemical-page .rx-chemical-cta {
+        background-attachment: scroll;
+    }
+}
+
+/* =======================================================================
+ * 1. Ground Improvement — .rx-ground-page
+ * Desktop breakpoints already present: 1100px, 760px.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-ground-page .rx-ground-intro-grid {
+        gap: 32px;
+    }
+
+    .rx-ground-required-grid,
+    .rx-ground-why-grid {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-ground-hero h1 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .rx-ground-required-head h2,
+    .rx-ground-why h2,
+    .rx-ground-cta h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .rx-ground-project-gallery figure {
+        height: min(85vw, 420px);
+    }
+
+    .rx-ground-cta h2 {
+        font-size: 30px;
+        line-height: 34px;
+    }
+
+    .rx-ground-cta-copy p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-ground-page .rx-ground-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-ground-hero {
+        padding: 32px 0;
+    }
+
+    .rx-ground-kicker {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .rx-ground-hero h1 {
+        font-size: 26px;
+        line-height: 30px;
+        margin-top: 12px;
+    }
+
+    .rx-ground-intro,
+    .rx-ground-required,
+    .rx-ground-projects,
+    .rx-ground-why,
+    .rx-ground-cta {
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .rx-ground-required-head h2,
+    .rx-ground-why h2 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .rx-ground-required-card {
+        padding: 20px;
+    }
+
+    .rx-ground-required-icon,
+    .rx-ground-why-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 14px;
+    }
+
+    .rx-ground-required-card h3,
+    .rx-ground-why-card h3 {
+        font-size: 19px;
+        line-height: 24px;
+    }
+
+    .rx-ground-cta h2 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .rx-ground-cta-primary,
+    .rx-ground-cta-outline {
+        width: 100%;
+    }
+}
+
+/* =======================================================================
+ * 2. Driveway Re-Levelling (.rx-driveway-page) & Basement Construction
+ * Support (.rx-basement-page). Basement re-uses the same `.rx-driveway-*`
+ * component classes (see class-renderer.php), so shared fixes are grouped
+ * with both selectors — desktop already collapses both to 1 column at
+ * 860/900px and 560px, this section adds the small-phone tier plus a
+ * couple of tablet-gap refinements.
+ * Desktop breakpoints already present: 1180px, 860/900px, 560px.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-driveway-page .rx-driveway-two-col,
+    .rx-basement-page .rx-driveway-two-col,
+    .rx-driveway-page .rx-driveway-notes-grid {
+        gap: 40px;
+    }
+
+    .rx-driveway-page .rx-driveway-proof-grid,
+    .rx-basement-page .rx-driveway-proof .rx-driveway-proof-grid {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-driveway-page .rx-driveway-hero h1,
+    .rx-basement-page .rx-driveway-hero h1 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-driveway-page .rx-driveway-process h2,
+    .rx-basement-page .rx-driveway-process h2,
+    .rx-basement-page .rx-driveway-proof h2,
+    .rx-driveway-page .rx-driveway-proof h2 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-driveway-page [data-rx-section="residential-driveway-benefits"] .rx-driveway-copy h2,
+    .rx-basement-page .rx-driveway-copy h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-driveway-page .rx-driveway-cta h2,
+    .rx-basement-page .rx-driveway-cta h2 {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .rx-driveway-page .rx-driveway-cta p,
+    .rx-basement-page .rx-driveway-cta p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-basement-page .rx-driveway-benefit-copy h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-driveway-page .rx-driveway-wrap,
+    .rx-driveway-page .rx-driveway-process .rx-driveway-wrap,
+    .rx-basement-page .rx-driveway-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-driveway-page .rx-driveway-hero,
+    .rx-basement-page .rx-driveway-hero {
+        padding: 30px 0;
+    }
+
+    .rx-driveway-page .rx-kicker,
+    .rx-basement-page .rx-kicker {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .rx-driveway-page .rx-driveway-hero h1,
+    .rx-basement-page .rx-driveway-hero h1 {
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    .rx-driveway-page [data-rx-section="residential-driveway-intro"],
+    .rx-driveway-page [data-rx-section="residential-driveway-why-moves"],
+    .rx-driveway-page [data-rx-section="residential-driveway-benefits"],
+    .rx-driveway-page .rx-driveway-notes,
+    .rx-driveway-page [data-rx-section="residential-driveway-issues"],
+    .rx-driveway-page .rx-driveway-process,
+    .rx-driveway-page .rx-driveway-proof,
+    .rx-driveway-page .rx-driveway-cta,
+    .rx-basement-page .rx-driveway-band,
+    .rx-basement-page .rx-driveway-process,
+    .rx-basement-page .rx-driveway-proof,
+    .rx-basement-page .rx-driveway-cta {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+    .rx-driveway-page .rx-driveway-step-number,
+    .rx-basement-page .rx-driveway-step-number {
+        width: 76px;
+        height: 76px;
+        flex-basis: 76px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .rx-driveway-page .rx-driveway-benefit-grid,
+    .rx-basement-page .rx-driveway-benefit-grid {
+        gap: 16px;
+    }
+
+    .rx-driveway-page .rx-driveway-cta a,
+    .rx-driveway-page .rx-driveway-cta-primary,
+    .rx-basement-page .rx-driveway-cta a {
+        width: 100%;
+    }
+
+    .rx-driveway-page .rx-driveway-proof-card,
+    .rx-basement-page .rx-driveway-proof-card {
+        padding: 22px;
+    }
+
+    .rx-driveway-page .rx-driveway-proof-icon,
+    .rx-basement-page .rx-driveway-proof-icon {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* =======================================================================
+ * 3. House Relevelling (.rx-cracked-page), Weak Soils (.rx-ci-ws-page) and
+ * Leaning Pillars / Chimneys (.rx-ci-lp-page) share an almost identical
+ * "figma pass" structure — hero, intro grid, causes grid, why-it-matters
+ * grid, navy whatis band, navy advantage band, before/after performance
+ * compare, navy help band — with only the prefix differing. Grouping the
+ * three prefixes together avoids tripling near-identical rules.
+ * Desktop breakpoints already present: 1100px, 860px, 620px.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-cracked-intro-copy,
+    .rx-ci-ws-intro-copy,
+    .rx-ci-lp-intro-copy {
+        padding-left: 20px;
+    }
+
+    .rx-cracked-advantage-grid,
+    .rx-ci-ws-advantage-grid,
+    .rx-ci-lp-advantage-grid {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-cracked-hero h1,
+    .rx-ci-ws-hero h1,
+    .rx-ci-lp-hero h1 {
+        font-size: 28px;
+    }
+
+    .rx-cracked-matters-copy h2,
+    .rx-ci-ws-matters-copy h2,
+    .rx-ci-ws-whatis-grid h2,
+    .rx-ci-lp-whatis-grid h2,
+    .rx-cracked-whatis-grid h2 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    /* The desktop CSS pins this heading at a fixed 48px with !important at
+       every viewport width (no override exists below 860px) — scale it
+       down like every other heading in the band. */
+    .rx-cracked-advantage-head h2,
+    .rx-ci-ws-advantage-head h2,
+    .rx-ci-lp-advantage-head h2 {
+        font-size: 30px !important;
+        line-height: 36px;
+    }
+
+    /* These max-widths were tuned for the 3-up desktop card grid; once the
+       grid collapses to a single column (≤620px in the desktop CSS) they
+       needlessly force the heading to wrap inside a much wider card. */
+    .rx-cracked-advantage-card-head h3,
+    .rx-ci-ws-advantage-card-head h3,
+    .rx-ci-lp-advantage-card-head h3,
+    .rx-cracked-advantage-card h3,
+    .rx-ci-ws-advantage-card h3,
+    .rx-ci-lp-advantage-card h3 {
+        max-width: none;
+    }
+
+    .rx-cracked-help h2,
+    .rx-ci-ws-help h2,
+    .rx-ci-lp-help h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-cracked-page .rx-wrap,
+    .rx-ci-ws-page .rx-wrap,
+    .rx-ci-lp-page .rx-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-cracked-hero,
+    .rx-ci-ws-hero,
+    .rx-ci-lp-hero {
+        padding: 32px 0 24px;
+    }
+
+    .rx-cracked-hero h1,
+    .rx-ci-ws-hero h1,
+    .rx-ci-lp-hero h1 {
+        font-size: 25px;
+    }
+
+    .rx-cracked-band,
+    .rx-ci-ws-band,
+    .rx-ci-lp-band,
+    .rx-cracked-whatis,
+    .rx-ci-ws-whatis,
+    .rx-ci-lp-whatis,
+    .rx-cracked-advantage,
+    .rx-ci-ws-advantage,
+    .rx-ci-lp-advantage,
+    .rx-cracked-help,
+    .rx-ci-ws-help,
+    .rx-ci-lp-help,
+    .rx-ci-ws-performance,
+    .rx-ci-lp-performance {
+        padding: 32px 0;
+    }
+
+    .rx-cracked-intro-copy {
+        padding-left: 12px;
+    }
+
+    .rx-cracked-cause-photo img,
+    .rx-ci-ws-cause-photo img,
+    .rx-ci-lp-cause-photo img {
+        height: 200px;
+    }
+
+    .rx-cracked-matters-copy h2,
+    .rx-ci-ws-matters-copy h2,
+    .rx-cracked-whatis-grid h2,
+    .rx-ci-ws-whatis-grid h2,
+    .rx-ci-lp-whatis-grid h2 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .rx-cracked-advantage-head h2,
+    .rx-ci-ws-advantage-head h2,
+    .rx-ci-lp-advantage-head h2 {
+        font-size: 25px !important;
+        line-height: 30px;
+    }
+
+    .rx-cracked-advantage-card,
+    .rx-ci-ws-advantage-card,
+    .rx-ci-lp-advantage-card {
+        padding: 22px;
+    }
+
+    .rx-cracked-help h2,
+    .rx-ci-ws-help h2,
+    .rx-ci-lp-help h2 {
+        font-size: 25px;
+    }
+
+    .rx-cracked-help-card,
+    .rx-ci-ws-help-card,
+    .rx-ci-lp-help-card {
+        padding: 28px 22px;
+    }
+
+    .rx-cracked-help-link-phone,
+    .rx-ci-ws-help-link-phone,
+    .rx-ci-lp-help-link-phone {
+        font-size: 20px;
+    }
+
+    .rx-cracked-compare-tag {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+
+    .rx-ci-ws-compare-tag {
+        font-size: 13px;
+        min-width: 108px;
+        padding: 8px 14px;
+    }
+}
+
+/* =======================================================================
+ * 4. Chemical Underpinning — .rx-chemical-page
+ * Desktop breakpoints already present: 1180px, 900px, 560px.
+ * Real gap: .rx-chemical-signs-grid never drops below 2 columns (the
+ * active, un-layered ruleset only redefines it at ≤900px, where it becomes
+ * `repeat(2, 1fr)` and stays that way all the way to 0). With a photo +
+ * heading per card this is cramped under ~480px, so we collapse it to a
+ * single column there.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-chemical-what-grid,
+    .rx-chemical-process-columns,
+    .rx-chemical-causes-grid {
+        gap: 36px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-chemical-page h2 {
+        font-size: 30px;
+    }
+
+    .rx-chemical-hero-panel h1 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .rx-chemical-what-images {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .rx-chemical-signs-grid {
+        gap: 20px 14px;
+    }
+
+    .rx-chemical-process-number {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rx-chemical-signs-grid,
+    .rx-chemical-what-images {
+        grid-template-columns: 1fr;
+    }
+
+    .rx-chemical-sign-card figure {
+        aspect-ratio: 1.4 / 1;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-chemical-page .rx-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-chemical-hero-panel {
+        padding: 32px 0 26px;
+    }
+
+    .rx-chemical-hero-panel h1 {
+        font-size: 27px;
+        line-height: 32px;
+    }
+
+    .rx-chemical-page h2 {
+        font-size: 25px;
+    }
+
+    .rx-chemical-what,
+    .rx-chemical-engineering,
+    .rx-chemical-signs,
+    .rx-chemical-uses,
+    .rx-chemical-process,
+    .rx-chemical-causes {
+        padding: 40px 0;
+    }
+
+    .rx-chemical-key-aspects li {
+        font-size: 15px;
+    }
+
+    .rx-chemical-why {
+        padding: 40px 0;
+    }
+
+    .rx-chemical-why-card {
+        padding: 20px;
+    }
+
+    .rx-chemical-cta {
+        padding: 44px 0;
+    }
+
+    .rx-chemical-cta h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+/* =======================================================================
+ * 5. Sand Permeation Grouting — .rx-sand-page
+ * Desktop breakpoints already present: 1100px, 860px, 520px.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-sand-risk-grid,
+    .rx-sand-scenarios-grid,
+    .rx-sand-process-grid {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-sand-hero-panel h1 {
+        font-size: 30px;
+    }
+
+    .rx-sand-page h2 {
+        font-size: 28px;
+    }
+
+    .rx-sand-scenario-card {
+        min-height: 0;
+        padding: 22px;
+    }
+
+    .rx-sand-cta {
+        padding: 56px 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-sand-page .rx-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-sand-hero-panel {
+        padding: 32px 0 26px;
+    }
+
+    .rx-sand-hero-panel h1 {
+        font-size: 26px;
+    }
+
+    .rx-sand-intro,
+    .rx-sand-band {
+        padding: 36px 0;
+    }
+
+    .rx-sand-page h2 {
+        font-size: 24px;
+    }
+
+    .rx-sand-risk-card,
+    .rx-sand-scenario-card {
+        padding: 20px;
+    }
+
+    .rx-sand-benefits-media img {
+        height: auto;
+    }
+
+    .rx-sand-cta {
+        padding: 40px 0;
+    }
+
+    .rx-sand-cta h2 {
+        font-size: 26px;
+    }
+
+    .rx-sand-cta-primary,
+    .rx-sand-cta-outline {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* =======================================================================
+ * 6. Mailbox / Brick Fence Re-Levelling — .rx-brick-page
+ * Desktop breakpoints already present: 1100px, 900px, 768px, 560px.
+ *
+ * Real bug: `.rx-brick-cta-actions` is `flex-wrap: nowrap` with three
+ * fixed-width children (208px + 166px + 226px + 2×24px gaps ≈ 648px). The
+ * first breakpoint that stacks them into a column is 560px, but the
+ * `.rx-wrap` at that point (and anywhere from ~561–899px) is narrower than
+ * 648px, so the CTA row overflows/clips between roughly 560–899px wide
+ * viewports (common small-tablet / large-phone widths). Fixing by letting
+ * the row wrap and releasing the fixed widths well above the existing
+ * 560px breakpoint.
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-brick-checklist {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 899px) {
+    .rx-brick-cta-actions {
+        flex-wrap: wrap;
+        row-gap: 12px;
+    }
+
+    .rx-brick-cta-actions .rx-btn-white,
+    .rx-brick-cta-actions .rx-btn-ghost[href^="tel:"],
+    .rx-brick-cta-actions .rx-btn-ghost[href^="mailto:"] {
+        width: auto;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-brick-hero-panel h1 {
+        font-size: 30px;
+    }
+
+    .rx-brick-where-grid {
+        gap: 20px;
+    }
+
+    .rx-brick-process-grid {
+        row-gap: 32px;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-brick-page .rx-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-brick-hero-panel {
+        padding: 28px 0;
+    }
+
+    .rx-brick-hero-panel h1 {
+        font-size: 26px;
+    }
+
+    .rx-brick-band {
+        padding: 32px 0;
+    }
+
+    .rx-brick-cta h2 {
+        font-size: 27px !important;
+        line-height: 32px;
+    }
+
+    .rx-brick-cta p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .rx-brick-cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rx-brick-cta-actions .rx-btn {
+        width: 100%;
+    }
+
+    .rx-brick-process-step > span {
+        width: 68px;
+        height: 68px;
+        font-size: 26px;
+    }
+
+    .rx-brick-why-card {
+        padding: 20px;
+    }
+}
+
+/* =======================================================================
+ * 7. Foundation Repair — .rx-foundation-page
+ * Desktop breakpoints already present: 1100px, 760px (including a
+ * responsive card/list transform for .rx-foundation-table below 760px).
+ * ===================================================================== */
+
+@media (max-width: 1024px) {
+    .rx-foundation-intro-grid,
+    .rx-foundation-overview-grid,
+    .rx-foundation-solutions-grid {
+        gap: 32px;
+    }
+
+    /* 48px of horizontal cell padding is comfortable at 1440px but eats a
+       large share of the available width once the layout is 2-up. */
+    .rx-foundation-table th,
+    .rx-foundation-table td {
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .rx-foundation-banner h1 {
+        font-size: 30px;
+    }
+
+    .rx-foundation-solutions-feature h2,
+    .rx-foundation-overview-copy h2,
+    .rx-foundation-causes-head > h2,
+    .rx-foundation-why h2,
+    .rx-foundation-cta h2 {
+        font-size: 30px;
+    }
+
+    .rx-foundation-solution-card {
+        padding: 22px 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .rx-foundation-wrap,
+    .rx-foundation-causes-wrap {
+        width: calc(100% - 24px);
+    }
+
+    .rx-foundation-banner {
+        padding: 32px 0;
+    }
+
+    .rx-foundation-kicker {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .rx-foundation-banner h1,
+    .rx-foundation-overview-copy h2,
+    .rx-foundation-solutions-feature h2,
+    .rx-foundation-causes-head > h2,
+    .rx-foundation-why h2,
+    .rx-foundation-cta h2 {
+        font-size: 25px;
+        line-height: 1.18;
+    }
+
+    .rx-foundation-intro,
+    .rx-foundation-overview,
+    .rx-foundation-solutions,
+    .rx-foundation-causes,
+    .rx-foundation-why,
+    .rx-foundation-cta {
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .rx-foundation-intro-copy h2 {
+        font-size: 24px;
+    }
+
+    .rx-foundation-signs h3 {
+        font-size: 19px;
+    }
+
+    .rx-foundation-signs li {
+        font-size: 15px;
+    }
+
+    .rx-foundation-why-card {
+        padding: 20px;
+    }
+
+    .rx-foundation-cta p {
+        font-size: 15px;
+    }
+}
