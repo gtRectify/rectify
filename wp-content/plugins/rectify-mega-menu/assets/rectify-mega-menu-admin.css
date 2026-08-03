@@ -1,0 +1,4 @@
+.rectify-mega-menu-field{margin:12px 0 16px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;background:#f9fafc;}
+.rectify-mega-menu-preview{margin:8px 0 10px;min-height:48px;display:flex;align-items:center;}
+.rectify-mega-menu-preview img{max-width:64px;max-height:64px;object-fit:contain;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.08);}
+.rectify-mega-menu-field .button{margin-right:8px;}

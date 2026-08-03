@@ -1,0 +1,31 @@
+# WordPress media and generated content
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backups/
+wp-content/ai1wm-backups/
+wp-content/updraft/
+wp-content/wflogs/
+
+# Dependencies and temporary files
+node_modules/
+*.log
+*.tmp
+*.cache
+
+# Backups and database exports
+*.sql
+*.zip
+*.tar
+*.tar.gz
+*.gz
+
+# Local configuration and credentials
+.env
+wp-config.php
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: lt_LT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "Google Rating"
+msgstr "Google įvertinimas"
+
+msgid "See All Reviews"
+msgstr "Žiūrėti visus atsiliepimus"
+
+msgid "Google User"
+msgstr "Google vartotojas"
+
+msgid "read more"
+msgstr "daugiau"
+
+msgid "More reviews"
+msgstr "Daugiau atsiliepimų"
+
+msgid "Based on %s reviews"
+msgstr "Remiantis %s atsiliepimais"
+
+msgid "review us on"
+msgstr "įvertinkite mus"
+
+msgid "Response from the owner"
+msgstr "Savininko atsakymas"
+
+msgid "%s place profile"
+msgstr "%s vietos profilis"
+
+msgid "review us on Google"
+msgstr "įvertinkite mus „Google“"
+
+msgid "All reviews"
+msgstr "Visi atsiliepimai"
+
+msgid "%s user profile"
+msgstr "%s vartotojo profilis"
+
+msgid "opens in a new window"
+msgstr "atsidaro naujame lange"
+
+msgid "Rating: %s out of 5"
+msgstr "Įvertinimas: %s iš 5"

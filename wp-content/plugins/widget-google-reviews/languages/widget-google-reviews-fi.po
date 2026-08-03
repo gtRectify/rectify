@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "Google Rating"
+msgstr "Google-arvostelu"
+
+msgid "See All Reviews"
+msgstr "Näytä kaikki arvostelut"
+
+msgid "Google User"
+msgstr "Google-käyttäjä"
+
+msgid "read more"
+msgstr "lisää"
+
+msgid "More reviews"
+msgstr "Lisää arvosteluja"
+
+msgid "Based on %s reviews"
+msgstr "Perustuu %s arvosteluun"
+
+msgid "review us on"
+msgstr "arvioi meidät"
+
+msgid "Response from the owner"
+msgstr "Omistajan vastaus"
+
+msgid "%s place profile"
+msgstr "%s paikan profiili"
+
+msgid "review us on Google"
+msgstr "arvioi meidät Googlessa"
+
+msgid "All reviews"
+msgstr "Kaikki arvostelut"
+
+msgid "%s user profile"
+msgstr "%s käyttäjäprofiili"
+
+msgid "opens in a new window"
+msgstr "avautuu uudessa ikkunassa"
+
+msgid "Rating: %s out of 5"
+msgstr "Arvostelu: %s / 5"
