@@ -641,7 +641,7 @@ function rectify_custom_enqueue_assets() {
         && 'commercial-solutions' === $current_page->post_name;
 
     $is_residential_figma_inner_page = $current_page instanceof WP_Post
-        && in_array( $current_page->post_name, array( 'ground-improvement', 'house-relevelling', 'weak-soils', 'foundation-repair', 'leaning-pillars-chimneys', 'leaning-pillars', 'chemical-underpinning', 'driveway-relevelling', 'sand-permeation', 'mailbox-brick-fence-releveling', 'basement-construction-support' ), true )
+        && in_array( $current_page->post_name, array( 'ground-improvement', 'house-relevelling', 'weak-soils', 'foundation-repair', 'leaning-pillars-chimneys', 'leaning-pillars', 'chemical-underpinning', 'driveway-relevelling', 'sand-permeation', 'mailbox-brick-fence-releveling', 'basement-construction-support', 'slab-relevelling' ), true )
         && $residential_page instanceof WP_Post
         && (int) $current_page->post_parent === (int) $residential_page->ID;
 

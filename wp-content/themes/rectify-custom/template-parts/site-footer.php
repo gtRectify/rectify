@@ -26,7 +26,7 @@ $rx_footer_columns = array(
     'Residential Solutions' => array(
         array( 'Chemical Underpinning', home_url( '/residential/chemical-underpinning/' ) ),
         array( 'Foundation Stabilisation', home_url( '/residential/foundation-repair/' ) ),
-        array( 'Slab Re-Levelling', home_url( '/residential/slab-lifting/' ) ),
+        array( 'Slab Re-Levelling', home_url( '/residential/slab-relevelling/' ) ),
         array( 'Ground Improvement', home_url( '/residential/ground-improvement/' ) ),
     ),
     'Commercial Solutions' => array(

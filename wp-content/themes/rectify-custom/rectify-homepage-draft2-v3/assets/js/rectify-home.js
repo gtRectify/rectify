@@ -60,6 +60,10 @@
     const parents = Array.from(menuBar.querySelectorAll('.rx-mega-parent'));
     if(!parents.length) return;
 
+    // Tell the sitewide nav script (js/main.js) not to double-wire these
+    // same links — it defers to this richer implementation when present.
+    window.__rxMegaMenuInit = true;
+
     const closeAll = (except)=>{
       parents.forEach((parent)=>{
         if(parent === except) return;
@@ -77,8 +81,16 @@
       link.setAttribute('aria-haspopup', 'true');
       link.setAttribute('aria-expanded', 'false');
 
+      // Hover/focus should only auto-open the desktop dropdown layout. Below
+      // the 860px breakpoint the menu is the mobile accordion, where only an
+      // explicit tap/click may open a panel — otherwise a real mouse hovering
+      // a narrow (resized or actual mobile) viewport pops panels open
+      // unintentionally. Width is checked (not just hover-capability) because
+      // a desktop browser resized narrow still reports hover:hover.
+      const isDesktopLayout = ()=> window.innerWidth > 860 && window.matchMedia('(hover: hover)').matches;
+
       parent.addEventListener('mouseenter', ()=>{
-        if(window.matchMedia('(hover: hover)').matches){
+        if(isDesktopLayout()){
           closeAll(parent);
           parent.classList.add('is-open');
           link.setAttribute('aria-expanded', 'true');
@@ -86,16 +98,18 @@
       });
 
       parent.addEventListener('mouseleave', ()=>{
-        if(window.matchMedia('(hover: hover)').matches){
+        if(isDesktopLayout()){
           parent.classList.remove('is-open');
           link.setAttribute('aria-expanded', 'false');
         }
       });
 
       parent.addEventListener('focusin', ()=>{
-        closeAll(parent);
-        parent.classList.add('is-open');
-        link.setAttribute('aria-expanded', 'true');
+        if(isDesktopLayout()){
+          closeAll(parent);
+          parent.classList.add('is-open');
+          link.setAttribute('aria-expanded', 'true');
+        }
       });
 
       parent.addEventListener('focusout', (event)=>{

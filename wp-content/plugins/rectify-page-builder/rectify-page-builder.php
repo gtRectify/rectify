@@ -308,6 +308,7 @@ function rectify_pb_get_residential_child_page_slugs()
         'leaning-walls-gaps-in-doors-windows' => 'leaning-walls-gaps-solutions',
         'erosion-control-sinkhole-remediation' => 'erosion-control-sinkhole-remediation-solutions',
         'house-relevelling' => 'house-relevelling-solutions',
+        'slab-relevelling' => 'slab-relevelling-solutions',
     );
 }
 

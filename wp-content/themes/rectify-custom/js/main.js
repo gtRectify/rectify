@@ -71,32 +71,40 @@
             }
         });
 
-        menu.querySelectorAll('.rx-menu > li').forEach(function(li) {
-            const submenu = li.querySelector('.rx-mega-submenu');
-            const link = li.querySelector('a');
+        // The homepage template loads a richer per-item accordion controller
+        // (rectify-homepage-draft2-v3/assets/js/rectify-home.js) that already
+        // handles click-toggle, aria-expanded and outside-click/Escape for
+        // these same links. Wiring our own click handler on top of it would
+        // double-toggle on a single tap. Only take over when that script
+        // isn't present (i.e. on inner pages using just this global script).
+        if (!window.__rxMegaMenuInit) {
+            menu.querySelectorAll('.rx-menu > li').forEach(function(li) {
+                const submenu = li.querySelector('.rx-mega-submenu');
+                const link = li.querySelector('a');
 
-            if (!submenu || !link) {
-                return;
-            }
-
-            link.addEventListener('click', function(e) {
-                if (!mobileQuery.matches) {
+                if (!submenu || !link) {
                     return;
                 }
 
-                e.preventDefault();
-
-                const isOpen = li.classList.contains('is-open');
-
-                menu.querySelectorAll('.rx-menu > li.is-open').forEach(function(other) {
-                    if (other !== li) {
-                        other.classList.remove('is-open');
+                link.addEventListener('click', function(e) {
+                    if (!mobileQuery.matches) {
+                        return;
                     }
-                });
 
-                li.classList.toggle('is-open', !isOpen);
+                    e.preventDefault();
+
+                    const isOpen = li.classList.contains('is-open');
+
+                    menu.querySelectorAll('.rx-menu > li.is-open').forEach(function(other) {
+                        if (other !== li) {
+                            other.classList.remove('is-open');
+                        }
+                    });
+
+                    li.classList.toggle('is-open', !isOpen);
+                });
             });
-        });
+        }
     }
 
     // Smooth scroll for anchor links

@@ -1978,81 +1978,68 @@ function rectify_pb_get_foundation_repair_seed_blocks_legacy()
 }
 
 /**
- * Figma-matched Foundation Stabilisation content.
- * Node 815:11836 in "Rectify - New Home".
+ * Figma-matched Foundation Repair content.
+ * Node 748:13766 ("Foundation Repair") in "Rectify - New Home".
+ *
+ * Uses the shared "cracked-style" block system (see
+ * rectify_pb_get_cracked_walls_seed_blocks()) so admin edits for this page
+ * are seeded with content that actually matches the live design.
  *
  * @return array
  */
 function rectify_pb_get_foundation_repair_seed_blocks()
 {
     return array(
-        array('id' => 'seed-foundation-banner-figma', 'type' => 'foundation-banner', 'section_key' => 'residential-foundation-banner', 'label' => 'Title Banner', 'fields' => array(
-            'kicker' => 'RESIDENTIAL SOLUTIONS',
-            'title' => 'Foundation Stabilisation',
-            'breadcrumb_label' => 'Foundation Stabilisation',
+        array('id' => 'seed-foundation-hero', 'type' => 'cracked-hero', 'section_key' => 'residential-foundation-hero', 'label' => 'Hero', 'fields' => array(
+            'kicker' => 'WHAT WE RECTIFY',
+            'title' => 'Foundation Repair Melbourne & South Australia',
+            'breadcrumb_label' => 'Foundation Repair',
         )),
-        array('id' => 'seed-foundation-intro-figma', 'type' => 'foundation-intro', 'section_key' => 'residential-foundation-intro', 'label' => 'Introduction', 'fields' => array(
-            'heading' => 'Engineered Solutions to Stop Foundation Movement at Its Source',
-            'body' => 'When the ground beneath your home moves, your foundation moves with it. Rectify provides engineered foundation stabilisation solutions that address the underlying cause of settlement and movement—not just the visible symptoms. Using advanced ground engineering and structural stabilisation techniques, we restore stability while minimising disruption to your property.',
-            'image' => 'images/foundation-stabilisation/intro-technician.jpg',
-            'image_alt' => 'Rectify technician stabilising the foundation beside a brick home',
+        array('id' => 'seed-foundation-intro', 'type' => 'cracked-band', 'section_key' => 'residential-foundation-intro', 'label' => 'Intro', 'fields' => array(
+            'heading' => 'Engineered Foundation Repair Solutions for Long-Term Structural Stability',
+            'body' => "Your home's foundation supports the entire structure. When the ground beneath it begins to move, settle, or weaken, the effects can be seen throughout the property—from cracked walls and uneven floors to sticking doors and sloping concrete slabs.\n\nAt Rectify, we specialise in foundation repair for residential properties across Melbourne, Victoria, and South Australia. Our experienced ground engineering team identifies the underlying cause of foundation movement and delivers engineered solutions designed to restore stability while minimising disruption to your home.\n\nWhether your property is experiencing early signs of settlement or more advanced structural movement, we're here to help protect your home with proven, long-term solutions.",
+            'image' => 'images/foundation-repair/intro-technician-van.png',
+            'media_position' => 'last',
         )),
-        array('id' => 'seed-foundation-overview-figma', 'type' => 'foundation-overview', 'section_key' => 'residential-foundation-overview', 'label' => 'What Is Foundation Stabilisation', 'fields' => array(
-            'heading' => 'What is Foundation Stabilisation',
-            'body' => "Foundation movement is rarely caused by the concrete itself. In most cases, changes beneath the foundation—such as reactive clay soils, erosion, moisture variation, poor compaction or underground voids—cause the structure to settle or move over time. Understanding soil behaviour and site conditions is fundamental to selecting the right stabilisation approach. Australian residential sites are commonly classified according to soil reactivity, with highly reactive soils requiring more robust foundation solutions to accommodate or resist movement.\n\nAt Rectify, every project begins with identifying the source of movement. Rather than masking symptoms, we engineer solutions that improve the ground conditions supporting your home and restore long-term structural performance.",
-            'signs_heading' => 'Foundation stabilisation may be recommended if your home has:',
-            'signs' => array(
-                array('text' => 'Cracking walls, ceilings or brickwork'),
-                array('text' => 'Uneven or sloping floors'),
-                array('text' => 'Doors and windows that stick or no longer close properly'),
-                array('text' => 'Sunken concrete slabs or footings'),
-                array('text' => 'Ongoing movement caused by reactive soils'),
-                array('text' => 'Localised settlement from erosion or underground voids'),
-            ),
+        array('id' => 'seed-foundation-whatis', 'type' => 'cracked-whatis', 'section_key' => 'residential-foundation-whatis', 'label' => 'What Is It', 'fields' => array(
+            'heading' => 'What Is Foundation Repair?',
+            'body' => 'Foundation repair is the process of stabilising and strengthening the ground and foundations that support your home. Rather than simply repairing visible cracks or cosmetic damage, effective foundation repair addresses the underlying cause of structural movement.',
         )),
-        array('id' => 'seed-foundation-solutions-figma', 'type' => 'foundation-solutions', 'section_key' => 'residential-foundation-solutions', 'label' => 'Foundation Stabilisation Solutions', 'fields' => array(
-            'heading' => 'Our Foundation Stabilisation Solutions',
-            'lead' => "Every home experiences different ground conditions, which is why there is no one-size-fits-all solution. Rectify's engineers assess your property and recommend the most appropriate stabilisation method based on soil conditions, foundation type and structural movement.",
-            'image' => 'images/foundation-stabilisation/cracked-foundation.jpg',
-            'image_alt' => 'Cracked concrete foundation revealing weakened supporting ground',
+        array('id' => 'seed-foundation-causes', 'type' => 'cracked-causes', 'section_key' => 'residential-foundation-causes', 'label' => 'Causes', 'fields' => array(
+            'heading' => '',
             'items' => array(
-                array('image' => 'images/foundation-stabilisation/chemical-underpinning.svg', 'title' => 'Chemical Underpinning', 'description' => 'Advanced expanding resin is injected beneath the foundation to fill voids, strengthen weak ground and restore support to settled structures with minimal excavation.'),
-                array('image' => 'images/foundation-stabilisation/ground-improvement.svg', 'title' => 'Ground Improvement', 'description' => 'Where poor soil conditions are the primary cause of movement, engineered ground improvement techniques increase soil density and bearing capacity before further structural damage occurs.'),
-                array('image' => 'images/foundation-stabilisation/chemical-underpinning.svg', 'title' => 'Soil Stabilisation', 'description' => 'Weak, loose or moisture-sensitive soils can be strengthened through specialised ground treatment methods that improve long-term foundation performance and reduce future settlement.'),
-                array('image' => 'images/foundation-stabilisation/ground-improvement.svg', 'title' => 'Foundation Repair', 'description' => 'Where movement has already affected the structure, Rectify can restore stability through integrated foundation repair solutions designed specifically for the identified cause.'),
+                array('image' => 'images/foundation-repair/reactive-clay-soils.jpg', 'title' => 'Reactive Clay Soils', 'description' => 'Reactive clay expands during wet conditions and contracts as the ground dries. These repeated moisture changes place continual stress on foundations and can lead to differential settlement.'),
+                array('image' => 'images/foundation-repair/poor-soil-compaction.jpg', 'title' => 'Poor Soil Compaction', 'description' => 'If the fill material beneath a home was not adequately compacted during construction, it may continue to compress over time, causing foundations to settle unevenly.'),
+                array('image' => 'images/foundation-repair/water-leaks-beneath-foundations.jpg', 'title' => 'Water Leaks Beneath Foundations', 'description' => 'Leaking water services, damaged stormwater pipes or poor drainage can soften supporting soils and reduce their ability to carry structural loads.'),
+                array('image' => 'images/foundation-repair/erosion.png', 'title' => 'Erosion', 'description' => 'Groundwater movement and poor drainage may gradually wash supporting soils away, leaving foundations without adequate support.'),
+                array('image' => 'images/foundation-repair/tree-root-activity.jpg', 'title' => 'Tree Root Activity', 'description' => 'Large trees remove moisture from surrounding soils, particularly reactive clays, causing shrinkage and uneven foundation movement.'),
+                array('image' => 'images/foundation-repair/natural-foundation-settlement.jpg', 'title' => 'Natural Foundation Settlement', 'description' => 'Older homes often experience gradual settlement as soil conditions change over many years. While some movement is expected, excessive settlement should be professionally assessed.'),
             ),
         )),
-        array('id' => 'seed-foundation-causes-figma', 'type' => 'foundation-causes-table', 'section_key' => 'residential-foundation-causes', 'label' => 'Why Foundations Move', 'fields' => array(
-            'heading' => 'Why Foundations Move?',
-            'subheading' => 'Understanding the Cause is the First Step to the Solution',
-            'lead' => "Many structural issues begin below ground long before cracks become visible. Changes in soil moisture, inadequate compaction, erosion and underground voids can all reduce the support beneath a home's foundation.",
-            'items' => array(
-                array('title' => 'Reactive Clay Soil', 'description' => 'Expansion and shrinkage cause seasonal movement beneath foundations.'),
-                array('title' => 'Water Leaks', 'description' => 'Softens supporting soils and creates localised settlement.'),
-                array('title' => 'Erosion', 'description' => 'Washes away supporting soil beneath slabs and footings.'),
-                array('title' => 'Poor site compaction', 'description' => 'Allows foundations to settle over time.'),
-                array('title' => 'Underground voids', 'description' => 'Reduces foundation support and increases differential settlement.'),
-                array('title' => 'Tree roots and moisture changes', 'description' => 'Dry reactive soils causing shrinkage and movement around the home.'),
-            ),
+        array('id' => 'seed-foundation-matters', 'type' => 'cracked-band', 'section_key' => 'residential-foundation-matters', 'label' => 'Why It Matters', 'fields' => array(
+            'heading' => 'Why Professional Assessment Is Important',
+            'body' => "At Rectify, we take an engineering-led approach to foundation repair. Our specialists carry out a comprehensive site assessment to identify the factors contributing to structural movement, including reactive soils, moisture fluctuations, erosion, inadequate ground compaction, voids beneath the foundation, or foundation settlement. Once the root cause has been identified, we develop a tailored remediation solution using proven techniques such as chemical underpinning, soil stabilisation, ground improvement, and foundation repair.\n\nRather than simply repairing the visible damage, we address the source of the movement to restore structural stability and help protect your home against future foundation issues. Our long-term solutions have helped homeowners across Melbourne, Victoria and South Australia safeguard one of their most valuable assets.",
+            'image' => 'images/foundation-repair/why-assessment-technician.png',
+            'media_position' => 'first',
+            'soft' => 'yes',
         )),
-        array('id' => 'seed-foundation-why-figma', 'type' => 'foundation-why', 'section_key' => 'residential-foundation-why', 'label' => 'Why Choose Rectify', 'fields' => array(
-            'heading' => 'Why Choose Rectify',
-            'items' => array(
-                array('image' => 'images/foundation-stabilisation/engineering-led.svg', 'title' => 'Engineering-Led Solutions', 'description' => 'Every project begins with understanding the cause of the problem, ensuring the right solution is delivered—not just a temporary fix.'),
-                array('image' => 'images/foundation-stabilisation/structural-expertise.svg', 'title' => 'Proven Structural Expertise', 'description' => 'Trusted to deliver engineered solutions across residential, commercial and infrastructure projects.'),
-                array('image' => 'images/foundation-stabilisation/non-invasive.svg', 'title' => 'Non-Invasive Technology', 'description' => 'Our advanced, non-invasive technologies restore structural stability with less excavation, less mess, and minimal interruption.'),
-                array('image' => 'images/foundation-stabilisation/long-term.png', 'title' => 'Long-Term Confidence', 'description' => "We don't just repair today's problem—we strengthen your asset for long-term performance and lasting value."),
-            ),
+        array('id' => 'seed-foundation-advantage', 'type' => 'cracked-advantage', 'section_key' => 'residential-foundation-advantage', 'label' => 'Why Choose Rectify', 'fields' => array(
+            'kicker' => 'OUR ADVANTAGE',
+            'heading' => 'Why Homeowners Choose Rectify',
+            'lead' => "At Rectify, we don't just repair structural problems—we help protect and preserve valuable assets for the long term. Our team combines technical expertise, innovative ground stabilisation technologies and a commitment to quality delivery across every project. Serving clients throughout Melbourne, Victoria, Adelaide, South Australia, and across Australia, we deliver trusted underpinning, foundation repair and ground engineering solutions that reduce risk, restore confidence and provide long-lasting structural performance.",
+            'items' => rectify_pb_get_cracked_advantage_items(),
         )),
-        array('id' => 'seed-foundation-cta-figma', 'type' => 'foundation-cta', 'section_key' => 'residential-foundation-cta', 'label' => 'Final CTA', 'fields' => array(
-            'heading' => 'Protect Your Home Before Foundation Movement Gets Worse',
-            'copy' => 'Foundation movement rarely resolves itself. An early engineering assessment can identify the cause of the problem and recommend the most effective solution before further structural damage occurs.',
-            'primary_text' => 'Contact Us',
-            'primary_url' => home_url('/contact-us/'),
+        array('id' => 'seed-foundation-performance', 'type' => 'cracked-performance', 'section_key' => 'residential-foundation-performance', 'label' => 'Performance Verified', 'fields' => array(
+            'heading' => 'Engineered. Rectified. Performance Verified.',
+            'subtext' => 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.',
+            'before_image' => 'images/foundation-repair/before-after-1.jpg',
+            'after_image' => 'images/foundation-repair/before-after-2.jpg',
+        )),
+        array('id' => 'seed-foundation-help', 'type' => 'cracked-help', 'section_key' => 'residential-foundation-help', 'label' => 'Final CTA', 'fields' => array(
+            'heading' => 'Need Help Choosing The Right Solution?',
+            'subtext' => "Whether you're dealing with foundation movement, structural cracking or ground instability, our specialists can help you understand the cause, explore your options and take the next step with confidence.",
             'phone_text' => '1800 18 20 20',
             'phone_url' => 'tel:1800182020',
-            'email_text' => 'admin@rectify.com.au',
-            'email_url' => 'mailto:admin@rectify.com.au',
         )),
     );
 }
