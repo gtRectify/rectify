@@ -153,6 +153,10 @@ function rectify_pb_get_seed_blocks_for_profile($profile)
         return rectify_pb_get_house_relevelling_seed_blocks();
     }
 
+    if ($profile === 'slab-relevelling-solutions' && function_exists('rectify_pb_get_slab_relevelling_seed_blocks')) {
+        return rectify_pb_get_slab_relevelling_seed_blocks();
+    }
+
     if ($profile === 'faq-residential' && function_exists('rectify_pb_get_faq_residential_seed_blocks')) {
         return rectify_pb_get_faq_residential_seed_blocks();
     }
@@ -316,6 +320,7 @@ function rectify_pb_localize_inline($profile = 'homepage')
             'removeItem' => __('Remove', 'rectify-page-builder'),
             'addBlock' => __('Add Section', 'rectify-page-builder'),
             'loadCurrentContent' => __('Load current content', 'rectify-page-builder'),
+            'confirmLoadSeed' => __('This will replace all sections currently in the builder with the default content for this page. Continue?', 'rectify-page-builder'),
             'confirmRemoveBlock' => __('Remove this section from the builder?', 'rectify-page-builder'),
             'collapse' => __('Collapse', 'rectify-page-builder'),
             'expand' => __('Expand', 'rectify-page-builder'),

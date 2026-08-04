@@ -991,7 +991,12 @@ section#resources .rx-row-head {
   /* color: #bd1726; */
 }
 .rx-menu li:hover a, .rx-menu li:hover span {
-  color: #676767 !important;
+  color: #676767;
+}
+
+.rx-mega-industries-grid li:hover span {
+  color: #bd1726 !important;
+
 }
 
 .rx-menu li:hover span.rx-mega-link-text {
@@ -1105,6 +1110,8 @@ section#resources .rx-row-head {
   pointer-events: none;
   z-index: 0;
 }
+
+
 .rx-home .rx-mega-submenu-intro h3 {
   position: relative;
   z-index: 1;
@@ -1278,6 +1285,7 @@ section#resources .rx-row-head {
 .rx-home .rx-mega-resources-card-media {
   display: block;
   overflow: hidden;
+  width: 100%;
   margin-bottom: 14px;
   border-radius: 8px;
   aspect-ratio: 4 / 3;
@@ -1457,14 +1465,16 @@ section#resources .rx-row-head {
 .rx-home .rx-mega-submenu-intro--industries::after {
   content: "";
   position: absolute;
-  left: -12px;
-  bottom: -14px;
-  width: 230px;
-  height: 168px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 230 168'><path d='M0 138 Q30 108 60 138 T120 138 T180 108 T230 138' stroke='%23d3d3d3' stroke-width='2' fill='none'/><path d='M0 156 Q30 126 60 156 T120 156 T180 126 T230 156' stroke='%23dedede' stroke-width='2' fill='none'/><path d='M-10 118 Q22 90 54 118 T118 118 T182 90 T240 118' stroke='%23c7c7c7' stroke-width='2' fill='none'/></svg>");
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 179px;
+  background-image: url("../images/mega-menu-wave.png");
   background-repeat: no-repeat;
+  background-position: left bottom;
   background-size: contain;
   pointer-events: none;
+  z-index: 0;
 }
 .rx-home .rx-mega-industries-grid {
   display: grid;
@@ -1515,7 +1525,7 @@ section#resources .rx-row-head {
 }
 .rx-home .rx-mega-industries-label {
   display: block;
-  color: #bd1726;
+  color: #bd1726 !important;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: 700;

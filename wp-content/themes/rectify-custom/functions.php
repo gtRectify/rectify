@@ -749,6 +749,18 @@ function rectify_custom_enqueue_assets() {
                 filemtime( $industries_mobile_css )
             );
         }
+
+        $industries_inner_pages_js = get_template_directory() . '/assets/js/industries-inner-pages.js';
+
+        if ( file_exists( $industries_inner_pages_js ) ) {
+            wp_enqueue_script(
+                'rectify-industries-inner-pages',
+                get_template_directory_uri() . '/assets/js/industries-inner-pages.js',
+                array(),
+                filemtime( $industries_inner_pages_js ),
+                true
+            );
+        }
     }
 
     if ( $is_residential_figma_inner_page ) {

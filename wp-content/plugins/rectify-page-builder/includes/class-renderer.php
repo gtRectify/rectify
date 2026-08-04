@@ -338,8 +338,32 @@ function rectify_pb_render_page_sections($post_id, $sections)
     } else {
         asort($saved_position);
         $saved_order = array_keys($saved_position);
-        $untouched_defaults = array_values(array_diff($default_order, $saved_order));
-        $ordered_keys = array_merge($saved_order, $untouched_defaults);
+        $saved_lookup = array_flip($saved_order);
+
+        // Merge saved-order with the theme's default order rather than
+        // simply putting every saved section before every untouched one:
+        // a page only partially edited in the builder (e.g. one section
+        // saved out of eight) must keep that section in its natural
+        // position instead of jumping to the top of the page. Sections
+        // present in both keep the admin's drag-and-drop order (relative
+        // to each other); untouched sections keep their original slot.
+        $ordered_keys = array();
+
+        foreach ($default_order as $key) {
+            if (isset($saved_lookup[$key])) {
+                $ordered_keys[] = array_shift($saved_order);
+            } else {
+                $ordered_keys[] = $key;
+            }
+        }
+
+        // Any saved section_key with no matching default section (a custom
+        // section added via the "section_key" field, not part of the
+        // theme's hardcoded set) has no natural position, so it's appended
+        // at the end in saved order.
+        foreach ($saved_order as $key) {
+            $ordered_keys[] = $key;
+        }
     }
 
     foreach ($ordered_keys as $key) {
@@ -1071,6 +1095,33 @@ function rectify_builder_render_section($post_id, $section_key)
         case 'process-principles':
             rectify_pb_render_process_principles($fields, $section_key);
             break;
+        case 'slab-relevel-hero':
+            rectify_pb_render_slab_relevel_hero($fields, $section_key);
+            break;
+        case 'slab-relevel-intro':
+            rectify_pb_render_slab_relevel_intro($fields, $section_key);
+            break;
+        case 'slab-relevel-signs':
+            rectify_pb_render_slab_relevel_signs($fields, $section_key);
+            break;
+        case 'slab-relevel-causes':
+            rectify_pb_render_slab_relevel_causes($fields, $section_key);
+            break;
+        case 'slab-relevel-process':
+            rectify_pb_render_slab_relevel_process($fields, $section_key);
+            break;
+        case 'slab-relevel-comparison':
+            rectify_pb_render_slab_relevel_comparison($fields, $section_key);
+            break;
+        case 'slab-relevel-proof':
+            rectify_pb_render_slab_relevel_proof($fields, $section_key);
+            break;
+        case 'slab-relevel-why':
+            rectify_pb_render_slab_relevel_why($fields, $section_key);
+            break;
+        case 'slab-relevel-cta':
+            rectify_pb_render_slab_relevel_cta($fields, $section_key);
+            break;
         default:
             return false;
     }
@@ -1400,14 +1451,15 @@ function rectify_pb_pasted_icon_svg($icon_key)
  * Resolve an "upload:<attachment_id>" icon-picker value to an <img> tag.
  *
  * @param string $icon_key
+ * @param string $class
  * @return string
  */
-function rectify_pb_uploaded_icon_img($icon_key)
+function rectify_pb_uploaded_icon_img($icon_key, $class = 'rx-custom-icon')
 {
     $attachment_id = absint(substr($icon_key, 7));
     $url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
 
-    return $url ? '<img src="' . esc_url($url) . '" alt="" class="rx-custom-icon">' : '';
+    return $url ? '<img src="' . esc_url($url) . '" alt="" class="' . esc_attr($class) . '">' : '';
 }
 
 /* -----------------------------------------------------------------------
@@ -9519,7 +9571,9 @@ function rectify_pb_ii_image_url($field_value, $fallback_relative_path)
 
 /**
  * Resolve an icon-picker field to markup: inline SVG for a "svg" icon, an
- * <img> for a "file" icon. Used by the ii-* block renderers.
+ * <img> for a "file" icon, or a directly uploaded/pasted icon (the
+ * "upload:<attachment_id>" and "paste:<base64>" values the icon-picker also
+ * accepts - see rectify_pb_icon_markup()). Used by the ii-* block renderers.
  *
  * @param string $icon_key
  * @param string $class
@@ -9529,6 +9583,16 @@ function rectify_pb_ii_icon_markup($icon_key, $class = 'rx-ii-icon')
 {
     if (!$icon_key) {
         return '';
+    }
+
+    if (strpos($icon_key, 'upload:') === 0) {
+        return rectify_pb_uploaded_icon_img($icon_key, $class);
+    }
+
+    if (strpos($icon_key, 'paste:') === 0) {
+        $svg_markup = rectify_pb_pasted_icon_svg($icon_key);
+
+        return $svg_markup ? '<span class="' . esc_attr($class) . '">' . $svg_markup . '</span>' : '';
     }
 
     $library = rectify_pb_get_icon_library();
@@ -9655,7 +9719,7 @@ function rectify_pb_render_ii_solutions($fields, $section_key)
         <div class="rx-ii-wrap">
             <div class="rx-ii-solutions-track">
                 <button type="button" class="rx-ii-solutions-prev" aria-label="<?php esc_attr_e('Previous solution', 'rectify-page-builder'); ?>">
-                    <span aria-hidden="true">&#8249;</span>
+                    <span class="rx-ii-solutions-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 </button>
                 <div class="rx-ii-solutions-grid">
                     <?php foreach ($items as $index => $item) :
@@ -9671,7 +9735,7 @@ function rectify_pb_render_ii_solutions($fields, $section_key)
                     <?php endforeach; ?>
                 </div>
                 <button type="button" class="rx-ii-solutions-next" aria-label="<?php esc_attr_e('Next solution', 'rectify-page-builder'); ?>">
-                    <span aria-hidden="true">&#8250;</span>
+                    <span class="rx-ii-solutions-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 </button>
             </div>
         </div>
@@ -9821,6 +9885,300 @@ function rectify_pb_render_ii_assets($fields, $section_key)
                     <?php endforeach; ?>
                 </ul>
                 <?php endif; ?>
+            </div>
+        </div>
+    </section>
+    <?php
+}
+
+/* -----------------------------------------------------------------------
+ * Slab Relevelling (Residential Solutions child page), matching
+ * template-parts/residential/content-slab-relevelling.php.
+ * ---------------------------------------------------------------------*/
+
+function rectify_pb_slab_relevel_image_url($field_value, $fallback_relative_path)
+{
+    $url = rectify_pb_image_url($field_value);
+
+    return $url ? $url : rectify_pb_theme_asset_url($fallback_relative_path);
+}
+
+function rectify_pb_render_slab_relevel_hero($fields, $section_key)
+{
+    $kicker = (isset($fields['kicker']) && $fields['kicker'] !== '') ? $fields['kicker'] : 'RESIDENTIAL SOLUTIONS';
+    $title = (isset($fields['title']) && $fields['title'] !== '') ? $fields['title'] : 'Slab Relevelling Melbourne, Adelaide & South Australia';
+    $breadcrumb_label = (isset($fields['breadcrumb_label']) && $fields['breadcrumb_label'] !== '') ? $fields['breadcrumb_label'] : 'Residential Solutions';
+    $breadcrumb_url = (isset($fields['breadcrumb_url']) && $fields['breadcrumb_url'] !== '') ? $fields['breadcrumb_url'] : home_url('/residential/');
+    $current_label = (isset($fields['current_label']) && $fields['current_label'] !== '') ? $fields['current_label'] : 'Slab Relevelling';
+    ?>
+    <section class="rx-slab-hero" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <span class="rx-slab-kicker"><?php echo esc_html($kicker); ?></span>
+            <h1><?php echo esc_html($title); ?></h1>
+            <nav class="rx-slab-breadcrumb" aria-label="Breadcrumb">
+                <a href="<?php echo esc_url(home_url('/')); ?>">Home</a>
+                <span aria-hidden="true">&rsaquo;</span>
+                <a href="<?php echo esc_url($breadcrumb_url); ?>"><?php echo esc_html($breadcrumb_label); ?></a>
+                <span aria-hidden="true">&rsaquo;</span>
+                <span><?php echo esc_html($current_label); ?></span>
+            </nav>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_intro($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Restore Sunken Concrete Slabs with Advanced Chemical Underpinning';
+    $body = isset($fields['body_richtext']) ? $fields['body_richtext'] : '';
+    $image = rectify_pb_slab_relevel_image_url(isset($fields['image']) ? $fields['image'] : 0, 'images/slab-relevelling/intro-slab.jpg');
+    ?>
+    <section class="rx-slab-band" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap rx-slab-intro-grid">
+            <div class="rx-slab-intro-copy">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <?php if ($body) : ?><?php echo wp_kses_post(wpautop($body)); ?><?php endif; ?>
+            </div>
+            <figure class="rx-slab-intro-media">
+                <img src="<?php echo esc_url($image); ?>" alt="<?php esc_attr_e('House exterior showing a concrete slab and pathway', 'rectify-custom'); ?>">
+            </figure>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_signs($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Is Your Concrete Slab Showing These Warning Signs?';
+    $lead = isset($fields['lead']) ? $fields['lead'] : '';
+    $items = isset($fields['items']) && is_array($fields['items']) ? $fields['items'] : array();
+    $note = isset($fields['note']) ? $fields['note'] : '';
+    $cta_text = (isset($fields['cta_text']) && $fields['cta_text'] !== '') ? $fields['cta_text'] : 'CONTACT OUR EXPERTS';
+    $cta_url = (isset($fields['cta_url']) && $fields['cta_url'] !== '') ? $fields['cta_url'] : home_url('/contact-us/');
+    ?>
+    <section class="rx-slab-band rx-slab-soft" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <div class="rx-slab-signs-head">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <?php if ($lead) : ?><p><?php echo wp_kses_post($lead); ?></p><?php endif; ?>
+            </div>
+            <?php if (!empty($items)) : ?>
+            <div class="rx-slab-signs-grid">
+                <?php foreach ($items as $item) :
+                    $image = rectify_pb_image_url(isset($item['image']) ? $item['image'] : 0);
+                    $title = isset($item['title']) ? $item['title'] : '';
+                    $copy = isset($item['copy']) ? $item['copy'] : '';
+                    ?>
+                <article class="rx-slab-sign-card">
+                    <?php if ($image) : ?>
+                    <figure class="rx-slab-sign-media">
+                        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
+                    </figure>
+                    <?php endif; ?>
+                    <?php if ($title) : ?><h3><?php echo esc_html($title); ?></h3><?php endif; ?>
+                    <?php if ($copy) : ?><p><?php echo wp_kses_post($copy); ?></p><?php endif; ?>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+            <?php if ($note) : ?><p class="rx-slab-signs-note"><?php echo wp_kses_post($note); ?></p><?php endif; ?>
+            <?php if ($cta_text) : ?><a class="rx-slab-btn-primary" href="<?php echo esc_url($cta_url); ?>"><?php echo esc_html($cta_text); ?></a><?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_causes($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'The Ground Beneath the Slab Is Usually the Problem';
+    $lead = isset($fields['lead']) ? $fields['lead'] : '';
+    $subhead = (isset($fields['subhead']) && $fields['subhead'] !== '') ? $fields['subhead'] : 'Several factors can contribute to slab movement, including:';
+    $items = isset($fields['items']) && is_array($fields['items']) ? $fields['items'] : array();
+    ?>
+    <section class="rx-slab-band" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <div class="rx-slab-causes-head">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <?php if ($lead) : ?><p><?php echo wp_kses_post($lead); ?></p><?php endif; ?>
+            </div>
+            <?php if ($subhead) : ?><h3 class="rx-slab-causes-subhead"><?php echo esc_html($subhead); ?></h3><?php endif; ?>
+            <?php if (!empty($items)) : ?>
+            <div class="rx-slab-causes-grid">
+                <?php foreach ($items as $item) :
+                    $image = rectify_pb_image_url(isset($item['image']) ? $item['image'] : 0);
+                    $title = isset($item['title']) ? $item['title'] : '';
+                    $copy = isset($item['copy']) ? $item['copy'] : '';
+                    ?>
+                <article class="rx-slab-cause-card">
+                    <?php if ($image) : ?>
+                    <figure class="rx-slab-cause-media">
+                        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
+                    </figure>
+                    <?php endif; ?>
+                    <?php if ($title) : ?><h4><?php echo esc_html($title); ?></h4><?php endif; ?>
+                    <?php if ($copy) : ?><p><?php echo wp_kses_post($copy); ?></p><?php endif; ?>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_process($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'How Chemical Underpinning Relevels Your Slab';
+    $subheading = (isset($fields['subheading']) && $fields['subheading'] !== '') ? $fields['subheading'] : 'Stabilise the Ground Before Lifting the Slab';
+    $body = isset($fields['body_richtext']) ? $fields['body_richtext'] : '';
+    $items = isset($fields['items']) && is_array($fields['items']) ? $fields['items'] : array();
+    ?>
+    <section class="rx-slab-band rx-slab-process" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap rx-slab-process-grid">
+            <div class="rx-slab-process-copy">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <?php if ($subheading) : ?><h3><?php echo esc_html($subheading); ?></h3><?php endif; ?>
+                <?php if ($body) : ?><?php echo wp_kses_post(wpautop($body)); ?><?php endif; ?>
+            </div>
+            <?php if (!empty($items)) : ?>
+            <div class="rx-slab-steps">
+                <?php foreach ($items as $item) :
+                    $number = isset($item['number']) ? $item['number'] : '';
+                    $title = isset($item['title']) ? $item['title'] : '';
+                    $copy = isset($item['copy']) ? $item['copy'] : '';
+                    ?>
+                <article class="rx-slab-step">
+                    <?php if ($number) : ?><span class="rx-slab-step-number"><?php echo esc_html($number); ?></span><?php endif; ?>
+                    <div class="rx-slab-step-copy">
+                        <?php if ($title) : ?><h4><?php echo esc_html($title); ?></h4><?php endif; ?>
+                        <?php if ($copy) : ?><p><?php echo wp_kses_post($copy); ?></p><?php endif; ?>
+                    </div>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_comparison($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Why Choose Chemical Underpinning?';
+    $subheading = (isset($fields['subheading']) && $fields['subheading'] !== '') ? $fields['subheading'] : 'A Smarter Alternative to Slab Replacement';
+    $lead = isset($fields['lead']) ? $fields['lead'] : '';
+    $rows = isset($fields['rows']) && is_array($fields['rows']) ? $fields['rows'] : array();
+    ?>
+    <section class="rx-slab-band rx-slab-comparison" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <div class="rx-slab-comparison-head">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <div>
+                    <?php if ($subheading) : ?><h3><?php echo esc_html($subheading); ?></h3><?php endif; ?>
+                    <?php if ($lead) : ?><p><?php echo wp_kses_post($lead); ?></p><?php endif; ?>
+                </div>
+            </div>
+            <?php if (!empty($rows)) : ?>
+            <div class="rx-slab-compare-table" role="table">
+                <div class="rx-slab-compare-row rx-slab-compare-row-heading" role="row">
+                    <div class="rx-slab-compare-cell rx-slab-compare-heading" role="columnheader"><?php esc_html_e('Traditional Slab Replacement', 'rectify-custom'); ?></div>
+                    <div class="rx-slab-compare-cell rx-slab-compare-heading" role="columnheader"><?php esc_html_e('Rectify Chemical Underpinning', 'rectify-custom'); ?></div>
+                </div>
+                <?php foreach ($rows as $row) :
+                    $traditional = isset($row['traditional']) ? $row['traditional'] : '';
+                    $rectify = isset($row['rectify']) ? $row['rectify'] : '';
+                    ?>
+                <div class="rx-slab-compare-row" role="row">
+                    <div class="rx-slab-compare-cell rx-slab-compare-cross" role="cell"><?php echo esc_html($traditional); ?></div>
+                    <div class="rx-slab-compare-cell rx-slab-compare-check" role="cell">
+                        <span class="rx-slab-check" aria-hidden="true"></span>
+                        <span><?php echo esc_html($rectify); ?></span>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_proof($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Engineered. Rectified. Performance Verified.';
+    $lead = (isset($fields['lead']) && $fields['lead'] !== '') ? $fields['lead'] : 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.';
+    $before_image = rectify_pb_slab_relevel_image_url(isset($fields['before_image']) ? $fields['before_image'] : 0, 'images/slab-relevelling/before-slab.jpg');
+    $after_image = rectify_pb_slab_relevel_image_url(isset($fields['after_image']) ? $fields['after_image'] : 0, 'images/slab-relevelling/after-slab.jpg');
+    ?>
+    <section class="rx-slab-band rx-slab-soft rx-slab-proof" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <div class="rx-slab-proof-head">
+                <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+                <?php if ($lead) : ?><p><?php echo wp_kses_post($lead); ?></p><?php endif; ?>
+            </div>
+            <div class="rx-slab-compare">
+                <figure class="rx-slab-compare-image">
+                    <span class="rx-slab-compare-tag rx-slab-compare-tag-before"><?php esc_html_e('BEFORE', 'rectify-custom'); ?></span>
+                    <img src="<?php echo esc_url($before_image); ?>" alt="<?php esc_attr_e('Concrete slab before chemical underpinning', 'rectify-custom'); ?>">
+                </figure>
+                <figure class="rx-slab-compare-image">
+                    <span class="rx-slab-compare-tag rx-slab-compare-tag-after"><?php esc_html_e('AFTER', 'rectify-custom'); ?></span>
+                    <img src="<?php echo esc_url($after_image); ?>" alt="<?php esc_attr_e('Concrete slab after chemical underpinning', 'rectify-custom'); ?>">
+                </figure>
+            </div>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_why($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Why Choose Rectify';
+    $items = isset($fields['items']) && is_array($fields['items']) ? $fields['items'] : array();
+    $contour = rectify_pb_theme_asset_url('images/home/Contour on Navy Blue.png');
+    ?>
+    <section class="rx-slab-why" data-rx-section="<?php echo esc_attr($section_key); ?>" style="<?php echo esc_attr('--rx-slab-contours:url(' . esc_url_raw($contour) . ');'); ?>">
+        <div class="rx-slab-wrap">
+            <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+            <?php if (!empty($items)) : ?>
+            <div class="rx-slab-why-grid">
+                <?php foreach ($items as $item) :
+                    $icon = rectify_pb_image_url(isset($item['icon']) ? $item['icon'] : 0);
+                    $title = isset($item['title']) ? $item['title'] : '';
+                    $copy = isset($item['copy']) ? $item['copy'] : '';
+                    ?>
+                <article class="rx-slab-why-card">
+                    <?php if ($icon) : ?><span class="rx-slab-why-icon"><img src="<?php echo esc_url($icon); ?>" alt=""></span><?php endif; ?>
+                    <?php if ($title) : ?><h3><?php echo esc_html($title); ?></h3><?php endif; ?>
+                    <?php if ($copy) : ?><p><?php echo wp_kses_post($copy); ?></p><?php endif; ?>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
+function rectify_pb_render_slab_relevel_cta($fields, $section_key)
+{
+    $heading = (isset($fields['heading']) && $fields['heading'] !== '') ? $fields['heading'] : 'Concerned About a Sunken Concrete Slab?';
+    $body = isset($fields['body']) ? $fields['body'] : '';
+    $primary_text = (isset($fields['primary_text']) && $fields['primary_text'] !== '') ? $fields['primary_text'] : 'CONTACT US';
+    $primary_url = (isset($fields['primary_url']) && $fields['primary_url'] !== '') ? $fields['primary_url'] : home_url('/contact-us/');
+    $phone_text = isset($fields['phone_text']) ? $fields['phone_text'] : '';
+    $phone_url = isset($fields['phone_url']) ? $fields['phone_url'] : '';
+    $email_text = isset($fields['email_text']) ? $fields['email_text'] : '';
+    $email_url = isset($fields['email_url']) ? $fields['email_url'] : '';
+    ?>
+    <section class="rx-slab-cta" data-rx-section="<?php echo esc_attr($section_key); ?>">
+        <div class="rx-slab-wrap">
+            <?php if ($heading) : ?><h2><?php echo esc_html($heading); ?></h2><?php endif; ?>
+            <?php if ($body) : ?><p><?php echo wp_kses_post($body); ?></p><?php endif; ?>
+            <div class="rx-slab-cta-actions">
+                <?php if ($primary_text) : ?><a class="rx-slab-cta-primary" href="<?php echo esc_url($primary_url); ?>"><?php echo esc_html($primary_text); ?></a><?php endif; ?>
+                <?php if ($phone_text) : ?><a class="rx-slab-cta-outline rx-slab-cta-phone" href="<?php echo esc_url($phone_url); ?>"><?php echo esc_html($phone_text); ?></a><?php endif; ?>
+                <?php if ($email_text) : ?><a class="rx-slab-cta-outline rx-slab-cta-mail" href="<?php echo esc_url($email_url); ?>"><?php echo esc_html($email_text); ?></a><?php endif; ?>
             </div>
         </div>
     </section>

@@ -258,6 +258,7 @@
     .rx-case-single-page .rx-case-single-help-card {
         padding: 24px 18px;
         border-radius: 14px;
+
     }
 
     .rx-case-study-page .rx-case-study-card-icon,
@@ -270,6 +271,8 @@
     .rx-case-single-page .rx-case-single-help-card h3 {
         font-size: 18px;
         line-height: 24px;
+        margin: 10px 0 8px !important;
+        width: auto !important;
     }
 
     .rx-case-study-page .rx-case-study-help-phone,

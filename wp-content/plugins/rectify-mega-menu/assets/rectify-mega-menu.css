@@ -91,34 +91,6 @@ width: 100px;
 .rx-btn.rx-btn-red {
     background: #bd1726  !important;
 }
-#menu-industries .display-flex {
-  display: block !important;
-}
-
-#menu-industries .rx-mega-icon, #menu-industries .rx-mega-icon-wrap {
-    width: 188px !important;
-    height: 139px !important;
-}
-
-#menu-industries .rx-menu-icon {
-    padding: 19px 54px !important;
-}
-#menu-industries .rx-mega-child {
-    text-align: center;
-}    
-
-#menu-industries .rx-mega-submenu-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
-    gap: 0px 24px;
-    align-content: start;
-    margin: 0;
-    padding: 3px 0 44px;
-    list-style: none;
-}
-#menu-industries .rx-mega-sub-link {
-    min-height: 9px !important;
-}
 /* =======================================================================
    About Us mega menu (Figma node 33:47): full-width white panel with red
    top/bottom borders, grey intro column (contour graphic) and a 3-column
@@ -152,4 +124,44 @@ li.rx-mega-parent#menu-about-us{position:static;}
   .rx-mega-submenu-inner--about{flex-direction:column;}
   .rx-mega-submenu-intro--about{flex:none;padding:24px;}
   .rx-mega-about{grid-template-columns:1fr;padding:20px;}
+}
+
+/* =======================================================================
+   Industries mega menu (Figma node 31:2268): full-width white panel with red
+   top/bottom borders, grey intro column (topographic contour graphic) and a
+   photo-card grid — one card per child menu item, using its admin-uploaded
+   Icon/Image and title.
+   ======================================================================= */
+li.rx-mega-parent#menu-industries{position:static;}
+.rx-mega-submenu--industries{left:0;right:0;width:auto;max-width:none;top:100%;transform:translateY(8px);}
+.rx-mega-parent:hover .rx-mega-submenu--industries,.rx-mega-parent:focus-within .rx-mega-submenu--industries,.rx-mega-parent.is-open .rx-mega-submenu--industries{transform:translateY(0);}
+.rx-mega-submenu-inner--industries{display:flex;align-items:stretch;padding:0;background:#fff;border:none;border-top:2px solid #bd1726;border-bottom:4px solid #bd1726;border-radius:0;box-shadow:0 24px 48px rgba(0,0,0,.18);overflow:hidden;}
+.rx-mega-submenu-intro--industries{position:relative;flex:0 0 clamp(260px,28vw,360px);margin:0;padding:38px 43px;border-bottom:0;background:#f3f3f3;overflow:hidden;}
+.rx-mega-submenu-intro--industries::after{content:"";position:absolute;left:-12px;bottom:-14px;width:230px;height:168px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 230 168'><path d='M0 138 Q30 108 60 138 T120 138 T180 108 T230 138' stroke='%23d3d3d3' stroke-width='2' fill='none'/><path d='M0 156 Q30 126 60 156 T120 156 T180 126 T230 156' stroke='%23dedede' stroke-width='2' fill='none'/><path d='M-10 118 Q22 90 54 118 T118 118 T182 90 T240 118' stroke='%23c7c7c7' stroke-width='2' fill='none'/></svg>");background-repeat:no-repeat;background-size:contain;pointer-events:none;}
+.rx-mega-submenu-intro--industries h3{position:relative;z-index:1;max-width:290px;margin:0 0 28px;color:#222840;font-family:Helvetica,Arial,sans-serif;font-size:24px;font-weight:700;line-height:33px;letter-spacing:normal;text-transform:none;}
+.rx-mega-submenu-intro--industries p{position:relative;z-index:1;max-width:290px;margin:0;color:#676767;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;letter-spacing:normal;text-transform:none;}
+.rx-mega-industries-grid{flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 20px;align-content:start;margin:0;padding:34px clamp(24px,5.5vw,48px);list-style:none;}
+.rx-mega-industries-item{min-width:0;padding:0;}
+.rx-mega-industries-link{display:flex;min-width:0;flex-direction:column;gap:8px;padding:0;border-radius:10px;background:transparent;text-decoration:none;letter-spacing:normal;text-transform:none;transition:transform .2s ease;}
+.rx-mega-industries-link:hover,.rx-mega-industries-link:focus-visible{transform:translateY(-1px);}
+.rx-mega-industries-media{display:block;overflow:hidden;border-radius:10px;background:#e8e8e8;aspect-ratio:4/3;}
+.rx-mega-industries-media img{display:block;width:100%;height:100%;object-fit:cover;}
+.rx-mega-industries-label{display:block;color:#bd1726;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:700;line-height:18px;}
+@media (max-width:1100px){
+  .rx-mega-industries-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media (max-width:860px){
+  li.rx-mega-parent#menu-industries{position:relative;}
+  .rx-mega-submenu--industries{left:0;right:auto;width:min(520px,calc(100vw - 40px));transform:translateY(8px);}
+  .rx-mega-submenu-inner--industries{flex-direction:column;}
+  .rx-mega-submenu-intro--industries{flex:none;min-height:385px;padding:32px 24px;}
+  .rx-mega-submenu-intro--industries h3,.rx-mega-submenu-intro--industries p{max-width:none;}
+  /* Match the Residential/Commercial Solutions mobile intro panel: same
+     background photo (via --rx-mega-industries-wave, set inline per-request
+     from rx_asset_url()) instead of the desktop's small topographic-line graphic. */
+  .rx-mega-submenu-intro--industries::after{left:0;bottom:0;width:100%;height:179px;background-image:var(--rx-mega-industries-wave);background-position:left bottom;background-size:contain;}
+  .rx-mega-industries-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:24px;}
+  .rx-mega-industries-link{gap:8px;}
+  .rx-mega-industries-media{border-radius:10px;aspect-ratio:184/131;}
+  .rx-mega-industries-label{font-size:16px;line-height:22px;}
 }

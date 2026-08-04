@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Rectify Mega Menu
  * Description: Production-ready mega menu for the Rectify homepage with admin-managed icons and images.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Copilot
  * Text Domain: rectify-mega-menu
  */
@@ -148,6 +148,10 @@ class Rectify_Mega_Menu_Walker extends Walker_Nav_Menu
             return 'about';
         }
 
+        if ($title === 'industries') {
+            return 'industries';
+        }
+
         return '';
     }
 
@@ -159,6 +163,10 @@ class Rectify_Mega_Menu_Walker extends Walker_Nav_Menu
 
         if ($key === 'about') {
             return $this->get_about_mega_markup($item->ID);
+        }
+
+        if ($key === 'industries') {
+            return $this->get_industries_mega_markup($item->ID);
         }
 
         return '';
@@ -295,6 +303,73 @@ class Rectify_Mega_Menu_Walker extends Walker_Nav_Menu
     }
 
     /**
+     * "Industries We Serve" mega menu (Figma node 31:2268): intro panel (subtitle +
+     * description, admin-managed via the parent item's Mega Menu Intro fields) followed
+     * by a 2-column-on-mobile / 4-column-on-desktop grid of photo cards, one per child
+     * menu item, using each child's admin-uploaded Icon/Image and title.
+     * Shares CSS classes with the theme's rx-mega-industries-* styles, but the
+     * authoritative styling lives in this plugin's assets/rectify-mega-menu.css.
+     */
+    private function get_industries_mega_markup($parent_id)
+    {
+        $children = $this->get_menu_item_children($parent_id);
+
+        $items_markup = '';
+        foreach ($children as $child) {
+            $title = get_post_meta($child->ID, '_rectify_megamenu_child_title', true);
+            $title = !empty($title) ? $title : $child->title;
+            $image_url = $this->get_industries_image_url($child->ID);
+            $item_url = !empty($child->url) ? $child->url : '#';
+
+            $items_markup .= '<li class="rx-mega-industries-item">'
+                . '<a class="rx-mega-industries-link" href="' . esc_url($item_url) . '">'
+                . '<span class="rx-mega-industries-media">';
+            if (!empty($image_url)) {
+                $items_markup .= '<img src="' . esc_url($image_url) . '" alt="" loading="lazy" decoding="async">';
+            }
+            $items_markup .= '</span>'
+                . '<span class="rx-mega-industries-label">' . esc_html($title) . '</span>'
+                . '</a>'
+                . '</li>';
+        }
+
+        // Same "wave" background photo used by the Residential/Commercial Solutions
+        // mega menu intro panel (.rx-home .rx-mega-submenu-intro::after in
+        // rectify-home.css), exposed as a CSS var so the mobile Industries intro
+        // panel can use the identical background image.
+        $intro_wave = function_exists('rx_asset_url') ? rx_asset_url('images/mega-menu-wave.png') : '';
+        $intro_wave_style = $intro_wave ? ' style="' . esc_attr('--rx-mega-industries-wave:url(' . $intro_wave . ');') . '"' : '';
+
+        // Leaves 2 divs open (rx-mega-submenu, rx-mega-submenu-inner--industries) — end_el() closes them with '</div></div>'.
+        return '<div class="rx-mega-submenu rx-mega-submenu--industries"><div class="rx-mega-submenu-inner rx-mega-submenu-inner--industries">'
+            . '<div class="rx-mega-submenu-intro rx-mega-submenu-intro--industries"' . $intro_wave_style . '>' . $this->get_intro_content_markup($parent_id) . '</div>'
+            . '<ul class="rx-mega-industries-grid">' . $items_markup . '</ul>';
+    }
+
+    /**
+     * Resolve a child menu item's admin-uploaded Icon/Image to a usable <img> src,
+     * same resolution order as get_icon_markup() but returning a bare URL since the
+     * industries grid renders a plain <img> rather than the small rx-mega-icon-wrap.
+     */
+    private function get_industries_image_url($menu_item_id)
+    {
+        $icon_id = absint(get_post_meta($menu_item_id, '_rectify_megamenu_icon_id', true));
+        if ($icon_id) {
+            $attachment = wp_get_attachment_image_src($icon_id, 'full');
+            if (!empty($attachment[0])) {
+                return $attachment[0];
+            }
+        }
+
+        $icon_url = get_post_meta($menu_item_id, '_rectify_megamenu_icon_url', true);
+        if (!empty($icon_url)) {
+            return $this->normalize_media_url($icon_url);
+        }
+
+        return '';
+    }
+
+    /**
      * Fetch the direct child nav-menu items of a parent menu item, in menu order,
      * fully hydrated (title, url, description, current/ancestor state) via
      * wp_setup_nav_menu_item() so they behave like items from wp_get_nav_menu_items().
@@ -397,7 +472,7 @@ class Rectify_Mega_Menu_Walker extends Walker_Nav_Menu
 
 class Rectify_Mega_Menu_Plugin
 {
-    private $version = '1.1.2';
+    private $version = '1.1.3';
 
     public function __construct()
     {

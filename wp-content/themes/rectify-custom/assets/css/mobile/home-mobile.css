@@ -247,7 +247,7 @@
     padding: 0;
   }
   .rx-home .rx-mega-submenu-intro {
-    min-height: 500px;
+    min-height: 426px;
     padding: 32px 24px;
   }
   .rx-home .rx-mega-submenu-intro h3,
@@ -279,15 +279,91 @@
     transform: none;
   }
 
-  /* Resources / industries / about mega panels: stack to a single column */
+  /* Resources / about mega panels: stack to a single column.
+     rectify-home.css's own 860px breakpoint caps these at
+     max-height: calc(100vh - 180px) with overflow: auto for its
+     tablet dropdown treatment — reset both so content flows into the
+     drawer's own scroll instead of being clipped inside a second,
+     hidden scroll area (News & Insights / FAQs were being cut off). */
   .rx-home .rx-menu-bar .rx-mega-resources,
-  .rx-home .rx-menu-bar .rx-mega-about,
-  .rx-home .rx-menu-bar .rx-mega-industries-grid {
+  .rx-home .rx-menu-bar .rx-mega-about {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-height: none;
     padding: 24px;
     gap: 24px;
+    overflow: visible;
+  }
+
+  /* Resources mega panel: case-study/news cards + FAQ list sized to the
+     Figma mobile spec (larger type than the desktop 3-col layout uses). */
+  .rx-home .rx-mega-resources-heading {
+    margin-bottom: 24px;
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .rx-home .rx-mega-resources-col--faqs .rx-mega-resources-heading {
+    margin-bottom: 32px;
+  }
+  .rx-home .rx-mega-resources-card {
+    margin-bottom: 24px;
+    padding: 0;
+    border-radius: 0;
+  }
+  .rx-home .rx-mega-resources-card:hover,
+  .rx-home .rx-mega-resources-card:focus-visible {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .rx-home .rx-mega-resources-card-label {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .rx-home .rx-menu-bar .rx-mega-resources-card-label {
+    color: #c8c8c8 !important;
+  }
+  .rx-home .rx-mega-resources-card-media {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    aspect-ratio: 98 / 39;
+  }
+  .rx-home .rx-mega-resources-card-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+  .rx-home .rx-mega-resources-more {
+    min-height: 48px;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  .rx-home .rx-mega-resources-faq-list a {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* Industries mega panel: keep the 2-column image grid from the Figma
+     mobile spec instead of stacking to a single column. */
+  .rx-home .rx-menu-bar .rx-mega-industries-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    padding: 24px;
+    gap: 24px;
+  }
+  .rx-home .rx-mega-industries-link {
+    gap: 8px;
+    padding: 0;
+  }
+  .rx-home .rx-mega-industries-media {
+    border-radius: 10px;
+    aspect-ratio: 184 / 131;
+  }
+  .rx-home .rx-mega-industries-label {
+    font-size: 16px;
+    line-height: 22px;
   }
 }
 

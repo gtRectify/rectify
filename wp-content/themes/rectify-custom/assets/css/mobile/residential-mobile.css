@@ -429,7 +429,8 @@
     .rx-ci-ws-help,
     .rx-ci-lp-help,
     .rx-ci-ws-performance,
-    .rx-ci-lp-performance {
+    .rx-ci-lp-performance,
+    .rx-cracked-page .rx-performance {
         padding: 32px 0;
     }
 

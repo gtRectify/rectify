@@ -6911,3 +6911,103 @@ function rectify_pb_get_residential_strata_seed_blocks()
         )),
     );
 }
+
+/**
+ * Seed content for the "Slab Relevelling" page (child of Residential
+ * Solutions), transcribed from
+ * template-parts/residential/content-slab-relevelling.php.
+ *
+ * @return array
+ */
+function rectify_pb_get_slab_relevelling_seed_blocks()
+{
+    return array(
+        array('id' => 'seed-slab-relevel-hero', 'type' => 'slab-relevel-hero', 'section_key' => 'residential-slab-relevel-hero', 'label' => 'Hero', 'fields' => array(
+            'kicker' => 'RESIDENTIAL SOLUTIONS',
+            'title' => 'Slab Relevelling Melbourne, Adelaide & South Australia',
+            'breadcrumb_label' => 'Residential Solutions',
+            'breadcrumb_url' => home_url('/residential/'),
+            'current_label' => 'Slab Relevelling',
+        )),
+        array('id' => 'seed-slab-relevel-intro', 'type' => 'slab-relevel-intro', 'section_key' => 'residential-slab-relevel-intro', 'label' => 'Intro', 'fields' => array(
+            'heading' => 'Restore Sunken Concrete Slabs with Advanced Chemical Underpinning',
+            'body_richtext' => "A sunken or uneven concrete slab is often the result of changing ground conditions beneath your property—not a failure of the concrete itself. Rectify uses advanced Chemical Underpinning technology to stabilise the supporting ground before precisely releveling the slab, helping restore structural performance with minimal disruption.\n\nWhether you're dealing with uneven floors in Melbourne, Adelaide, or anywhere across South Australia, our engineering-led approach addresses the underlying cause of slab settlement rather than simply treating the symptoms.",
+            'image' => 'images/slab-relevelling/intro-slab.jpg',
+        )),
+        array('id' => 'seed-slab-relevel-signs', 'type' => 'slab-relevel-signs', 'section_key' => 'residential-slab-relevel-signs', 'label' => 'Warning Signs', 'fields' => array(
+            'heading' => 'Is Your Concrete Slab Showing These Warning Signs?',
+            'lead' => 'Concrete slabs rarely sink overnight. Most homeowners first notice subtle changes around their property before realising the supporting ground has begun to move.',
+            'items' => array(
+                array('image' => 'images/slab-relevelling/sign-uneven-floors.jpg', 'title' => 'Uneven, sloping or sinking floors', 'copy' => 'Floors that no longer feel level can indicate that sections of the slab have settled unevenly.'),
+                array('image' => 'images/slab-relevelling/sign-cracked-tiles.jpg', 'title' => 'Cracked Floor Tiles', 'copy' => 'Tiles that crack, lift or separate without impact are often responding to movement beneath the slab.'),
+                array('image' => 'images/slab-relevelling/sign-wall-gaps.jpg', 'title' => 'Gaps Around Walls or Skirting Boards', 'copy' => 'As the slab shifts, small gaps can begin appearing where walls and flooring once met neatly.'),
+                array('image' => 'images/slab-relevelling/sign-doors-windows.jpg', 'title' => 'Doors and Windows Becoming Difficult to Operate', 'copy' => 'Movement in the foundation can affect door frames and window openings, causing sticking or misalignment.'),
+            ),
+            'note' => "If you've noticed one or more of these issues around your property in Melbourne, Adelaide or South Australia, it's worth investigating the underlying ground conditions before the movement worsens.",
+            'cta_text' => 'CONTACT OUR EXPERTS',
+            'cta_url' => home_url('/contact-us/'),
+        )),
+        array('id' => 'seed-slab-relevel-causes', 'type' => 'slab-relevel-causes', 'section_key' => 'residential-slab-relevel-causes', 'label' => 'Causes', 'fields' => array(
+            'heading' => 'The Ground Beneath the Slab Is Usually the Problem',
+            'lead' => 'Concrete is designed to support significant loads, but it relies entirely on the ground beneath it. When that support changes, the slab begins to settle.',
+            'subhead' => 'Several factors can contribute to slab movement, including:',
+            'items' => array(
+                array('image' => 'images/slab-relevelling/cause-reactive-clay.jpg', 'title' => 'Reactive Clay Soils', 'copy' => 'Many areas throughout Melbourne and South Australia contain reactive clay soils that expand when wet and shrink during dry conditions. This continual movement can gradually affect the support beneath the slab.'),
+                array('image' => 'images/slab-relevelling/cause-underground-voids.jpg', 'title' => 'Underground Voids', 'copy' => 'Hidden voids beneath the slab reduce its bearing support, allowing sections of concrete to settle.'),
+                array('image' => 'images/slab-relevelling/cause-poorly-compacted-fill.jpg', 'title' => 'Poorly Compacted Fill', 'copy' => 'If the ground was not adequately compacted during construction, gradual consolidation may occur over time.'),
+                array('image' => 'images/slab-relevelling/cause-water-drainage.jpg', 'title' => 'Water Leaks and Drainage Problems', 'copy' => 'Leaking plumbing or poor drainage can soften the supporting soils and contribute to ongoing settlement.'),
+                array('image' => 'images/slab-relevelling/cause-soil-erosion.jpg', 'title' => 'Soil Erosion', 'copy' => 'Water movement can wash away supporting material beneath the slab, leaving unsupported areas that eventually sink.'),
+            ),
+        )),
+        array('id' => 'seed-slab-relevel-process', 'type' => 'slab-relevel-process', 'section_key' => 'residential-slab-relevel-process', 'label' => 'Our Process', 'fields' => array(
+            'heading' => 'How Chemical Underpinning Relevels Your Slab',
+            'subheading' => 'Stabilise the Ground Before Lifting the Slab',
+            'body_richtext' => "Rectify's slab relevelling process is built around our proven Chemical Underpinning technology.\n\nRather than demolishing and replacing concrete, we strengthen the supporting ground beneath the slab using specialised expanding structural resin. The resin fills underground voids, improves soil density and restores support beneath the slab, allowing controlled lifting where appropriate.",
+            'items' => array(
+                array('number' => '01', 'title' => 'Structural Assessment', 'copy' => 'Our specialists inspect the slab, surrounding structures and ground conditions to identify the cause of movement.'),
+                array('number' => '02', 'title' => 'Precision Injection Points', 'copy' => 'Small access holes are created through the slab to reach the affected ground below.'),
+                array('number' => '03', 'title' => 'Chemical Underpinning', 'copy' => 'Engineered structural resin is injected beneath the slab. As it expands, it fills voids, strengthens weak ground and improves load-bearing capacity.'),
+                array('number' => '04', 'title' => 'Controlled Slab Relevelling', 'copy' => 'As ground support is restored, the slab can often be carefully relevelled while movement is continuously monitored for precision.'),
+                array('number' => '05', 'title' => 'Final Verification', 'copy' => 'Once the desired outcome has been achieved, the completed work is verified to ensure the slab has been stabilised and relevelled as intended.'),
+            ),
+        )),
+        array('id' => 'seed-slab-relevel-comparison', 'type' => 'slab-relevel-comparison', 'section_key' => 'residential-slab-relevel-comparison', 'label' => 'Comparison Table', 'fields' => array(
+            'heading' => 'Why Choose Chemical Underpinning?',
+            'subheading' => 'A Smarter Alternative to Slab Replacement',
+            'lead' => "Replacing an entire concrete slab isn't always necessary. In many cases, the slab itself remains structurally sound—the real issue lies beneath it.",
+            'rows' => array(
+                array('traditional' => 'Removes and replaces the existing slab', 'rectify' => 'Retains the existing slab where suitable'),
+                array('traditional' => 'Extensive excavation and demolition', 'rectify' => 'Minimal excavation required'),
+                array('traditional' => 'Long construction periods', 'rectify' => 'Faster installation in many projects'),
+                array('traditional' => 'Significant disruption to the property', 'rectify' => 'Minimal disruption to daily life'),
+                array('traditional' => 'Addresses the concrete only', 'rectify' => 'Stabilises the supporting ground'),
+                array('traditional' => 'Large amounts of construction waste', 'rectify' => 'Lower environmental impact'),
+            ),
+        )),
+        array('id' => 'seed-slab-relevel-proof', 'type' => 'slab-relevel-proof', 'section_key' => 'residential-slab-relevel-proof', 'label' => 'Performance Verified', 'fields' => array(
+            'heading' => 'Engineered. Rectified. Performance Verified.',
+            'lead' => 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.',
+            'before_image' => 'images/slab-relevelling/before-slab.jpg',
+            'after_image' => 'images/slab-relevelling/after-slab.jpg',
+        )),
+        array('id' => 'seed-slab-relevel-why', 'type' => 'slab-relevel-why', 'section_key' => 'residential-slab-relevel-why', 'label' => 'Why Choose Rectify', 'fields' => array(
+            'heading' => 'Why Choose Rectify',
+            'items' => array(
+                array('icon' => 'images/commercial-ground-improvement/icon-worker.svg', 'title' => 'Engineering-Led Solutions', 'copy' => 'Every project begins with understanding the cause of the problem, ensuring the right solution is delivered—not just a temporary fix.'),
+                array('icon' => 'images/commercial-ground-improvement/icon-expert.svg', 'title' => 'Proven Structural Expertise', 'copy' => 'Trusted to deliver engineered solutions across residential, commercial and infrastructure projects.'),
+                array('icon' => 'images/commercial-ground-improvement/icon-non-invasive.svg', 'title' => 'Non-Invasive Technology', 'copy' => 'Our advanced, non-invasive technologies restore structural stability with less excavation, less mess, and minimal interruption.'),
+                array('icon' => 'images/commercial-ground-improvement/icon-services-longterm.png', 'title' => 'Long-Term Confidence', 'copy' => "We don't just repair today's problem—we strengthen your asset for long-term performance and lasting value."),
+            ),
+        )),
+        array('id' => 'seed-slab-relevel-cta', 'type' => 'slab-relevel-cta', 'section_key' => 'residential-slab-relevel-cta', 'label' => 'Final CTA', 'fields' => array(
+            'heading' => 'Concerned About a Sunken Concrete Slab?',
+            'body' => "If your floors have become uneven or you've noticed signs of slab settlement, don't wait for the problem to become more extensive. Book a professional structural assessment with Rectify to identify the cause and determine whether Chemical Underpinning is the right solution for your property in Melbourne, Adelaide, or South Australia.",
+            'primary_text' => 'CONTACT US',
+            'primary_url' => home_url('/contact-us/'),
+            'phone_text' => '1800 18 20 20',
+            'phone_url' => 'tel:1800182020',
+            'email_text' => 'admin@rectify.com.au',
+            'email_url' => 'mailto:admin@rectify.com.au',
+        )),
+    );
+}

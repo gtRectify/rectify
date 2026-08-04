@@ -106,10 +106,8 @@
 
 		$toolbar.append($typeSelect, $sectionKeyInput, $addButton);
 
-		if (!state.length) {
-			var $loadButton = $('<button type="button" class="button rpb-load-seed"></button>').text(config.i18n.loadCurrentContent);
-			$toolbar.append($loadButton);
-		}
+		var $loadButton = $('<button type="button" class="button rpb-load-seed"></button>').text(config.i18n.loadCurrentContent);
+		$toolbar.append($loadButton);
 
 		$app.append($toolbar);
 
@@ -458,6 +456,10 @@
 		});
 
 		$app.on('click', '.rpb-load-seed', function () {
+			if (state.length && !window.confirm(config.i18n.confirmLoadSeed)) {
+				return;
+			}
+
 			state = JSON.parse(JSON.stringify(config.seedBlocks));
 			renderApp();
 		});

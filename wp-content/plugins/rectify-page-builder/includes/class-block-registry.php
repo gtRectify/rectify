@@ -3218,6 +3218,139 @@ function rectify_pb_get_block_types()
                 ),
             ),
         ),
+
+        'slab-relevel-hero' => array(
+            'label' => __('Slab Relevelling: Title Banner', 'rectify-page-builder'),
+            'fields' => array(
+                'kicker' => array('type' => 'text', 'label' => __('Kicker', 'rectify-page-builder')),
+                'title' => array('type' => 'text', 'label' => __('Title (H1)', 'rectify-page-builder')),
+                'breadcrumb_label' => array('type' => 'text', 'label' => __('Breadcrumb Parent Label', 'rectify-page-builder')),
+                'breadcrumb_url' => array('type' => 'url', 'label' => __('Breadcrumb Parent URL', 'rectify-page-builder')),
+                'current_label' => array('type' => 'text', 'label' => __('Breadcrumb Current Page Label', 'rectify-page-builder')),
+            ),
+        ),
+
+        'slab-relevel-intro' => array(
+            'label' => __('Slab Relevelling: Intro', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'body_richtext' => array('type' => 'richtext', 'label' => __('Body Copy (paragraphs)', 'rectify-page-builder')),
+                'image' => array('type' => 'image', 'label' => __('Image', 'rectify-page-builder')),
+            ),
+        ),
+
+        'slab-relevel-signs' => array(
+            'label' => __('Slab Relevelling: Warning Signs', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'lead' => array('type' => 'richtext', 'label' => __('Lead Paragraph', 'rectify-page-builder')),
+                'items' => array(
+                    'type' => 'repeater',
+                    'label' => __('Sign Cards', 'rectify-page-builder'),
+                    'fields' => array(
+                        'image' => array('type' => 'image', 'label' => __('Image', 'rectify-page-builder')),
+                        'title' => array('type' => 'text', 'label' => __('Title', 'rectify-page-builder')),
+                        'copy' => array('type' => 'richtext', 'label' => __('Copy', 'rectify-page-builder')),
+                    ),
+                ),
+                'note' => array('type' => 'richtext', 'label' => __('Closing Note', 'rectify-page-builder')),
+                'cta_text' => array('type' => 'text', 'label' => __('Button Text', 'rectify-page-builder')),
+                'cta_url' => array('type' => 'url', 'label' => __('Button URL', 'rectify-page-builder')),
+            ),
+        ),
+
+        'slab-relevel-causes' => array(
+            'label' => __('Slab Relevelling: Causes', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'lead' => array('type' => 'richtext', 'label' => __('Lead Paragraph', 'rectify-page-builder')),
+                'subhead' => array('type' => 'text', 'label' => __('Sub-heading', 'rectify-page-builder')),
+                'items' => array(
+                    'type' => 'repeater',
+                    'label' => __('Cause Cards', 'rectify-page-builder'),
+                    'fields' => array(
+                        'image' => array('type' => 'image', 'label' => __('Image', 'rectify-page-builder')),
+                        'title' => array('type' => 'text', 'label' => __('Title', 'rectify-page-builder')),
+                        'copy' => array('type' => 'richtext', 'label' => __('Copy', 'rectify-page-builder')),
+                    ),
+                ),
+            ),
+        ),
+
+        'slab-relevel-process' => array(
+            'label' => __('Slab Relevelling: Our Process', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'subheading' => array('type' => 'text', 'label' => __('Subheading', 'rectify-page-builder')),
+                'body_richtext' => array('type' => 'richtext', 'label' => __('Body Copy (paragraphs)', 'rectify-page-builder')),
+                'items' => array(
+                    'type' => 'repeater',
+                    'label' => __('Steps', 'rectify-page-builder'),
+                    'fields' => array(
+                        'number' => array('type' => 'text', 'label' => __('Step Number', 'rectify-page-builder')),
+                        'title' => array('type' => 'text', 'label' => __('Title', 'rectify-page-builder')),
+                        'copy' => array('type' => 'richtext', 'label' => __('Copy', 'rectify-page-builder')),
+                    ),
+                ),
+            ),
+        ),
+
+        'slab-relevel-comparison' => array(
+            'label' => __('Slab Relevelling: Comparison Table', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'subheading' => array('type' => 'text', 'label' => __('Subheading', 'rectify-page-builder')),
+                'lead' => array('type' => 'richtext', 'label' => __('Lead Paragraph', 'rectify-page-builder')),
+                'rows' => array(
+                    'type' => 'repeater',
+                    'label' => __('Comparison Rows', 'rectify-page-builder'),
+                    'fields' => array(
+                        'traditional' => array('type' => 'text', 'label' => __('Traditional Slab Replacement', 'rectify-page-builder')),
+                        'rectify' => array('type' => 'text', 'label' => __('Rectify Chemical Underpinning', 'rectify-page-builder')),
+                    ),
+                ),
+            ),
+        ),
+
+        'slab-relevel-proof' => array(
+            'label' => __('Slab Relevelling: Performance Verified (before/after)', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'lead' => array('type' => 'richtext', 'label' => __('Lead Paragraph', 'rectify-page-builder')),
+                'before_image' => array('type' => 'image', 'label' => __('Before Image', 'rectify-page-builder')),
+                'after_image' => array('type' => 'image', 'label' => __('After Image', 'rectify-page-builder')),
+            ),
+        ),
+
+        'slab-relevel-why' => array(
+            'label' => __('Slab Relevelling: Why Choose Rectify', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'items' => array(
+                    'type' => 'repeater',
+                    'label' => __('Cards', 'rectify-page-builder'),
+                    'fields' => array(
+                        'icon' => array('type' => 'image', 'label' => __('Icon', 'rectify-page-builder')),
+                        'title' => array('type' => 'text', 'label' => __('Title', 'rectify-page-builder')),
+                        'copy' => array('type' => 'richtext', 'label' => __('Copy', 'rectify-page-builder')),
+                    ),
+                ),
+            ),
+        ),
+
+        'slab-relevel-cta' => array(
+            'label' => __('Slab Relevelling: Final CTA', 'rectify-page-builder'),
+            'fields' => array(
+                'heading' => array('type' => 'text', 'label' => __('Heading', 'rectify-page-builder')),
+                'body' => array('type' => 'richtext', 'label' => __('Copy', 'rectify-page-builder')),
+                'primary_text' => array('type' => 'text', 'label' => __('Primary Button Text', 'rectify-page-builder')),
+                'primary_url' => array('type' => 'url', 'label' => __('Primary Button URL', 'rectify-page-builder')),
+                'phone_text' => array('type' => 'text', 'label' => __('Phone Text', 'rectify-page-builder')),
+                'phone_url' => array('type' => 'url', 'label' => __('Phone URL (tel:...)', 'rectify-page-builder')),
+                'email_text' => array('type' => 'text', 'label' => __('Email Text', 'rectify-page-builder')),
+                'email_url' => array('type' => 'url', 'label' => __('Email URL (mailto:...)', 'rectify-page-builder')),
+            ),
+        ),
     );
 
     return $types;

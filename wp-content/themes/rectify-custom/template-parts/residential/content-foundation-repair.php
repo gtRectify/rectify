@@ -237,7 +237,7 @@ $advantage_cards = array(
                 'key'    => 'residential-foundation-performance',
                 'render' => function () use ( $foundation_images ) {
                     ?>
-                    <section class="rx-performance">
+                    <section class="rx-performance" data-rx-section="residential-foundation-performance">
                         <div class="rx-wrap rx-reveal">
                             <h2 class="rx-title"><?php esc_html_e( 'Engineered. Rectified. Performance Verified.', 'rectify-custom' ); ?></h2>
                             <p class="rx-lead"><?php esc_html_e( 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.', 'rectify-custom' ); ?></p>
