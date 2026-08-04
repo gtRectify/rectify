@@ -1,5 +1,5 @@
 # WordPress media and generated content
-wp-content/uploads/
+# wp-content/uploads/
 wp-content/cache/
 wp-content/upgrade/
 wp-content/backups/

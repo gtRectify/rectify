@@ -3910,9 +3910,9 @@ body.rx-cert-page .site-content {
 .rx-cert-builder-logos {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px 24px;
+    gap: 40px;
     align-items: center;
-    justify-items: start;
+    justify-items: center;
 }
 
 .rx-cert-builder-logo {

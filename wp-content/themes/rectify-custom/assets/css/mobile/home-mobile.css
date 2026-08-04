@@ -128,6 +128,9 @@
   .rx-btn.rx-btn-red {
     border-radius: 8px;
   }
+  .rx-services .rx-reveal.in {
+    min-height: 0;
+  }
   .rx-home .rx-mobile-phone {
     display: inline-flex;
     flex: 1 0 0;
@@ -285,5 +288,429 @@
     width: 100%;
     padding: 24px;
     gap: 24px;
+  }
+}
+
+/*
+ * Homepage body sections — mobile/tablet spacing simplification.
+ * rectify-home.css already collapses these grids to one column at
+ * <=860px; what's left is fixed desktop-scale padding (up to 176px)
+ * and gaps that still read as "wide" on a phone. Section padding below
+ * uses clamp() so it scales smoothly with viewport width instead of
+ * jumping between fixed breakpoint values.
+ */
+@media (max-width: 860px) {
+  .rx-home .rx-hero,
+  .rx-home .rx-services,
+  .rx-home .rx-signs,
+  .rx-home .rx-video,
+  .rx-home .rx-causes,
+  .rx-home .rx-advantage,
+  .rx-home .rx-performance,
+  .rx-home .rx-reputation,
+  .rx-home .rx-customers,
+  .rx-home .rx-guide,
+  .rx-home .rx-cases,
+  .rx-home .rx-map,
+  .rx-home .rx-social,
+  .rx-home .rx-follow,
+  .rx-home .rx-home-faq,
+  .rx-home .rx-questions {
+    padding-top: clamp(28px, 7vw, 48px);
+    padding-bottom: clamp(28px, 7vw, 48px);
+  }
+
+  .rx-home .rx-partners {
+    padding-top: clamp(24px, 6vw, 40px);
+    padding-bottom: 0;
+  }
+
+  /* Decorative wave graphics behind these two sections reserved 116-176px
+     of pure clearance on desktop; a phone doesn't need nearly as much. */
+  .rx-home .rx-advantage {
+    padding-bottom: clamp(48px, 12vw, 72px);
+  }
+  .rx-home .rx-questions {
+    padding-bottom: clamp(40px, 10vw, 64px);
+  }
+  .rx-home .rx-advantage:after,
+  .rx-home .rx-questions:after {
+    height: clamp(160px, 40vw, 260px);
+  }
+
+  .rx-home .rx-wrap {
+    width: min(100% - 32px, var(--rx-wrap));
+  }
+
+  /* Hero: the fixed 120px top/bottom margins on the copy block were the
+     single biggest source of empty space on mobile. */
+  .rx-home .rx-hero {
+    min-height: 0;
+  }
+  .rx-home .rx-hero-copy.rx-reveal {
+    margin-top: clamp(24px, 8vw, 40px);
+    margin-bottom: clamp(24px, 8vw, 40px);
+  }
+  .rx-home .rx-hero-actions {
+    margin-bottom: 20px;
+  }
+  .rx-home .rx-hero-trust {
+    gap: 16px;
+    padding-top: 16px;
+  }
+
+  /* Root cause of the "cut off" hero text: the embedded Google Reviews
+     widget ([grw] shortcode -> .wp-gr -> .rpi-slides -> .rpi-slide) lays
+     its cards out at a fixed intrinsic width (measured ~1638px) that
+     ignores its container. As a flex/block child with no width ceiling,
+     .rx-hero-trust-review balloons to match it, and .rx-hero-copy's
+     scrollable content grows to ~1638px along with it (silently, since
+     .rx-hero's overflow:hidden hides the excess rather than reporting a
+     visible scrollbar) — the hero column's text keeps deferring to that
+     phantom width instead of a clean, honest 100%. Clip the widget to
+     its column instead of letting it dictate layout width.
+   */
+  .rx-home .rx-hero-trust-review,
+  .rx-home .rx-hero-google-reviews,
+  .rx-home .rx-hero-google-reviews .wp-gr {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Tighter grid gaps everywhere instead of the 24-86px desktop scale */
+  .rx-home .rx-grid-2,
+  .rx-home .rx-services .rx-grid-2,
+  .rx-home .rx-signs .rx-grid-2,
+  .rx-home .rx-advantage .rx-grid-2,
+  .rx-home .rx-guide .rx-grid-2 {
+    gap: 24px;
+  }
+  .rx-home .rx-grid-2 {
+    gap: 0 !important;
+  }
+  .rx-services .rx-reveal.in {
+    width: auto !important;
+}
+  .rx-service-item .rx-service-item-text {
+    font-size: 15px !important;
+  }
+  .rx-home .rx-cause-grid,
+  .rx-home .rx-signs-grid,
+  .rx-home .rx-advantage-grid,
+  .rx-home .rx-question-grid,
+  .rx-home .rx-service-grid {
+    gap: 14px;
+  }
+  .rx-home .rx-social-grid,
+  .rx-home .rx-follow-grid {
+    gap: 12px;
+  }
+
+  /* Simplify card padding — desktop's 26-32px reads as bulky at this size */
+  .rx-home .rx-cause-card {
+    padding: 20px;
+    min-height: 0;
+  }
+  .rx-home .rx-adv-card {
+    max-width: none;
+    padding: 22px;
+    gap: 12px;
+  }
+  .rx-home .rx-question-card {
+    padding: 20px;
+    min-height: 0;
+  }
+  .rx-home .rx-social-card {
+    padding: 16px;
+  }
+
+  /* A fixed 349px item width inside a now-single-column grid overflows
+     a phone viewport — let it fill the column instead. */
+  .rx-home .rx-service-item {
+    width: 100%;
+  }
+
+  .rx-home .rx-row-head,
+  .rx-home .rx-social-head,
+  .rx-home .rx-follow-head {
+    margin-bottom: 20px;
+  }
+  .rx-home .rx-row-head p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .rx-home .rx-guide-action {
+    margin-top: 32px;
+  }
+  .rx-home .rx-lead {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .rx-home .rx-hero,
+  .rx-home .rx-services,
+  .rx-home .rx-signs,
+  .rx-home .rx-video,
+  .rx-home .rx-causes,
+  .rx-home .rx-performance,
+  .rx-home .rx-reputation,
+  .rx-home .rx-customers,
+  .rx-home .rx-guide,
+  .rx-home .rx-cases,
+  .rx-home .rx-map,
+  .rx-home .rx-social,
+  .rx-home .rx-follow,
+  .rx-home .rx-home-faq {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .rx-home .rx-advantage {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+  .rx-home .rx-questions {
+    padding-top: 24px;
+    padding-bottom: 36px;
+  }
+  .rx-home .rx-wrap {
+    width: min(100% - 28px, var(--rx-wrap));
+  }
+  .rx-home .rx-hero-copy.rx-reveal {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .rx-home .rx-cause-grid,
+  .rx-home .rx-signs-grid,
+  .rx-home .rx-advantage-grid,
+  .rx-home .rx-question-grid {
+    gap: 12px;
+  }
+  .rx-home .rx-social-grid,
+  .rx-home .rx-follow-grid,
+  .rx-home .rx-follow-instagram-feed #sb_instagram #sbi_images {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .rx-home .rx-adv-card h3 {
+    font-size: 20px;
+  }
+  .rx-home .rx-adv-card p {
+    font-size: 15px;
+  }
+}
+
+/*
+ * "Engineered Solutions With Minimal Disruption" (.rx-services) and
+ * "A Reputation Built On Results" (.rx-reputation) — targeted fixes.
+ *
+ * .rx-btn carries a sitewide `white-space: nowrap`, and .rx-btn-outline
+ * adds its own `margin-top: 20px`. Neither is a problem for a single
+ * button after a paragraph, but once two/more outline buttons stack
+ * full-width in a mobile column (services tabs, the reputation CTA),
+ * nowrap risks the label spilling past the button edge — and since
+ * .rx-home has `overflow: hidden`, an overflowing label is silently
+ * clipped rather than wrapping or scrolling. Fixed below by letting the
+ * label wrap and relying on `gap` instead of stacked margins.
+ */
+@media (max-width: 640px) {
+  /* Residential/Commercial switch becomes a segmented pill control (grey
+     track, active tab filled red) instead of two stacked outline buttons.
+     Labels can run long ("Our Commercial Solutions"), so the arrow icon
+     is hidden here and the label is left free to wrap onto a second line
+     inside its half of the track rather than overflowing it. */
+  .rx-home .rx-services-toggle {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 6px;
+    background: #F4F4F2;
+    padding: 4px;
+    border-radius: 10px;
+    width: 100%;
+        display: flex;
+  }
+  .rx-home .rx-services-tab-button {
+    flex: 1;
+    margin-top: 0;
+    width: auto;
+    min-height: 40px;
+    height: auto;
+    padding: 9px 8px;
+    font-size: 12.5px;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+    border-radius: 7px;
+    border-color: transparent;
+    background: transparent;
+    color: #6B7280;
+  }
+  .rx-home .rx-services-tab-button.is-active,
+  .rx-home .rx-services-tab-button:hover,
+  .rx-home .rx-services-tab-button:focus-visible {
+    background: var(--rx-red);
+    color: #fff;
+    box-shadow: none;
+  }
+  .rx-home .rx-services-tab-button .arr {
+    display: none;
+  }
+
+  .rx-home .rx-reputation .rx-btn-outline {
+    margin-top: 0;
+    width: 100%;
+    min-height: 44px;
+    height: auto;
+    padding: 10px 18px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  /* Services heading/lead: give the long H2 room instead of relying on
+     the desktop max-width, and tighten the gap before the tab buttons. */
+  .rx-home .rx-services .rx-title {
+    max-width: none;
+    font-size: clamp(24px, 7vw, 29px);
+  }
+  .rx-home .rx-services .rx-lead {
+    max-width: none;
+    margin-bottom: 18px;
+  }
+
+  /* Service/commercial items: the desktop card grid (bordered, shadowed
+     tiles, two-up) becomes a single-column checklist — icon tile + label
+     rows separated by a hairline, matching the approved mobile design. */
+  .rx-home .rx-services-list > .rx-wrap.rx-grid-2 {
+    gap: 0;
+  }
+  .rx-home .rx-service-item {
+    align-items: center;
+    gap: 12px;
+    padding: 13px 2px;
+    border: none;
+    border-bottom: 1px solid #EFEFEC;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .rx-home .rx-services-list .rx-service-item:last-child {
+    border-bottom: none;
+  }
+  .rx-home .rx-service-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .rx-home .rx-services .rx-sign-card-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 9px;
+    background: #FCEBEB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rx-home .rx-services .rx-sign-card-icon svg,
+  .rx-home .rx-services .rx-sign-card-icon img {
+    width: 18px;
+    height: 18px;
+  }
+  .rx-home .rx-service-item-text {
+    font-size: 14px;
+  }
+
+  /* Reputation row: stack the heading/lead above the Google summary
+     instead of the mid-width flex row, which was cramped between the
+     860px and 520px breakpoints already handled elsewhere. */
+  .rx-home .rx-reputation .rx-row-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .rx-home .rx-google {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+  .rx-home .rx-google-word {
+    font-size: 26px;
+  }
+
+  /* Review widget strip: the 3rd-party [grw] shortcode lays its cards
+     out in an unwrapped flex row. Contain the overflow in its own
+     scroll box instead of letting .rx-home's overflow:hidden clip
+     whichever cards run past the viewport edge. */
+  .rx-home .rx-review-strip {
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .rx-home .rx-review-strip::-webkit-scrollbar {
+    display: none;
+  }
+  .rx-home .rx-review-strip > * {
+    flex: 0 0 auto;
+    max-width: 86vw;
+    scroll-snap-align: start;
+    white-space: normal;
+  }
+}
+
+/* Safety net: on very narrow phones let ANY button label wrap rather
+   than risk it being clipped by .rx-home's overflow:hidden. Short
+   labels stay on one line naturally; only long ones (e.g. "Our
+   Commercial Solutions") are affected. */
+@media (max-width: 380px) {
+  .rx-home .rx-btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
+}
+
+/*
+ * "Real Projects. Real Results." (.rx-case-study-grid) — the desktop
+ * markup hardcodes `.rx-case-study-card { width: 378px; margin: 26px }`
+ * inside a `display: flex` row with no wrap and no mobile override
+ * anywhere. Three ~430px-wide (378px + 26px margin both sides) cards
+ * never fit a phone screen, so they're forced into a squeezed row and
+ * clipped by .rx-home's overflow:hidden — hence the crushed, one-word-
+ * per-line card titles and the cut-off third card. The badge inside
+ * each card (`.rx-case-card h3`) also hardcodes `width: 235px; float:
+ * right`, which breaks the same way once the card is narrower than
+ * that. Stacked to a single column below, full width, like every
+ * other card grid on the page.
+ */
+@media (max-width: 860px) {
+  .rx-home .rx-case-study-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .rx-home .rx-case-study-card {
+    width: 100%;
+    margin: 0;
+  }
+  .rx-home .rx-case-card {
+    min-height: 200px;
+  }
+  .rx-home .rx-case-card h3 {
+    float: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .rx-home .rx-case-study-grid.rx-stagger p {
+    margin-top: 8px;
   }
 }
