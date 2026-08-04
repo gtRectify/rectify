@@ -67,4 +67,9 @@
     .rx-warranty-terms img { height: auto; }
     .rx-warranty-page .rx-contact-cta > .rx-wrap > h2 { font-size: 36px; line-height: 42px; }
     .rx-warranty-page .rx-contact-cta-grid { grid-template-columns: 1fr; }
+    .rx-warranty-page .rx-contact-cta::after { height: 200px; background-size: 100% auto; }
+}
+
+@media (max-width: 480px) {
+    .rx-warranty-page .rx-contact-cta::after { height: 130px; }
 }

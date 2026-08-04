@@ -566,6 +566,16 @@
     .rx-ii-page .rx-ii-why-choose-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
+
+    /* Commercial Buildings hard-codes this contour's background-size to the
+       desktop banner's literal pixel dimensions (1440px 395px), which can't
+       scale down for phone/tablet viewports and clips to a tiny sliver of
+       the image below 1024px. Restore the responsive `cover` sizing the
+       base .rx-ii-why-choose::after rule uses everywhere else. */
+    .rx-ii-page .rx-ii-why-choose::after {
+        background-position: center bottom;
+        background-size: cover;
+    }
 }
 
 @media (max-width: 767px) {

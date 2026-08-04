@@ -641,7 +641,7 @@ function rectify_custom_enqueue_assets() {
         && 'commercial-solutions' === $current_page->post_name;
 
     $is_residential_figma_inner_page = $current_page instanceof WP_Post
-        && in_array( $current_page->post_name, array( 'ground-improvement', 'house-relevelling', 'weak-soils', 'foundation-repair', 'leaning-pillars-chimneys', 'leaning-pillars', 'chemical-underpinning', 'driveway-relevelling', 'sand-permeation', 'mailbox-brick-fence-releveling', 'basement-construction-support', 'slab-relevelling' ), true )
+        && in_array( $current_page->post_name, array( 'ground-improvement', 'house-relevelling', 'weak-soils', 'foundation-repair', 'leaning-pillars-chimneys', 'leaning-pillars', 'chemical-underpinning', 'driveway-relevelling', 'sand-permeation', 'mailbox-brick-fence-releveling', 'basement-construction-support', 'slab-relevelling', 'cracked-walls', 'open-uneven-control-joints', 'sloping-slab', 'erosion-control-sinkhole-remediation', 'jammed-doors-windows', 'leaning-house-wall' ), true )
         && $residential_page instanceof WP_Post
         && (int) $current_page->post_parent === (int) $residential_page->ID;
 
@@ -771,6 +771,21 @@ function rectify_custom_enqueue_assets() {
                 get_template_directory_uri() . '/assets/css/mobile/residential-mobile.css',
                 array( 'rectify-residential-inner-pages' ),
                 filemtime( $residential_mobile_css )
+            );
+        }
+
+        // The "Engineered. Rectified. Performance Verified." image slider on these
+        // pages reuses the homepage's .rx-performance/.rx-slider markup, so it
+        // needs the same carousel script (auto-init is scoped to that selector).
+        $residential_slider_js = get_template_directory() . '/assets/js/rectify-home.js';
+
+        if ( file_exists( $residential_slider_js ) ) {
+            wp_enqueue_script(
+                'rectify-home-slider',
+                get_template_directory_uri() . '/assets/js/rectify-home.js',
+                array(),
+                filemtime( $residential_slider_js ),
+                true
             );
         }
     }

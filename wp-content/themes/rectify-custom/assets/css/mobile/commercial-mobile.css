@@ -652,7 +652,8 @@ body:has(.rx-undermining-page) {
     }
 
     .rx-ci-slab-page .rx-ci-why-choose {
-        background-size: auto 40%;
+        background-size: cover;
+        background-position: bottom center;
     }
 
     .rx-ci-slab-page .rx-ci-cta h2 {

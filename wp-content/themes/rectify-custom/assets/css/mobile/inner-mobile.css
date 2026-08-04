@@ -1,0 +1,46 @@
+/* =======================================================================
+ * Shared mobile/tablet overrides for inner-page.css (singular) and
+ * inner-pages.css (plural). Loaded after BOTH base files, so a rule
+ * here can win against either one without needing !important.
+ * ===================================================================== */
+
+/* =======================================================================
+ * Background-image responsiveness fixes
+ * A handful of full-bleed decorative "contour" backgrounds were built
+ * with a fixed pixel background-size (e.g. "1160px auto", "480px auto").
+ * On phone/tablet-width viewports the box is much narrower than that
+ * fixed size, so only a small cropped/zoomed fraction of the artwork
+ * is visible instead of the whole graphic fitting the section. Scaling
+ * to the box (100% auto / cover) fixes this without touching desktop
+ * appearance above this breakpoint.
+ *
+ * NOTE: the plain "auto <fixed-px>" contour backgrounds elsewhere in
+ * inner-page.css / inner-pages.css (e.g. .rx-commercial-why::after,
+ * .rx-civil-why::after, .rx-hospital-why::after, .rx-contact-cta::after,
+ * etc.) are intentionally left alone here: with width:auto the browser
+ * always preserves the artwork's native aspect ratio, so they never
+ * distort — they're genuine repeat-x tiling patterns, not bugs.
+ * ===================================================================== */
+@media (max-width: 768px) {
+    /* .rx-driveway-proof is declared identically in both inner-page.css
+       and inner-pages.css - one rule here covers both. */
+    .rx-driveway-proof {
+        background-size: 100% auto;
+    }
+
+    /* inner-page.css only (cracked/driveway repair pages) */
+    .rx-cracked-advantage,
+    .rx-cracked-help {
+        background-size: 100% auto;
+    }
+
+    /* NOTE: inner-page.css's .rx-case-single-cta (background-size: 480px
+       auto) is intentionally NOT overridden here. On the one template
+       that renders it (content-case-studies-sigle-page.php), it is always
+       loaded alongside resources-inner-pages.css, which sets
+       `.rx-case-single-cta { background-image: none; }` and supplies the
+       actual visible background via its own `.rx-case-single-cta::after`
+       rule (handled separately by mobile/resources-mobile.css). A fix
+       here would have no visible effect and would duplicate a component
+       that file already owns (see resources-mobile.css's own scope note). */
+}

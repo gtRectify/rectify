@@ -263,22 +263,27 @@ $advantage_cards = array(
                 'key'    => 'residential-slab-performance',
                 'render' => function () use ( $slab_images ) {
                     ?>
-                    <section class="rx-cracked-band rx-cracked-performance">
-                        <div class="rx-wrap">
-                            <h2><?php esc_html_e( 'Engineered. Rectified. Performance Verified.', 'rectify-custom' ); ?></h2>
-                            <p><?php esc_html_e( 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.', 'rectify-custom' ); ?></p>
-                            <div class="rx-cracked-compare">
-                                <figure class="rx-cracked-compare-image">
-                                    <span class="rx-cracked-compare-tag rx-cracked-compare-tag-before"><?php esc_html_e( 'BEFORE', 'rectify-custom' ); ?></span>
-                                    <img src="<?php echo esc_url( $slab_images['before'] ); ?>" alt="<?php esc_attr_e( 'Before structural remediation', 'rectify-custom' ); ?>">
-                                </figure>
-                                <span class="rx-cracked-compare-divider" aria-hidden="true">
-                                    <span class="rx-cracked-compare-arrows">&#9664;&#9654;</span>
-                                </span>
-                                <figure class="rx-cracked-compare-image">
-                                    <span class="rx-cracked-compare-tag rx-cracked-compare-tag-after"><?php esc_html_e( 'AFTER', 'rectify-custom' ); ?></span>
-                                    <img src="<?php echo esc_url( $slab_images['after'] ); ?>" alt="<?php esc_attr_e( 'After structural remediation', 'rectify-custom' ); ?>">
-                                </figure>
+                    <section class="rx-performance">
+                        <div class="rx-wrap rx-reveal">
+                            <h2 class="rx-title"><?php esc_html_e( 'Engineered. Rectified. Performance Verified.', 'rectify-custom' ); ?></h2>
+                            <p class="rx-lead"><?php esc_html_e( 'See how identifying the cause, applying the right solution and verifying the outcome delivers lasting structural performance.', 'rectify-custom' ); ?></p>
+                            <div class="rx-compare">
+                                <div class="rx-slider">
+                                    <div class="slider-container">
+                                        <div class="slider">
+                                            <div class="rx-slider-slide slider-image slider-image-before is-active">
+                                                <img src="<?php echo esc_url( $slab_images['before'] ); ?>" alt="<?php esc_attr_e( 'Before structural remediation', 'rectify-custom' ); ?>">
+                                            </div>
+                                            <div class="rx-slider-slide">
+                                                <img src="<?php echo esc_url( $slab_images['after'] ); ?>" alt="<?php esc_attr_e( 'After structural remediation', 'rectify-custom' ); ?>">
+                                            </div>
+                                        </div>
+                                        <button class="rx-slider-control rx-slider-prev" type="button" aria-label="<?php esc_attr_e( 'Previous image', 'rectify-custom' ); ?>"></button>
+                                        <button class="rx-slider-control rx-slider-next" type="button" aria-label="<?php esc_attr_e( 'Next image', 'rectify-custom' ); ?>"></button>
+                                        <div class="slider-handle"></div>
+                                    </div>
+                                    <span class="rx-slider-dot" aria-hidden="true"></span>
+                                </div>
                             </div>
                         </div>
                     </section>

@@ -87,7 +87,7 @@
     .rx-case-study-page .rx-case-study-cta::after,
     .rx-case-single-page .rx-case-single-cta::after {
         height: 320px;
-        background-size: 100% 320px;
+        background-size: cover;
     }
 }
 
@@ -115,7 +115,7 @@
     .rx-case-study-page .rx-case-study-cta::after,
     .rx-case-single-page .rx-case-single-cta::after {
         height: 260px;
-        background-size: 100% 260px;
+        background-size: cover;
         background-position: center bottom;
     }
 }
@@ -169,7 +169,7 @@
     .rx-case-study-page .rx-case-study-cta::after,
     .rx-case-single-page .rx-case-single-cta::after {
         height: 180px;
-        background-size: 100% 180px;
+        background-size: cover;
     }
 
     .rx-case-study-page .rx-case-study-help-grid,
@@ -251,7 +251,7 @@
     .rx-case-study-page .rx-case-study-cta::after,
     .rx-case-single-page .rx-case-single-cta::after {
         height: 140px;
-        background-size: 100% 140px;
+        background-size: cover;
     }
 
     .rx-case-study-page .rx-case-study-help-card,

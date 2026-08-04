@@ -4922,7 +4922,8 @@ body.rx-commercial-solutions-page .site-content {
     .rx-ci-slab-page .rx-ci-why-choose {
         min-height: 0;
         padding: 64px 0;
-        background-size: auto 65%;
+        background-size: cover;
+        background-position: bottom center;
     }
 
     .rx-ci-slab-page .rx-ci-why-choose-card {

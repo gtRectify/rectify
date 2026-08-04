@@ -203,6 +203,21 @@
     }
 }
 
+/* Real bug: `.rx-driveway-page .rx-driveway-proof` uses a non-repeating
+   `background-size: 100% 402px` — the width tracks the box but the height
+   is pinned at 402px, so as the box narrows on phones (and the desktop CSS
+   itself drops the box to `min-height: 0` at this same 860px breakpoint)
+   the contour graphic looks stretched/cropped instead of scaling with the
+   section. `.rx-basement-page`'s equivalent section already uses a
+   repeating `background-repeat: repeat-x` / `1160px auto` tile and is
+   unaffected, so it is left out of this fix. */
+@media (max-width: 860px) {
+    .rx-driveway-page .rx-driveway-proof {
+        background-size: cover;
+        background-position: center bottom;
+    }
+}
+
 @media (max-width: 767px) {
     .rx-driveway-page .rx-driveway-hero h1,
     .rx-basement-page .rx-driveway-hero h1 {

@@ -11871,3 +11871,7 @@ body.page-id-2670 .rx-sticky-quote {
         width: 100%;
     }
 }
+.rx-performance p {
+    text-align: center;
+    margin: 0 auto;
+}
