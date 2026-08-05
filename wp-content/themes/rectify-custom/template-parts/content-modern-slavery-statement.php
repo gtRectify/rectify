@@ -1,13 +1,13 @@
 <?php
 /**
- * Privacy Policy page content template.
+ * Modern Slavery Statement page content template.
  *
  * Rendered via page.php's slug-based template_part lookup for the
- * top-level "our-policy" page. Shares the rx-faq-page / rx-faq-hero /
- * rx-faq-cta components used by content-legal.php and
- * content-modern-slavery-statement.php, and renders the published PDF
- * full-page via the rx-pdf-viewer (see assets/js/pdf-viewer.js) instead of
- * a download link so the document is view-only.
+ * top-level "modern-slavery-statement" page. Shares the rx-faq-page /
+ * rx-faq-hero / rx-faq-cta components used by content-legal.php and
+ * content-our-policy.php, and renders the published PDF full-page via
+ * the rx-pdf-viewer (see assets/js/pdf-viewer.js) instead of a download
+ * link so the document is view-only.
  *
  * @package Rectify_Custom
  */
@@ -16,11 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$policy_pdf_url = 'https://rectify.com.au/wp-content/uploads/2026/08/RG-POL-PRV-001-Privacy-Policy.pdf';
-$policy_pdf_id  = attachment_url_to_postid( $policy_pdf_url );
+$modern_slavery_upload_dir = wp_upload_dir();
+$modern_slavery_pdf_url    = trailingslashit( $modern_slavery_upload_dir['baseurl'] ) . '2026/08/Modern-Slavery-Policy-Statement.pdf';
+$modern_slavery_pdf_id     = attachment_url_to_postid( $modern_slavery_pdf_url );
 
-if ( $policy_pdf_id ) {
-    $policy_pdf_url = wp_get_attachment_url( $policy_pdf_id );
+if ( $modern_slavery_pdf_id ) {
+    $modern_slavery_pdf_url = wp_get_attachment_url( $modern_slavery_pdf_id );
 }
 
 ?>
@@ -31,17 +32,17 @@ if ( $policy_pdf_id ) {
     if ( function_exists( 'rectify_pb_render_page_sections' ) ) :
         rectify_pb_render_page_sections( get_the_ID(), array(
             array(
-                'key'    => 'policy-hero',
+                'key'    => 'modern-slavery-hero',
                 'render' => function () {
                     ?>
                     <section class="rx-faq-hero rx-legal-hero">
                         <div class="rx-wrap">
-                            <h1><?php esc_html_e( 'Privacy Policy', 'rectify-custom' ); ?></h1>
+                            <h1><?php esc_html_e( 'Modern Slavery Statement', 'rectify-custom' ); ?></h1>
 
                             <nav class="rx-faq-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'rectify-custom' ); ?>">
                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'rectify-custom' ); ?></a>
                                 <span aria-hidden="true">></span>
-                                <span><?php esc_html_e( 'Privacy Policy', 'rectify-custom' ); ?></span>
+                                <span><?php esc_html_e( 'Modern Slavery Statement', 'rectify-custom' ); ?></span>
                             </nav>
                         </div>
                     </section>
@@ -49,15 +50,15 @@ if ( $policy_pdf_id ) {
                 },
             ),
             array(
-                'key'    => 'policy-content',
-                'render' => function () use ( $policy_pdf_url ) {
+                'key'    => 'modern-slavery-viewer',
+                'render' => function () use ( $modern_slavery_pdf_url ) {
                     ?>
                     <section class="rx-pdf-section">
                         <div class="rx-wrap">
                             <div
                                 class="rx-pdf-viewer"
-                                data-pdf-url="<?php echo esc_url( $policy_pdf_url ); ?>"
-                                data-pdf-title="<?php esc_attr_e( 'Privacy Policy', 'rectify-custom' ); ?>"
+                                data-pdf-url="<?php echo esc_url( $modern_slavery_pdf_url ); ?>"
+                                data-pdf-title="<?php esc_attr_e( 'Modern Slavery Policy Statement', 'rectify-custom' ); ?>"
                             >
                                 <div class="rx-pdf-toolbar">
                                     <div class="rx-pdf-toolbar-group">
@@ -70,7 +71,7 @@ if ( $policy_pdf_id ) {
                                         <span class="rx-pdf-current-page">1</span> / <span class="rx-pdf-total-pages">&hellip;</span>
                                     </div>
                                 </div>
-                                <div class="rx-pdf-pages" role="document" aria-label="<?php esc_attr_e( 'Privacy Policy document viewer', 'rectify-custom' ); ?>">
+                                <div class="rx-pdf-pages" role="document" aria-label="<?php esc_attr_e( 'Modern Slavery Policy Statement document viewer', 'rectify-custom' ); ?>">
                                     <div class="rx-pdf-status"><?php esc_html_e( 'Loading document…', 'rectify-custom' ); ?></div>
                                 </div>
                             </div>
@@ -83,7 +84,7 @@ if ( $policy_pdf_id ) {
                 },
             ),
             array(
-                'key'    => 'policy-help',
+                'key'    => 'modern-slavery-help',
                 'render' => function () {
                     ?>
                     <section class="rx-faq-cta" style="<?php echo esc_attr( '--rx-faq-contours:url(' . esc_url_raw( rx_asset_url( 'images/home/Contour on Navy Blue.png' ) ) . ');' ); ?>">

@@ -1,0 +1,124 @@
+/* ============================================
+   MODERN SLAVERY STATEMENT PAGE — full-page, view-only PDF viewer
+   (assets/js/pdf-viewer.js renders pages to <canvas>; there is no
+   download/print control by design)
+   ============================================ */
+
+.rx-pdf-section {
+    padding: 40px 0 96px;
+    background: #fff;
+}
+
+.rx-pdf-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    min-height: 600px;
+    border: 1px solid #e2e5ea;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #eef0f3;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.rx-pdf-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    gap: 16px;
+    padding: 10px 18px;
+    background: #fff;
+    border-bottom: 1px solid #e2e5ea;
+}
+
+.rx-pdf-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--rx-faq-ink, #1a2233);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.rx-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #d7dbe2;
+    border-radius: 8px;
+    background: #f6f7f9;
+    color: var(--rx-faq-ink, #1a2233);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.rx-pdf-btn:hover {
+    background: #ebedf1;
+}
+
+.rx-pdf-zoom-level {
+    min-width: 46px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.rx-pdf-pages {
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: 24px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.rx-pdf-pages canvas {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 16px rgba(20, 25, 40, 0.12);
+    background: #fff;
+    pointer-events: none; /* blocks the native "Save Image As…" context menu on the rendered page */
+}
+
+.rx-pdf-status {
+    margin: auto;
+    color: var(--rx-faq-muted, #6b7280);
+    font-size: 15px;
+}
+
+.rx-pdf-noscript {
+    margin-top: 16px;
+    color: var(--rx-faq-muted, #6b7280);
+    text-align: center;
+}
+
+@media (max-width: 860px) {
+    .rx-pdf-viewer {
+        height: 75vh;
+        min-height: 480px;
+        border-radius: 8px;
+    }
+
+    .rx-pdf-toolbar {
+        padding: 8px 12px;
+    }
+}
+
+/* Keep the document out of printed output — this is a view-only page */
+@media print {
+    .rx-pdf-viewer {
+        display: none !important;
+    }
+
+    .rx-pdf-section::after {
+        content: "This document is available for on-screen viewing only.";
+        display: block;
+        text-align: center;
+        color: #444;
+    }
+}

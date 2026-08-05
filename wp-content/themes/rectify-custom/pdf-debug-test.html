@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>pdf debug</title></head>
+<body>
+<div id="log" style="font-family:monospace;white-space:pre-wrap;"></div>
+<canvas id="c"></canvas>
+<script>
+function log(msg) {
+    document.getElementById('log').textContent += msg + "\n";
+}
+window.onerror = function (msg, src, line, col, err) {
+    log('WINDOW ERROR: ' + msg + ' @ ' + src + ':' + line + ':' + col);
+};
+
+var pdfUrl = 'http://localhost/rectify_fresh/wp-content/uploads/2026/08/Modern-Slavery-Policy-Statement.pdf';
+var pdfjsUrl = 'http://localhost/rectify_fresh/wp-content/themes/rectify-custom/assets/vendor/pdfjs/pdf.min.js';
+var workerUrl = 'http://localhost/rectify_fresh/wp-content/themes/rectify-custom/assets/vendor/pdfjs/pdf.worker.min.js';
+
+log('starting import of ' + pdfjsUrl);
+
+import(pdfjsUrl).then(function (pdfjsLib) {
+    log('imported pdfjsLib OK, version=' + pdfjsLib.version);
+    pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
+    log('fetching doc: ' + pdfUrl);
+    return pdfjsLib.getDocument(pdfUrl).promise;
+}).then(function (doc) {
+    log('doc loaded, numPages=' + doc.numPages);
+    return doc.getPage(1);
+}).then(function (page) {
+    log('got page 1');
+    var viewport = page.getViewport({ scale: 1.5 });
+    var canvas = document.getElementById('c');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    var ctx = canvas.getContext('2d');
+    log('rendering page 1, viewport=' + viewport.width + 'x' + viewport.height);
+    return page.render({ canvasContext: ctx, viewport: viewport }).promise;
+}).then(function () {
+    log('RENDER COMPLETE');
+    var canvas = document.getElementById('c');
+    var ctx = canvas.getContext('2d');
+    var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    var nonWhite = 0;
+    for (var i = 0; i < data.length; i += 4) {
+        if (data[i] !== 255 || data[i+1] !== 255 || data[i+2] !== 255) {
+            nonWhite++;
+        }
+    }
+    log('non-white pixel count: ' + nonWhite + ' / ' + (data.length / 4));
+}).catch(function (err) {
+    log('CAUGHT ERROR: ' + (err && err.message ? err.message : err));
+    log('STACK: ' + (err && err.stack ? err.stack : 'n/a'));
+});
+</script>
+</body>
+</html>

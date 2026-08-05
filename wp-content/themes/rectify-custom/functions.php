@@ -22,6 +22,7 @@ require get_template_directory() . '/inc/cpt-case-studies-news.php';
 require get_template_directory() . '/inc/homepage-instagram-feed.php';
 require get_template_directory() . '/inc/search-support.php';
 require get_template_directory() . '/inc/staff-email.php';
+require get_template_directory() . '/inc/smtp-mailer.php';
 
 if ( ! function_exists( 'rectify_custom_maybe_flush_job_opportunities_rewrites' ) ) {
     /**
@@ -802,7 +803,7 @@ function rectify_custom_enqueue_assets() {
         }
     }
 
-    $inner_pages_plural_slugs = array( 'case-studies', 'news-and-insights', 'contact-us', 'assessment', 'get-a-free-quote', 'quotation', 'soil-stabilisation', 'our-policy', 'legal' );
+    $inner_pages_plural_slugs = array( 'case-studies', 'news-and-insights', 'contact-us', 'assessment', 'get-a-free-quote', 'quotation', 'soil-stabilisation', 'our-policy', 'legal', 'modern-slavery-statement' );
 
     $is_faq_child_page = $current_page instanceof WP_Post
         && $current_page->post_parent
@@ -829,6 +830,36 @@ function rectify_custom_enqueue_assets() {
                 array( 'rectify-inner-pages-plural' ),
                 filemtime( $inner_mobile_css )
             );
+        }
+    }
+
+    if ( is_page( array( 'modern-slavery-statement', 'our-policy' ) ) ) {
+        $pdf_viewer_css = get_template_directory() . '/assets/css/pdf-viewer.css';
+
+        if ( file_exists( $pdf_viewer_css ) ) {
+            wp_enqueue_style(
+                'rectify-pdf-viewer',
+                get_template_directory_uri() . '/assets/css/pdf-viewer.css',
+                array( 'rectify-inner-pages-plural' ),
+                filemtime( $pdf_viewer_css )
+            );
+        }
+
+        $pdf_viewer_js = get_template_directory() . '/assets/js/pdf-viewer.js';
+
+        if ( file_exists( $pdf_viewer_js ) ) {
+            wp_enqueue_script(
+                'rectify-pdf-viewer',
+                get_template_directory_uri() . '/assets/js/pdf-viewer.js',
+                array(),
+                filemtime( $pdf_viewer_js ),
+                true
+            );
+
+            wp_localize_script( 'rectify-pdf-viewer', 'rxPdfViewerConfig', array(
+                'pdfjsUrl'  => get_template_directory_uri() . '/assets/vendor/pdfjs/pdf.min.js',
+                'workerUrl' => get_template_directory_uri() . '/assets/vendor/pdfjs/pdf.worker.min.js',
+            ) );
         }
     }
 

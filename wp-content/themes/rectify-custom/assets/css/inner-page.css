@@ -1996,7 +1996,7 @@ body.rx-career-single-page .content-wrapper {
     margin: 0;
     padding: 14px;
     border-radius: 50%;
-    background: var(--rx-residential-soft);
+    background: #000000;
 }
 
 .rx-case-single-author figure img {
