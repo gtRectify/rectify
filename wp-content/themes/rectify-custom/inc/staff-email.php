@@ -169,6 +169,10 @@ if ( ! function_exists( 'rectify_handle_send_staff_email' ) ) {
             // see raw mail-server internals.
             if ( $mail_error && current_user_can( 'manage_options' ) ) {
                 $error_response['debug'] = $mail_error;
+
+                if ( false !== stripos( $mail_error, 'connect' ) && function_exists( 'rectify_smtp_connectivity_report' ) ) {
+                    $error_response['debug'] .= ' :: ' . rectify_smtp_connectivity_report();
+                }
             }
 
             wp_send_json_error( $error_response );

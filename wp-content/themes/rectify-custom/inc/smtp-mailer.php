@@ -72,3 +72,57 @@ if ( ! function_exists( 'rectify_log_mail_failure' ) ) {
     }
 }
 add_action( 'wp_mail_failed', 'rectify_log_mail_failure' );
+
+if ( ! function_exists( 'rectify_smtp_connectivity_report' ) ) {
+    /**
+     * Temporary diagnostic: raw TCP connect attempts (no TLS handshake) to
+     * the configured SMTP target plus the common local alternatives, so a
+     * "could not connect" failure can be narrowed down to a specific
+     * host/port being firewalled rather than guessed at one combo at a time.
+     *
+     * @return string
+     */
+    function rectify_smtp_connectivity_report() {
+        $targets = array();
+
+        if ( defined( 'RECTIFY_SMTP_HOST' ) && RECTIFY_SMTP_HOST ) {
+            $targets[] = array( RECTIFY_SMTP_HOST, defined( 'RECTIFY_SMTP_PORT' ) ? (int) RECTIFY_SMTP_PORT : 465 );
+        }
+
+        foreach ( array( 'localhost', '127.0.0.1' ) as $host ) {
+            foreach ( array( 465, 587, 25 ) as $port ) {
+                $targets[] = array( $host, $port );
+            }
+        }
+
+        $results = array();
+
+        foreach ( $targets as $target ) {
+            list( $host, $port ) = $target;
+            $key = $host . ':' . $port;
+
+            if ( isset( $results[ $key ] ) ) {
+                continue;
+            }
+
+            $errno  = 0;
+            $errstr = '';
+            $conn   = @fsockopen( $host, $port, $errno, $errstr, 3 );
+
+            if ( $conn ) {
+                fclose( $conn );
+                $results[ $key ] = 'OK';
+            } else {
+                $results[ $key ] = "FAIL ({$errno} {$errstr})";
+            }
+        }
+
+        $lines = array();
+
+        foreach ( $results as $target => $outcome ) {
+            $lines[] = $target . ' -> ' . $outcome;
+        }
+
+        return implode( ' | ', $lines );
+    }
+}
