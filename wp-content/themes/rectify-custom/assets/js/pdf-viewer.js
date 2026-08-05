@@ -30,9 +30,11 @@
             return;
         }
 
-        var pdfDoc   = null;
-        var scale    = BASE_SCALE;
-        var canvases = [];
+        var pdfDoc       = null;
+        var scale        = BASE_SCALE;
+        var canvases     = [];
+        var renderChain  = Promise.resolve();
+        var renderQueued = false;
 
         function renderPage( pageNumber ) {
             return pdfDoc.getPage( pageNumber ).then( function ( page ) {
@@ -61,6 +63,31 @@
             return chain;
         }
 
+        // Zoom clicks (or the initial load) must never render the same
+        // canvas from two overlapping passes — pdf.js throws if render() is
+        // called again on a canvas before the prior call has settled. This
+        // queues at most one extra pass behind whichever is currently
+        // running, so passes are always strictly sequential.
+        function queueRenderAllPages() {
+            if ( renderQueued ) {
+                return renderChain;
+            }
+
+            renderQueued = true;
+            renderChain = renderChain.then( function () {
+                renderQueued = false;
+                return renderAllPages();
+            } ).catch( function ( error ) {
+                renderQueued = false;
+
+                if ( window.console ) {
+                    window.console.error( 'rx-pdf-viewer render:', error );
+                }
+            } );
+
+            return renderChain;
+        }
+
         function setZoom( nextScale ) {
             scale = Math.min( 2.5, Math.max( 0.5, nextScale ) );
 
@@ -68,7 +95,7 @@
                 zoomLevelEl.textContent = Math.round( ( scale / BASE_SCALE ) * 100 ) + '%';
             }
 
-            renderAllPages();
+            queueRenderAllPages();
         }
 
         function updateCurrentPageFromScroll() {
@@ -113,7 +140,7 @@
                 canvases.push( canvas );
             }
 
-            return renderAllPages();
+            return queueRenderAllPages();
         } ).catch( function ( error ) {
             pagesEl.innerHTML = '<div class="rx-pdf-status">Unable to load the document right now.</div>';
 

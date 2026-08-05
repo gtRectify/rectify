@@ -58,3 +58,17 @@ if ( ! function_exists( 'rectify_smtp_mail_from_name' ) ) {
     }
 }
 add_filter( 'wp_mail_from_name', 'rectify_smtp_mail_from_name', 20 );
+
+if ( ! function_exists( 'rectify_log_mail_failure' ) ) {
+    /**
+     * Temporary diagnostic: log the underlying PHPMailer/SMTP error so it can
+     * be inspected on staging - wp_mail() itself only returns a bare false,
+     * and the AJAX handler deliberately doesn't expose SMTP errors to visitors.
+     *
+     * @param WP_Error $wp_error
+     */
+    function rectify_log_mail_failure( $wp_error ) {
+        error_log( 'Rectify SMTP send failed: ' . $wp_error->get_error_message() );
+    }
+}
+add_action( 'wp_mail_failed', 'rectify_log_mail_failure' );
