@@ -152,19 +152,32 @@ if ( ! function_exists( 'rectify_smtp_connectivity_report' ) ) {
         }
 
         $lines[] = 'openssl: ' . ( extension_loaded( 'openssl' ) ? 'loaded' : 'NOT LOADED' );
+        $lines[] = 'RECTIFY_SMTP_PEER_NAME: ' . ( defined( 'RECTIFY_SMTP_PEER_NAME' ) ? var_export( RECTIFY_SMTP_PEER_NAME, true ) : 'not defined' );
 
         // Raw TCP succeeding doesn't rule out the TLS handshake itself
         // failing (e.g. the cert not matching the "localhost" hostname
         // we're connecting as) - probe the actual ssl:// wrapper PHPMailer
-        // uses, once with normal certificate verification and once without,
-        // to tell those two cases apart.
+        // uses, with normal verification, without verification, and (if
+        // configured) with the peer_name override, to tell those cases apart.
         $tls_host = defined( 'RECTIFY_SMTP_HOST' ) && RECTIFY_SMTP_HOST ? RECTIFY_SMTP_HOST : 'localhost';
         $tls_port = defined( 'RECTIFY_SMTP_PORT' ) ? (int) RECTIFY_SMTP_PORT : 465;
 
-        foreach ( array(
+        $probes = array(
             'tls verify-on'  => array( 'ssl' => array( 'verify_peer' => true, 'verify_peer_name' => true ) ),
             'tls verify-off' => array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) ),
-        ) as $label => $ssl_options ) {
+        );
+
+        if ( defined( 'RECTIFY_SMTP_PEER_NAME' ) && RECTIFY_SMTP_PEER_NAME ) {
+            $probes['tls peer_name override'] = array(
+                'ssl' => array(
+                    'verify_peer'      => true,
+                    'verify_peer_name' => true,
+                    'peer_name'        => RECTIFY_SMTP_PEER_NAME,
+                ),
+            );
+        }
+
+        foreach ( $probes as $label => $ssl_options ) {
             $context = stream_context_create( $ssl_options );
             $errno   = 0;
             $errstr  = '';
