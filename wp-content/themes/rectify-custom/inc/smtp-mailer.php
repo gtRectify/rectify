@@ -37,6 +37,34 @@ if ( ! function_exists( 'rectify_configure_smtp' ) ) {
         $phpmailer->Password   = defined( 'RECTIFY_SMTP_PASS' ) ? RECTIFY_SMTP_PASS : '';
         $phpmailer->SMTPSecure = defined( 'RECTIFY_SMTP_SECURE' ) ? RECTIFY_SMTP_SECURE : 'tls';
         $phpmailer->SMTPAutoTLS = false;
+
+        // Connecting via "localhost" (to route around outbound SMTP being
+        // firewalled) means the cert we get back is for the real domain,
+        // not "localhost" - RECTIFY_SMTP_PEER_NAME tells PHP which hostname
+        // to actually verify the certificate against, so verification stays
+        // on instead of being disabled outright.
+        if ( defined( 'RECTIFY_SMTP_PEER_NAME' ) && RECTIFY_SMTP_PEER_NAME ) {
+            $phpmailer->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer'      => true,
+                    'verify_peer_name' => true,
+                    'peer_name'        => RECTIFY_SMTP_PEER_NAME,
+                ),
+            );
+        } elseif ( defined( 'RECTIFY_SMTP_VERIFY_PEER' ) && ! RECTIFY_SMTP_VERIFY_PEER ) {
+            // Escape hatch if the host's cert doesn't match any hostname we
+            // can pin (e.g. a shared default cert) - logs a clear warning
+            // since this does weaken the connection.
+            error_log( 'Rectify SMTP: certificate verification disabled via RECTIFY_SMTP_VERIFY_PEER - set RECTIFY_SMTP_PEER_NAME instead once the correct hostname is known.' );
+
+            $phpmailer->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ),
+            );
+        }
     }
 }
 add_action( 'phpmailer_init', 'rectify_configure_smtp' );
