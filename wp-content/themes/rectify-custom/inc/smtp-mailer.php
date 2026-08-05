@@ -123,6 +123,43 @@ if ( ! function_exists( 'rectify_smtp_connectivity_report' ) ) {
             $lines[] = $target . ' -> ' . $outcome;
         }
 
+        $lines[] = 'openssl: ' . ( extension_loaded( 'openssl' ) ? 'loaded' : 'NOT LOADED' );
+
+        // Raw TCP succeeding doesn't rule out the TLS handshake itself
+        // failing (e.g. the cert not matching the "localhost" hostname
+        // we're connecting as) - probe the actual ssl:// wrapper PHPMailer
+        // uses, once with normal certificate verification and once without,
+        // to tell those two cases apart.
+        $tls_host = defined( 'RECTIFY_SMTP_HOST' ) && RECTIFY_SMTP_HOST ? RECTIFY_SMTP_HOST : 'localhost';
+        $tls_port = defined( 'RECTIFY_SMTP_PORT' ) ? (int) RECTIFY_SMTP_PORT : 465;
+
+        foreach ( array(
+            'tls verify-on'  => array( 'ssl' => array( 'verify_peer' => true, 'verify_peer_name' => true ) ),
+            'tls verify-off' => array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) ),
+        ) as $label => $ssl_options ) {
+            $context = stream_context_create( $ssl_options );
+            $errno   = 0;
+            $errstr  = '';
+            $caught  = '';
+
+            set_error_handler( static function ( $no, $str ) use ( &$caught ) {
+                $caught = $str;
+                return true;
+            } );
+
+            $conn = @stream_socket_client( "ssl://{$tls_host}:{$tls_port}", $errno, $errstr, 5, STREAM_CLIENT_CONNECT, $context );
+
+            restore_error_handler();
+
+            if ( $conn ) {
+                fclose( $conn );
+                $lines[] = "{$label} ({$tls_host}:{$tls_port}) -> OK";
+            } else {
+                $detail  = trim( $errstr . ( $caught ? '; ' . $caught : '' ) );
+                $lines[] = "{$label} ({$tls_host}:{$tls_port}) -> FAIL ({$errno} {$detail})";
+            }
+        }
+
         return implode( ' | ', $lines );
     }
 }
