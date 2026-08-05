@@ -143,13 +143,31 @@ if ( ! function_exists( 'rectify_handle_send_staff_email' ) ) {
         add_filter( 'wp_mail_from', $set_mail_from );
         add_filter( 'wp_mail_from_name', $set_mail_from_name );
 
+        // Capture the underlying PHPMailer/SMTP error (if any) so it can be
+        // surfaced to admins for diagnosis - wp_mail() itself only returns
+        // a bare false, with no detail on why the send failed.
+        $mail_error         = '';
+        $capture_mail_error = static function ( $wp_error ) use ( &$mail_error ) {
+            $mail_error = $wp_error->get_error_message();
+        };
+        add_action( 'wp_mail_failed', $capture_mail_error );
+
         $sent = wp_mail( $recipient_email, $subject, $body, $headers );
 
         remove_filter( 'wp_mail_from', $set_mail_from );
         remove_filter( 'wp_mail_from_name', $set_mail_from_name );
+        remove_action( 'wp_mail_failed', $capture_mail_error );
 
         if ( ! $sent ) {
-            wp_send_json_error( array( 'message' => 'Something went wrong sending your message. Please try again.' ) );
+            $error_response = array( 'message' => 'Something went wrong sending your message. Please try again.' );
+
+            // Only ever shown to logged-in admins - regular visitors never
+            // see raw mail-server internals.
+            if ( $mail_error && current_user_can( 'manage_options' ) ) {
+                $error_response['debug'] = $mail_error;
+            }
+
+            wp_send_json_error( $error_response );
         }
 
         wp_send_json_success( array( 'message' => 'Message sent.' ) );

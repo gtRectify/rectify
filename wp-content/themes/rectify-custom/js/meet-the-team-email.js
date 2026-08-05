@@ -144,7 +144,13 @@
                         closeModal();
                     }, 1200);
                 } else {
-                    setStatus((data && data.data && data.data.message) || 'Something went wrong. Please try again.', 'error');
+                    var errorMessage = (data && data.data && data.data.message) || 'Something went wrong. Please try again.';
+
+                    if (data && data.data && data.data.debug) {
+                        errorMessage += ' [' + data.data.debug + ']';
+                    }
+
+                    setStatus(errorMessage, 'error');
                 }
             })
             .catch(function () {

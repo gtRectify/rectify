@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$policy_pdf_url = 'https://rectify.com.au/wp-content/uploads/2026/08/RG-POL-PRV-001-Privacy-Policy.pdf';
+$policy_pdf_url = trailingslashit( home_url() ) . 'wp-content/uploads/2026/08/RG-POL-PRV-001-Privacy-Policy.pdf';
 $policy_pdf_id  = attachment_url_to_postid( $policy_pdf_url );
 
 if ( $policy_pdf_id ) {
