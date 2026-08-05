@@ -2,7 +2,8 @@
 /**
  * Sticky "Get a Quick Quote" widget.
  *
- * Renders on every page (included from header.php): a fixed tab on the right
+ * Renders on every page except assessment/get-a-free-quote (included from
+ * header.php, which already excludes those two): a fixed tab on the right
  * edge of the viewport that opens a slide-in panel containing the HubSpot
  * quick-quote form, plus the shared thank-you popup re-used from the
  * get-a-free-quote/quotation page so a successful submission looks identical

@@ -7370,31 +7370,127 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
     object-fit: cover;
 }
 
-.rx-thankyou-modal--contact .rx-thankyou-body h2 {
-    max-width: 754px;
-    margin-bottom: 53px;
-    white-space: nowrap;
+@media (min-width: 761px) {
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-card {
+        width: min(791px, calc(100vw - 48px));
+        height: auto;
+        max-height: calc(100dvh - 96px);
+        border-radius: 16px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-scroll {
+        border-radius: 16px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-close {
+        top: -40px;
+        right: 0;
+        width: 34px;
+        height: 34px;
+        border-width: 3px;
+        border-radius: 8px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-close::before,
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-close::after {
+        width: 17px;
+        height: 3px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-banner,
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-tag {
+        display: none;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-body {
+        padding: 64px 32px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-body h2 {
+        max-width: none;
+        margin: 0 0 32px;
+        font-size: 32px;
+        line-height: 38px;
+        white-space: normal;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-copy {
+        max-width: none;
+        margin: 0 0 48px !important;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-resource-copy {
+        max-width: none;
+        margin: 0 0 18px !important;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-actions {
+        margin: 0 0 42px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-urgent {
+        max-width: none;
+        margin: 0 0 24px !important;
+        color: #222840 !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        line-height: 26px !important;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-trust {
+        margin: 0 0 42px !important;
+        color: #676767 !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 22px !important;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-divider {
+        width: 100%;
+        height: 1px;
+        margin: 0 0 24px;
+        background: #c8c8c8;
+        flex: none;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-stat-line,
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-stat-value,
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-stat-label,
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-stat-copy {
+        color: #000 !important;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-stars {
+        color: #fbc02d;
+    }
 }
 
-.rx-thankyou-modal--contact .rx-thankyou-copy {
-    max-width: 754px;
+.rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-trust {
+    color: #676767 !important;
+    font-weight: 500 !important;
 }
 
-.rx-thankyou-modal--contact .rx-thankyou-actions {
-    margin-bottom: 35px;
+.rx-thankyou-btn.rx-thankyou-btn--filled {
+    border-color: #bd1726 !important;
+    background: #bd1726 !important;
+    color: #fff !important;
 }
 
-.rx-thankyou-modal--contact .rx-thankyou-urgent {
-    max-width: 785px;
-    margin: 0 auto 73px !important;
-    color: #222840 !important;
-    font-size: 24px !important;
-    font-weight: 700 !important;
-    line-height: 30px !important;
+.rx-thankyou-btn.rx-thankyou-btn--filled:hover {
+    background: #96101c !important;
+    color: #fff !important;
 }
 
-.rx-thankyou-modal--contact .rx-thankyou-trust {
-    margin-bottom: 73px !important;
+.rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours {
+    margin-top: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media (max-width: 760px) {
@@ -7469,7 +7565,7 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
         white-space: normal;
     }
 
-    .rx-thankyou-modal--contact .rx-thankyou-body h2 {
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-body h2 {
         margin-bottom: 30px;
     }
 
@@ -7502,7 +7598,7 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
         margin-bottom: 34px;
     }
 
-    .rx-thankyou-modal--contact .rx-thankyou-urgent {
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-urgent {
         margin-bottom: 38px !important;
         font-size: 19px !important;
         line-height: 25px !important;
@@ -7521,7 +7617,7 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
         line-height: 23px !important;
     }
 
-    .rx-thankyou-modal--contact .rx-thankyou-trust {
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-trust {
         margin-bottom: 38px !important;
     }
 

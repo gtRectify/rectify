@@ -134,7 +134,9 @@ $rectify_industries_services = array(
 <body <?php body_class('rx-template-clean'); ?>>
 <?php wp_body_open(); ?>
 
-<?php get_template_part( 'template-parts/sticky-quick-quote' ); ?>
+<?php if ( ! is_page( array( 'assessment', 'get-a-free-quote' ) ) ) : ?>
+    <?php get_template_part( 'template-parts/sticky-quick-quote' ); ?>
+<?php endif; ?>
 
 <main class="rx-home" id="top">
     <div class="rx-top-strip">
