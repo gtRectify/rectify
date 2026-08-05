@@ -91,11 +91,15 @@ if ( ! function_exists( 'rectify_handle_send_staff_email' ) ) {
             wp_send_json_success( array( 'message' => 'Message sent.' ) );
         }
 
+        // Admins testing the form themselves aren't the bot traffic this
+        // limit exists to stop, so they're exempt from it.
+        $is_rate_limit_exempt = current_user_can( 'manage_options' );
+
         $ip             = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
         $rate_limit_key = 'rectify_mtt_email_' . md5( $ip );
         $sent_in_window = (int) get_transient( $rate_limit_key );
 
-        if ( $sent_in_window >= 5 ) {
+        if ( ! $is_rate_limit_exempt && $sent_in_window >= 5 ) {
             wp_send_json_error( array( 'message' => 'Too many requests. Please try again later.' ), 429 );
         }
 
