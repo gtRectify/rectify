@@ -108,7 +108,9 @@ body.rx-menu-open .rx-sticky-quote-tab {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 32px 28px 28px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 32px 28px calc(28px + env(safe-area-inset-bottom, 0px));
 }
 
 .rx-sticky-quote-close {
@@ -151,14 +153,16 @@ body.rx-menu-open .rx-sticky-quote-tab {
     .rx-sticky-quote-drawer {
         width: 100vw;
         max-width: 100vw;
+        height: 100vh;
         height: 100dvh;
+        max-height: 100vh;
         max-height: 100dvh;
         margin: 0;
         border-radius: 0;
     }
 
     .rx-sticky-quote-scroll {
-        padding: 28px 20px 20px;
+        padding: 28px 20px calc(32px + env(safe-area-inset-bottom, 0px));
     }
 
     .rx-sticky-quote-tab {

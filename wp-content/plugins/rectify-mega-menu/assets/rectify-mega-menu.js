@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
   window.__rxMegaMenuInit = true;
 
   parents.forEach(function (parent) {
+    // Plain links (e.g. "Contact Us", "Cost Calculator") get the
+    // .rx-mega-parent class from the walker too, but have no submenu to
+    // toggle. Skip those so the tap navigates normally instead of being
+    // preventDefault()'d into a dead accordion toggle.
+    if (!parent.classList.contains('menu-item-has-children') || !parent.querySelector(':scope > .rx-mega-submenu')) {
+      return;
+    }
+
     // Only the top-level link toggles the accordion. Attaching this to
     // `parent` instead (delegating via event.target.closest('a')) would also
     // catch taps on real destination links inside the open submenu — e.g.
