@@ -116,7 +116,6 @@ $rx_sq_assets = trailingslashit( get_template_directory_uri() ) . 'assets/images
 
             <div class="rx-thankyou-contours" aria-hidden="true">
                 <img src="<?php echo esc_url( $rx_sq_assets . 'thankyou-contour-left.svg' ); ?>" alt="">
-                <img src="<?php echo esc_url( $rx_sq_assets . 'thankyou-contour-right.svg' ); ?>" alt="">
             </div>
         </div>
     </div>

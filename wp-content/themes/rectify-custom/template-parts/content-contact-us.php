@@ -383,7 +383,6 @@ $rx_hubspot_contact_returned = isset( $_GET['hubspot_contact_submitted'] )
 
             <div class="rx-thankyou-contours" aria-hidden="true">
                 <img src="<?php echo esc_url( $rx_thankyou_assets . 'thankyou-contour-left.svg' ); ?>" alt="">
-                <img src="<?php echo esc_url( $rx_thankyou_assets . 'thankyou-contour-right.svg' ); ?>" alt="">
             </div>
         </div>
     </div>
