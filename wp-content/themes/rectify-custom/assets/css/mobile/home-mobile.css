@@ -4,6 +4,17 @@
  * win the cascade at equal specificity without needing !important.
  */
 
+/* Remove the blue/gray flash WebKit/Android browsers show on tap */
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
 /* Hamburger toggle (primary nav bar) */
 .rx-menu-toggle {
   display: none;
