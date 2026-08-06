@@ -61,7 +61,7 @@ $rx_sq_assets = trailingslashit( get_template_directory_uri() ) . 'assets/images
 ?>
 <div
     id="rx-thankyou-modal-hubspot-sticky-quote"
-    class="rx-thankyou-modal rx-thankyou-modal--quotation"
+    class="rx-thankyou-modal rx-thankyou-modal--quotation rx-thankyou-modal--contact"
     data-hubspot-form-id="<?php echo esc_attr( $rx_sq_form_id ); ?>"
     aria-hidden="true"
 >
@@ -78,32 +78,26 @@ $rx_sq_assets = trailingslashit( get_template_directory_uri() ) . 'assets/images
         </button>
 
         <div class="rx-thankyou-scroll">
-            <div class="rx-thankyou-banner">
-                <img src="<?php echo esc_url( $rx_sq_assets . 'quotation/thankyou-banner.jpg' ); ?>" alt="">
-            </div>
-
             <div class="rx-thankyou-body">
-                <div class="rx-thankyou-tag" aria-hidden="true">
-                    <img src="<?php echo esc_url( $rx_sq_assets . 'thnank-you-tag.png' ); ?>" alt="">
-                </div>
-
-                <h2 id="rx-thankyou-heading-hubspot-sticky-quote">Thank You for Booking Your Structural Assessment</h2>
-                <p class="rx-thankyou-lead">We've received your assessment request and appreciate the opportunity to assist you.</p>
-                <p class="rx-thankyou-copy">Our team is currently reviewing your submission to ensure it is directed to the appropriate specialist. We will contact you shortly to discuss your property, answer any questions, and arrange a suitable assessment time.</p>
+                <h2 id="rx-thankyou-heading-hubspot-sticky-quote">Your quote request has been received.</h2>
+                <p class="rx-thankyou-copy">We have received your request and appreciate the opportunity to assist you.<br><br>Our team will review the information you provided to understand your property concerns and determine the most appropriate next step. A Rectify specialist will contact you shortly to discuss your requirements, clarify any details and explain what may be required before a formal quotation can be prepared.</p>
                 <p class="rx-thankyou-resource-copy">In the meantime, here are some resources to get to know us better and explore how we've helped others</p>
 
                 <div class="rx-thankyou-actions">
-                    <a class="rx-thankyou-btn" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">
-                        <img src="<?php echo esc_url( $rx_sq_assets . 'Rectify-Icon-Set_About-Us-2.svg' ); ?>" alt="">
+                    <a class="rx-thankyou-btn rx-thankyou-btn--filled" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">
+                        <img src="<?php echo esc_url( $rx_sq_assets . 'Rectify-Icon-Set_About-Us-2-white.svg' ); ?>" alt="">
                         <span>About Us</span>
                     </a>
                     <a class="rx-thankyou-btn" href="<?php echo esc_url( home_url( '/resources/case-studies/' ) ); ?>">
                         <img src="<?php echo esc_url( $rx_sq_assets . 'Rectify-Icon-Set-Recovered_Case-Study-1.svg' ); ?>" alt="">
-                        <span>Case Studies</span>
+                        <span>View Case Studies</span>
                     </a>
                 </div>
 
+                <p class="rx-thankyou-urgent">If your enquiry is urgent, please call us on <a href="tel:1800182020">1800 18 20 20</a> for immediate assistance.</p>
                 <p class="rx-thankyou-trust">We appreciate your trust in Rectify and look forward to assisting you.</p>
+
+                <div class="rx-thankyou-divider" aria-hidden="true"></div>
 
                 <div class="rx-thankyou-stats">
                     <div class="rx-thankyou-stat rx-thankyou-stat--reviews">
@@ -121,7 +115,8 @@ $rx_sq_assets = trailingslashit( get_template_directory_uri() ) . 'assets/images
             </div>
 
             <div class="rx-thankyou-contours" aria-hidden="true">
-                <img src="<?php echo esc_url( $rx_sq_assets . 'footer-wave.png' ); ?>" alt="">
+                <img src="<?php echo esc_url( $rx_sq_assets . 'thankyou-contour-left.svg' ); ?>" alt="">
+                <img src="<?php echo esc_url( $rx_sq_assets . 'thankyou-contour-right.svg' ); ?>" alt="">
             </div>
         </div>
     </div>
