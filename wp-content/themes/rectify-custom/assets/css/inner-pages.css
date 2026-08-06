@@ -7482,6 +7482,7 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
 }
 
 .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours {
+    height: 89px;
     margin-top: 0;
     display: flex;
     align-items: flex-end;
@@ -7490,7 +7491,11 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
 .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours img {
     width: 50%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
+}
+
+.rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours img:first-child {
+    transform: scaleX(-1);
 }
 
 @media (max-width: 760px) {
@@ -7652,5 +7657,10 @@ body.page-id-8031 .site-content { max-width: 100%; min-width: 0; width: 100%; }
     .rx-thankyou-modal--quotation .rx-thankyou-contours {
         height: 120px;
         margin-top: 20px;
+    }
+
+    .rx-thankyou-modal--contact.rx-thankyou-modal--quotation .rx-thankyou-contours {
+        height: 56px;
+        margin-top: 12px;
     }
 }

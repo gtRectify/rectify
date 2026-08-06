@@ -23,6 +23,9 @@ require get_template_directory() . '/inc/homepage-instagram-feed.php';
 require get_template_directory() . '/inc/search-support.php';
 require get_template_directory() . '/inc/staff-email.php';
 require get_template_directory() . '/inc/smtp-mailer.php';
+require get_template_directory() . '/inc/rectify-email-parts.php';
+require get_template_directory() . '/inc/contact-confirmation-email.php';
+require get_template_directory() . '/inc/quote-confirmation-email.php';
 
 if ( ! function_exists( 'rectify_custom_maybe_flush_job_opportunities_rewrites' ) ) {
     /**
