@@ -3026,6 +3026,16 @@ function custom_safe_page_redirect() {
         wp_redirect( site_url( '/resources/case-studies/' ), 301 );
         exit;
     }
+
+    if ( is_page( 'industries' ) ) {
+        wp_redirect( site_url( '/industries/transport-assets/' ), 301 );
+        exit;
+    }
+
+    if ( is_page( 'about-us' ) ) {
+        wp_redirect( site_url( '/about-us/about-rectify/' ), 301 );
+        exit;
+    }
 }
 add_action( 'template_redirect', 'custom_safe_page_redirect' );
 
