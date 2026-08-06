@@ -816,4 +816,9 @@ select,
     line-height: 1.6 !important;
     font-size: 14px !important;
   }
+
+  .rectify-manual-map-wrapper, .rectify-wp-map-wrapper {
+    width: 75% !important;
+    height: 449px !important;
+  }
 }
