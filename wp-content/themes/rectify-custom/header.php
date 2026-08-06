@@ -269,8 +269,8 @@ $rectify_industries_services = array(
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <a href="#commercial" aria-haspopup="true" aria-expanded="false"><span class="rx-mega-link" >Commercial Solutions</span> <span class="arrow-down"></span></a>
+                    <li class="rx-menu-item rx-mega-parent menu-item-has-children">
+                        <a class="rx-mega-link" href="#commercial" aria-haspopup="true" aria-expanded="false"><span class="rx-mega-link" >Commercial Solutions</span> <span class="arrow-down"></span></a>
                     <div class="rx-mega-submenu">
                             <div class="rx-mega-submenu-inner">
                                 <div class="rx-mega-submenu-intro">
@@ -465,7 +465,7 @@ $rectify_industries_services = array(
                             </div>
                         </div>
                     </li> -->
-                    <li><a href="#contact"><span class="rx-mega-link">Contact Us</span></a></li>
+                    <li><a href="<?php echo esc_url(home_url('/contact-us/')); ?>"><span class="rx-mega-link">Contact Us</span></a></li>
                 </ul>
             <?php endif; ?>
         </div>

@@ -2232,3 +2232,24 @@ body {
 .page-id-7523 .rx-about-rectify-difference p {
     font-weight: 700 !important;
 }
+.rx-home .rx-btn, .rx-search-cta__phone {
+    background: var(--Primary-Red, #bd1726) !important;
+    border: 1px solid var(--Primary-Red, #fff) !important;
+    COLOR: #fff !important;
+        display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 0 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .055em;
+    line-height: 1;
+    border: 1px solid transparent;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    white-space: nowrap;
+}

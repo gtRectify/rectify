@@ -24,12 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
   window.__rxMegaMenuInit = true;
 
   parents.forEach(function (parent) {
-    parent.addEventListener('click', function (event) {
-      const link = event.target.closest('a');
-      if (!link || !parent.contains(link)) {
-        return;
-      }
+    // Only the top-level link toggles the accordion. Attaching this to
+    // `parent` instead (delegating via event.target.closest('a')) would also
+    // catch taps on real destination links inside the open submenu — e.g.
+    // "Cracked Walls" or "EXPLORE MORE SOLUTIONS" — and preventDefault() them
+    // into a dead click that just closes the panel instead of navigating.
+    const topLink = parent.querySelector(':scope > .rx-mega-link');
+    if (!topLink) {
+      return;
+    }
 
+    topLink.addEventListener('click', function (event) {
       event.preventDefault();
       const isOpen = parent.classList.contains('is-open');
       parents.forEach(function (item) {

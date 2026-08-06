@@ -48,6 +48,15 @@
     display: none;
 }
 
+/* This tab's z-index (99990) sits far above the mobile nav drawer (1400 in
+   mobile/home-mobile.css), so it stays clickable over the open drawer and
+   intercepts taps on any nav row that falls under its fixed position —
+   most often the right-aligned accordion arrow. Hide it while the drawer
+   is open. */
+body.rx-menu-open .rx-sticky-quote-tab {
+    display: none;
+}
+
 /* ---------- Slide-in panel ---------- */
 .rx-sticky-quote-panel {
     position: fixed;

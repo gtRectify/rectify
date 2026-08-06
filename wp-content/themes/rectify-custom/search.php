@@ -79,7 +79,7 @@ get_header();
                 <span class="rx-search-empty__icon" aria-hidden="true">0</span>
                 <h2><?php esc_html_e( 'No matching results yet', 'rectify-custom' ); ?></h2>
                 <p><?php esc_html_e( 'Try a shorter phrase or a broader term such as foundations, cracks, soil or commercial.', 'rectify-custom' ); ?></p>
-                <a class="rx-search-button" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Ask our team', 'rectify-custom' ); ?><span aria-hidden="true">→</span></a>
+                <a class="rx-btn rx-btn-red" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Ask our team', 'rectify-custom' ); ?><span aria-hidden="true">→</span></a>
             </div>
         </section>
     <?php else : ?>
@@ -162,7 +162,7 @@ get_header();
                 <p><?php esc_html_e( 'Tell our specialists what you are seeing and we’ll help you understand the next step.', 'rectify-custom' ); ?></p>
             </div>
             <div class="rx-search-cta__actions">
-                <a class="rx-search-button rx-search-button--light" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact us', 'rectify-custom' ); ?><span aria-hidden="true">→</span></a>
+                <a class="rx-btn rx-btn-white" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact us', 'rectify-custom' ); ?><span aria-hidden="true">→</span></a>
                 <a class="rx-search-cta__phone" href="tel:1800182020">1800 18 20 20</a>
             </div>
         </div>

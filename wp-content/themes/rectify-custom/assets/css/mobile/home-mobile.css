@@ -135,7 +135,7 @@
     display: inline-flex;
     flex: 1 0 0;
     align-items: center;
-    gap: 18px;
+    gap: 5px;
     min-width: 0;
     color: #fff;
     font-family: Helvetica;
@@ -796,5 +796,13 @@
   }
   .rx-home .rx-case-study-grid.rx-stagger p {
     margin-top: 8px;
+  }
+  .rx-resources#resources {
+    background-size: contain;
+    height: 200px;
+  }
+  .rx-home .rx-social-card-content p {
+    line-height: 1.6 !important;
+    font-size: 14px !important;
   }
 }

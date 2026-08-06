@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Rectify Mega Menu
  * Description: Production-ready mega menu for the Rectify homepage with admin-managed icons and images.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: Copilot
  * Text Domain: rectify-mega-menu
  */
@@ -472,7 +472,7 @@ class Rectify_Mega_Menu_Walker extends Walker_Nav_Menu
 
 class Rectify_Mega_Menu_Plugin
 {
-    private $version = '1.1.3';
+    private $version = '1.1.4';
 
     public function __construct()
     {
