@@ -43,7 +43,7 @@ $rx_footer_columns = array(
         array( 'Frequently Asked Questions', home_url( '/resources/faq/residential/' ) ),
         array( 'News &amp; Insights', home_url( '/resources/news-and-insights/' ) ),
         array( 'Case Studies', home_url( '/resources/case-studies/' ) ),
-        array( 'Soil Review', home_url( '/soil-stabilisation/' ) ),
+        // array( 'Soil Review', home_url( '/soil-stabilisation/' ) ),
     ),
 );
 

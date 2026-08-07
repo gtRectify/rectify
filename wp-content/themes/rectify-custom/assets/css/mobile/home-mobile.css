@@ -578,9 +578,25 @@ select,
     gap: 12px;
   }
   .rx-home .rx-social-grid,
-  .rx-home .rx-follow-grid,
-  .rx-home .rx-follow-instagram-feed #sb_instagram #sbi_images {
+  .rx-home .rx-follow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  /* IG feed (Follow Our Latest Projects & Insights): single column on mobile
+     instead of the plugin's default 2-up grid. */
+  .rx-home .rx-follow-instagram-feed #sb_instagram #sbi_images {
+    grid-template-columns: 1fr !important;
+  }
+  /* This feed is forced to a 3:4 (portrait) image ratio for the homepage —
+     see rectify_custom_match_homepage_instagram_profile_grid() in
+     inc/homepage-instagram-feed.php — not 1:1. The plugin's JS sets that as
+     an inline px height on .sbi_photo; !important is needed here to beat
+     the inline style. Any ratio shorter than 3:4 makes object-fit: cover
+     clip the top/bottom of the thumbnail, so this matches 3:4 exactly. */
+  .rx-home .rx-follow-instagram-feed #sb_instagram #sbi_images .sbi_photo,
+  .rx-home .rx-follow-instagram-feed #sb_instagram #sbi_images .sbi_photo img {
+    height: auto !important;
+    aspect-ratio: 3 / 4 !important;
+    border-radius: 8px;
   }
   .rx-home .rx-adv-card h3 {
     font-size: 20px;
@@ -820,5 +836,9 @@ select,
   .rectify-manual-map-wrapper, .rectify-wp-map-wrapper {
     width: 75% !important;
     height: 449px !important;
+  }
+  #sb_instagram #sbi_images .sbi_item {
+     padding: 10px 39px;
+    border-radius: 12px;
   }
 }
